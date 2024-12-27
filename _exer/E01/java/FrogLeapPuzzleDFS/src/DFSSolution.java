@@ -39,7 +39,6 @@ public class DFSSolution {
         Scanner sc = new Scanner(System.in);
         System.out.print("N: ");
 
-
         int N = sc.nextInt();
         int SIZE = N * 2 + 1;
 
