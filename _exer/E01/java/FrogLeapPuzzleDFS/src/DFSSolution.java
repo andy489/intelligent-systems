@@ -10,7 +10,7 @@ public class DFSSolution {
     // 1 = single jump, 2 = double jump
     private static final List<Pair<Integer, Integer>> JUMP_TYPES = new ArrayList<>();
 
-    {
+    static {
         JUMP_TYPES.add(new Pair<>(-1, 1));
         JUMP_TYPES.add(new Pair<>(-1, 2));
         JUMP_TYPES.add(new Pair<>(1, 1));
