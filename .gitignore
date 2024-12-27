@@ -335,3 +335,6 @@ fabric.properties
 
 java/.idea
 cpp/.idea
+
+_exer/**/**/**/.idea
+_exer/**/**/**/*.iml
