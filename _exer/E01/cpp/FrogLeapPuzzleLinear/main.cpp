@@ -58,23 +58,21 @@ int jumps(vector<char> &board, int leaf_pos, int i, int j, list<int> &jump_seque
         if (j < i) {
             swap(board, leaf_pos, leaf_pos - 2);
             leaf_pos = leaf_pos - 2;
-            jump_sequence.push_back(leaf_pos + 1);
         } else {
             swap(board, leaf_pos, leaf_pos - 1);
             leaf_pos = leaf_pos - 1;
-            jump_sequence.push_back(leaf_pos + 1);
         }
     } else { // jump right
         if (j < i) {
             swap(board, leaf_pos, leaf_pos + 2);
             leaf_pos = leaf_pos + 2;
-            jump_sequence.push_back(leaf_pos + 1);
         } else {
             swap(board, leaf_pos, leaf_pos + 1);
             leaf_pos = leaf_pos + 1;
-            jump_sequence.push_back(leaf_pos + 1);
         }
     }
+
+    jump_sequence.push_back(leaf_pos + 1);
     print(board);
     return leaf_pos;
 }
@@ -94,12 +92,12 @@ void linear_solution(vector<char> &board, int N, list<int> &jump_sequence) {
         if (N % 2 == 0) { // jump left if n is even
             swap(board, leaf_pos, leaf_pos - 2);
             leaf_pos = leaf_pos - 2;
-            jump_sequence.push_back(leaf_pos + 1);
         } else { // jump right if n is odd
             swap(board, leaf_pos, leaf_pos + 2);
             leaf_pos = leaf_pos + 2;
-            jump_sequence.push_back(leaf_pos + 1);
         }
+
+        jump_sequence.push_back(leaf_pos + 1);
         print(board);
     }
 
