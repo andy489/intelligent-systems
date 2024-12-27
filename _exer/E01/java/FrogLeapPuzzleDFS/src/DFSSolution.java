@@ -5,8 +5,6 @@ import java.util.Scanner;
 
 public class DFSSolution {
 
-    private static final char LEFT_FROG = 'L', RIGHT_FROG = 'R', LEAF = '_';
-
     // pair = {key=RIGHT_FROG/LEFT_FROG, value=SINGLE_JUMP/DOUBLE_JUMP}
     // -1 = right frog jumps left, 1 = left frog jumps right
     // 1 = single jump, 2 = double jump
@@ -94,7 +92,7 @@ public class DFSSolution {
         }
 
         for (int i = 0; i < midIndex; i++) {
-            if (board[i] != RIGHT_FROG) {
+            if (board[i] != 'R') {
                 return false;
             }
         }
@@ -104,10 +102,10 @@ public class DFSSolution {
 
     boolean shiftLeaf(char[] board, int leafPos, Pair<Integer, Integer> jumpType, LinkedList<Integer> jumpSequence,
                       int depth) {
-        int frog_pos = leafPos + jumpType.getKey() * jumpType.getValue();
+        int frogPos = leafPos + jumpType.getKey() * jumpType.getValue();
 
-        if (inRange(board, frog_pos) && board[frog_pos] == (jumpType.getKey() == -1 ? 'L' : 'R')) {
-            return move(board, leafPos, frog_pos, jumpSequence, depth);
+        if (inRange(board, frogPos) && board[frogPos] == (jumpType.getKey() == -1 ? 'L' : 'R')) {
+            return move(board, leafPos, frogPos, jumpSequence, depth);
         }
 
         return false;
