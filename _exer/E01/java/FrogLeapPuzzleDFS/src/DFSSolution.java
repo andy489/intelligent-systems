@@ -62,9 +62,9 @@ public class DFSSolution {
     private boolean dfs(char[] board, int leafPos, LinkedList<Integer> jumpSequence, int depth) {
 
         if (isGoalState(board, leafPos)) {
-            long endTime = System.nanoTime();
             System.out.printf("Goal State found at depth: %d%n", depth);
 
+            long endTime = System.nanoTime();
             long ms = (endTime - startTime) / 1000000;
             long s = ms / 1000;
             System.out.printf("Solving puzzle took: %d µs ≈ %d s.%n", ms, s);
@@ -124,8 +124,6 @@ public class DFSSolution {
             jumpSequence.add(frogPos + 1);
             return true;
         }
-
-        --depth;
 
         swap(board, leafPos, frogPos);
 
