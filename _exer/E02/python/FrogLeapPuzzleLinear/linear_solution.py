@@ -11,32 +11,14 @@ def init_board():
         i = i + 1
 
 
-def print_board(arr):
+def print_state(arr):
     print("".join(arr))
 
 
-def linear_solution():
-    print_board(board)
-
-    leaf_pos = n
-
-    for i in range(n):
-        for j in range(i + 1):
-            leaf_pos = jumps(leaf_pos, i, j)
-
-    for i in range(n):
-        if n % 2 == 0:
-            swap(leaf_pos, leaf_pos - 2)
-            leaf_pos = leaf_pos - 2
-        else:
-            swap(leaf_pos, leaf_pos + 2)
-            leaf_pos = leaf_pos + 2
-            print_board(board)
-        jump_seq.append(leaf_pos + 1)
-
-    for i in range(n - 1, -1, -1):
-        for j in range(i, -1, -1):
-            leaf_pos = jumps(leaf_pos, i, j)
+def swap(from_ind, to_ind):
+    temp = board[from_ind]
+    board[from_ind] = board[to_ind]
+    board[to_ind] = temp
 
 
 def jumps(leaf_pos, i, j):
@@ -55,15 +37,31 @@ def jumps(leaf_pos, i, j):
             swap(leaf_pos, leaf_pos + 1)
             leaf_pos = leaf_pos + 1
     jump_seq.append(leaf_pos + 1)
-    print_board(board)
+    print_state(board)
     return leaf_pos
 
+def linear_solution():
+    print_state(board)
 
-def swap(from_ind, to_ind):
-    temp = board[from_ind]
-    board[from_ind] = board[to_ind]
-    board[to_ind] = temp
+    leaf_pos = n
 
+    for i in range(n):
+        for j in range(i + 1):
+            leaf_pos = jumps(leaf_pos, i, j)
+
+    for i in range(n):
+        if n % 2 == 0:
+            swap(leaf_pos, leaf_pos - 2)
+            leaf_pos = leaf_pos - 2
+        else:
+            swap(leaf_pos, leaf_pos + 2)
+            leaf_pos = leaf_pos + 2
+            print_state(board)
+        jump_seq.append(leaf_pos + 1)
+
+    for i in range(n - 1, -1, -1):
+        for j in range(i, -1, -1):
+            leaf_pos = jumps(leaf_pos, i, j)
 
 n = int(input("N: "))
 board = []

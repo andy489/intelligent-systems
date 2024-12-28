@@ -143,7 +143,7 @@ int main() {
     list<int> jump_sequence;
     int leaf_pos = N;
     linear_solution(board, N, leaf_pos, jump_sequence);
-    printf("Jump Sequence: ");
+    printf("Jump sequence: ");
     print_jump_sequence(jump_sequence);
     printf("Total jumps: %d\nSuccess!", jump_sequence.size());
 

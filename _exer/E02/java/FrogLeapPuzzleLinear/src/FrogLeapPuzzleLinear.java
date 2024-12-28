@@ -122,7 +122,7 @@ public class FrogLeapPuzzleLinear {
         return leafPos;
     }
 
-    private static int processSecondHalf(char[] board, int N, int leafPos, LinkedList<Integer> jumpSequence) {
+    private static void processSecondHalf(char[] board, int N, int leafPos, LinkedList<Integer> jumpSequence) {
         for (int i = N; i > 0; i--) {
             if (i % 2 == 0) {
                 leafPos = jumpsSecond(board, leafPos, jumpSequence, i, LEFT_SINGLE, LEFT_DOUBLE);
@@ -130,8 +130,6 @@ public class FrogLeapPuzzleLinear {
                 leafPos = jumpsSecond(board, leafPos, jumpSequence, i, RIGHT_SINGLE, RIGHT_DOUBLE);
             }
         }
-
-        return leafPos;
     }
 
     private static void linearSolution(char[] board, int N, LinkedList<Integer> jumpSequence) {
@@ -149,7 +147,7 @@ public class FrogLeapPuzzleLinear {
         LinkedList<Integer> jumpSequence = new LinkedList<>();
 
         linearSolution(board, board.length / 2, jumpSequence);
-        System.out.print("Jump Sequence: ");
+        System.out.print("Jump sequence: ");
         printJumpSequence(jumpSequence);
         System.out.println("Total jumps: " + jumpSequence.size());
         System.out.println("Success!");
