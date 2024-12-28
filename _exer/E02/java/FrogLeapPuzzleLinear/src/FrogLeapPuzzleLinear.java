@@ -3,18 +3,7 @@ import java.util.Scanner;
 
 public class FrogLeapPuzzleLinear {
 
-    public static void main(String[] args) {
-
-        char[] board = initBoard();
-
-        LinkedList<Integer> jumpSequence = new LinkedList<>();
-
-        linearSolution(board, board.length / 2, jumpSequence);
-        System.out.print("Jump Sequence: ");
-        print(jumpSequence);
-        System.out.println("Total jumps: " + jumpSequence.size());
-        System.out.println("Success!");
-    }
+    private static final int LEFT_SINGLE = 1, RIGHT_SINGLE = -1, LEFT_DOUBLE = 2, RIGHT_DOUBLE = -2;
 
     private static char[] initBoard() {
 
@@ -41,66 +30,7 @@ public class FrogLeapPuzzleLinear {
         return board;
     }
 
-    private static void linearSolution(char[] board, int N, LinkedList<Integer> jumpSequence) {
-        print(board);
-
-        int leafPos = N;
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < i + 1; j++) {
-                leafPos = jumps(board, leafPos, i, j, jumpSequence);
-            }
-        }
-
-        for (int i = 0; i < N; i++) { // jump left or right
-            if (N % 2 == 0) { // jump left if n is even
-                swap(board, leafPos, leafPos - 2);
-                leafPos = leafPos - 2;
-            } else { // jump right if n is odd
-                swap(board, leafPos, leafPos + 2);
-                leafPos = leafPos + 2;
-            }
-            jumpSequence.add(leafPos + 1);
-            print(board);
-        }
-
-        for (int i = N - 1; i >= 0; i--) {
-            for (int j = i; j >= 0; j--) {
-                leafPos = jumps(board, leafPos, i, j, jumpSequence);
-            }
-        }
-    }
-
-    private static int jumps(char[] board, int leafPos, int i, int j, LinkedList<Integer> jumpSequence) {
-        if (i % 2 == 0) { // jump left
-            if (j < i) {
-                swap(board, leafPos, leafPos - 2);
-                leafPos = leafPos - 2;
-            } else {
-                swap(board, leafPos, leafPos - 1);
-                leafPos = leafPos - 1;
-            }
-        } else { // jump right
-            if (j < i) {
-                swap(board, leafPos, leafPos + 2);
-                leafPos = leafPos + 2;
-            } else {
-                swap(board, leafPos, leafPos + 1);
-                leafPos = leafPos + 1;
-            }
-        }
-        jumpSequence.add(leafPos + 1);
-        print(board);
-        return leafPos;
-    }
-
-    private static void swap(char[] board, int fromIndex, int toIndex) {
-        char temp = board[fromIndex];
-        board[fromIndex] = board[toIndex];
-        board[toIndex] = temp;
-    }
-
-    private static void print(char[] board) {
+    private static void printState(char[] board) {
         for (char c : board) {
             System.out.print(c);
         }
@@ -108,7 +38,7 @@ public class FrogLeapPuzzleLinear {
         System.out.println();
     }
 
-    private static void print(LinkedList<Integer> ll) {
+    private static void printJumpSequence(LinkedList<Integer> ll) {
         int SIZE = ll.size();
 
         for (int i = 0; i < SIZE - 1; i++) {
@@ -120,5 +50,108 @@ public class FrogLeapPuzzleLinear {
         } else {
             System.out.println();
         }
+    }
+
+    private static void swap(char[] board, int fromIndex, int toIndex) {
+        char temp = board[fromIndex];
+        board[fromIndex] = board[toIndex];
+        board[toIndex] = temp;
+    }
+
+    private static int jump(char[] board, int leafPos, int direction) {
+        swap(board, leafPos, leafPos + direction);
+        leafPos += direction;
+        return leafPos;
+    }
+
+    private static int jumpsFirst(char[] board, int leafPos, LinkedList<Integer> jumpSequence, int i,
+                                  int rightDouble, int rightSingle) {
+
+        for (int j = 0; j < i - 1; j++) {
+            leafPos = jump(board, leafPos, rightDouble);
+            printState(board);
+            jumpSequence.addLast(leafPos + 1);
+        }
+
+        leafPos = jump(board, leafPos, rightSingle);
+        printState(board);
+        jumpSequence.addLast(leafPos + 1);
+        return leafPos;
+    }
+
+    private static int jumpsSecond(char[] board, int leafPos, LinkedList<Integer> jumpSequence, int i,
+                                   int leftSingle, int leftDouble) {
+        leafPos = jump(board, leafPos, leftSingle);
+        printState(board);
+        jumpSequence.addLast(leafPos + 1);
+
+        for (int j = 1; j < i; j++) {
+            leafPos = jump(board, leafPos, leftDouble);
+            printState(board);
+            jumpSequence.addLast(leafPos + 1);
+        }
+        return leafPos;
+    }
+
+    private static int processFirstHalf(char[] board, int N, int leafPos, LinkedList<Integer> jumpSequence) {
+        for (int i = 1; i <= N; i++) {
+            if (i % 2 == 0) {
+                leafPos = jumpsFirst(board, leafPos, jumpSequence, i, LEFT_DOUBLE, LEFT_SINGLE);
+            } else {
+                leafPos = jumpsFirst(board, leafPos, jumpSequence, i, RIGHT_DOUBLE, RIGHT_SINGLE);
+            }
+        }
+        return leafPos;
+    }
+
+    private static int processMiddle(char[] board, int N, int leafPos, LinkedList<Integer> jumpSequence) {
+        if (N % 2 == 0) {
+            for (int j = 0; j < N; j++) {
+                leafPos = jump(board, leafPos, RIGHT_DOUBLE);
+                printState(board);
+                jumpSequence.addLast(leafPos + 1);
+            }
+        } else {
+            for (int j = 0; j < N; j++) {
+                leafPos = jump(board, leafPos, LEFT_DOUBLE);
+                printState(board);
+                jumpSequence.addLast(leafPos + 1);
+            }
+        }
+
+        return leafPos;
+    }
+
+    private static int processSecondHalf(char[] board, int N, int leafPos, LinkedList<Integer> jumpSequence) {
+        for (int i = N; i > 0; i--) {
+            if (i % 2 == 0) {
+                leafPos = jumpsSecond(board, leafPos, jumpSequence, i, LEFT_SINGLE, LEFT_DOUBLE);
+            } else {
+                leafPos = jumpsSecond(board, leafPos, jumpSequence, i, RIGHT_SINGLE, RIGHT_DOUBLE);
+            }
+        }
+
+        return leafPos;
+    }
+
+    private static void linearSolution(char[] board, int N, LinkedList<Integer> jumpSequence) {
+        printState(board);
+
+        int leafPos = processFirstHalf(board, N, N, jumpSequence);
+        leafPos = processMiddle(board, N, leafPos, jumpSequence);
+        processSecondHalf(board, N, leafPos, jumpSequence);
+    }
+
+    public static void main(String[] args) {
+
+        char[] board = initBoard();
+
+        LinkedList<Integer> jumpSequence = new LinkedList<>();
+
+        linearSolution(board, board.length / 2, jumpSequence);
+        System.out.print("Jump Sequence: ");
+        printJumpSequence(jumpSequence);
+        System.out.println("Total jumps: " + jumpSequence.size());
+        System.out.println("Success!");
     }
 }

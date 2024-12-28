@@ -4,6 +4,8 @@
 
 using namespace std;
 
+static const int LEFT_SINGLE = 1, RIGHT_SINGLE = -1, LEFT_DOUBLE = 2, RIGHT_DOUBLE = -2;
+
 void init_board(vector<char> &board, int N) {
     int SIZE = N * 2 + 1;
     board.resize(SIZE);
@@ -21,17 +23,17 @@ void init_board(vector<char> &board, int N) {
     }
 }
 
-void print(vector<char> &board) {
+void print_state(vector<char> &board) {
     int SIZE = (int) board.size();
 
-    for (int i = SIZE - 1; i >= 0; --i) {
+    for (int i = 0; i < SIZE; i++) {
         printf("%c", board[i]);
     }
 
     printf("\n");
 }
 
-void print(list<int> ll) {
+void print_jump_sequence(list<int> ll) {
     int SIZE = ll.size();
 
     for (int i = 0; i < SIZE - 1; i++) {
@@ -47,79 +49,102 @@ void print(list<int> ll) {
     }
 }
 
-void swap(vector<char> &board, int from_ind, int to_ind) {
-    char temp = board[from_ind];
-    board[from_ind] = board[to_ind];
-    board[to_ind] = temp;
+void jump(vector<char> &board, int &leaf_pos, int direction) {
+    swap(board[leaf_pos], board[leaf_pos + direction]);
+    leaf_pos += direction;
 }
 
-int jumps(vector<char> &board, int leaf_pos, int i, int j, list<int> &jump_sequence) {
-    if (i % 2 == 0) { // jump left
-        if (j < i) {
-            swap(board, leaf_pos, leaf_pos - 2);
-            leaf_pos = leaf_pos - 2;
+void process_first_half(vector<char> &board, int N, int &leaf_pos, list<int> &jump_sequence) {
+    for (int i = 1; i <= N; i++) {
+        if (i % 2 == 0) {
+            for (int j = 0; j < i - 1; j++) {
+                jump(board, leaf_pos, LEFT_DOUBLE);
+                print_state(board);
+                jump_sequence.push_back(leaf_pos + 1);
+            }
+
+            jump(board, leaf_pos, LEFT_SINGLE);
+            print_state(board);
+            jump_sequence.push_back(leaf_pos + 1);
+
         } else {
-            swap(board, leaf_pos, leaf_pos - 1);
-            leaf_pos = leaf_pos - 1;
-        }
-    } else { // jump right
-        if (j < i) {
-            swap(board, leaf_pos, leaf_pos + 2);
-            leaf_pos = leaf_pos + 2;
-        } else {
-            swap(board, leaf_pos, leaf_pos + 1);
-            leaf_pos = leaf_pos + 1;
+            for (int j = 0; j < i - 1; j++) {
+                jump(board, leaf_pos, RIGHT_DOUBLE);
+                print_state(board);
+                jump_sequence.push_back(leaf_pos + 1);
+            }
+
+            jump(board, leaf_pos, RIGHT_SINGLE);
+            print_state(board);
+            jump_sequence.push_back(leaf_pos + 1);
+
         }
     }
-
-    jump_sequence.push_back(leaf_pos + 1);
-    print(board);
-    return leaf_pos;
 }
 
-void linear_solution(vector<char> &board, int N, list<int> &jump_sequence) {
-    print(board);
-
-    int leaf_pos = N;
-
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < i + 1; j++) {
-            leaf_pos = jumps(board, leaf_pos, i, j, jump_sequence);
+void process_middle(vector<char> &board, int N, int &leaf_pos, list<int> &jump_sequence) {
+    if (N % 2 == 0) {
+        for (int j = 0; j < N; j++) {
+            jump(board, leaf_pos, RIGHT_DOUBLE);
+            print_state(board);
+            jump_sequence.push_back(leaf_pos + 1);
+        }
+    } else {
+        for (int j = 0; j < N; j++) {
+            jump(board, leaf_pos, LEFT_DOUBLE);
+            print_state(board);
+            jump_sequence.push_back(leaf_pos + 1);
         }
     }
+}
 
-    for (int i = 0; i < N; i++) { // jump left or right
-        if (N % 2 == 0) { // jump left if n is even
-            swap(board, leaf_pos, leaf_pos - 2);
-            leaf_pos = leaf_pos - 2;
-        } else { // jump right if n is odd
-            swap(board, leaf_pos, leaf_pos + 2);
-            leaf_pos = leaf_pos + 2;
+void process_second_half(vector<char> &board, int N, int &leaf_pos, list<int> &jump_sequence) {
+    for (int i = N; i > 0; i--) {
+        if (i % 2 == 0) {
+            jump(board, leaf_pos, LEFT_SINGLE);
+            print_state(board);
+            jump_sequence.push_back(leaf_pos + 1);
+
+            for (int j = 1; j < i; j++) {
+                jump(board, leaf_pos, LEFT_DOUBLE);
+                print_state(board);
+                jump_sequence.push_back(leaf_pos + 1);
+            }
+        } else {
+            jump(board, leaf_pos, RIGHT_SINGLE);
+            print_state(board);
+            jump_sequence.push_back(leaf_pos + 1);
+
+            for (int j = 1; j < i; j++) {
+                jump(board, leaf_pos, RIGHT_DOUBLE);
+                print_state(board);
+                jump_sequence.push_back(leaf_pos + 1);
+            }
         }
-
-        jump_sequence.push_back(leaf_pos + 1);
-        print(board);
     }
+}
 
-    for (int i = N - 1; i >= 0; i--) {
-        for (int j = i; j >= 0; j--) {
-            leaf_pos = jumps(board, leaf_pos, i, j, jump_sequence);
-        }
-    }
+void linear_solution(vector<char> &board, int N, int &leaf_pos, list<int> &jump_sequence) {
+    print_state(board);
+    process_first_half(board, N, leaf_pos, jump_sequence);
+    process_middle(board, N, leaf_pos, jump_sequence);
+    process_second_half(board, N, leaf_pos, jump_sequence);
 }
 
 int main() {
-
     int N;
     printf("N: ");
     scanf("%d", &N);
 
     vector<char> board;
+
     init_board(board, N);
 
     list<int> jump_sequence;
-    linear_solution(board, board.size() / 2, jump_sequence);
-    print(jump_sequence);
+    int leaf_pos = N;
+    linear_solution(board, N, leaf_pos, jump_sequence);
+    printf("Jump Sequence: ");
+    print_jump_sequence(jump_sequence);
     printf("Total jumps: %d\nSuccess!", jump_sequence.size());
 
     return 0;
