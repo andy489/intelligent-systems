@@ -7,8 +7,8 @@
 using namespace std;
 using namespace std::chrono;
 
-const string PUZZLES_RELATIVE_PATH = "./../puzzles/";
-const string CURRENT_PUZZLE = "puzzle160-4x4-unsolvable.txt";
+const string PUZZLES_RELATIVE_PATH = "./puzzles/";
+const string CURRENT_PUZZLE = "puzzle018-3x3.txt";
 
 int grid_size;
 int blank_tile_target_index;
@@ -420,7 +420,7 @@ void ida_star() { // depth limited search with heuristic = manhattan distance
 }
 
 int main() {
-    // read_current_state_from_console();
+     // read_current_state_from_console();
     read_current_state_from_file();
 
     int heuristic = calc_total_manhattan_distance_cost();
