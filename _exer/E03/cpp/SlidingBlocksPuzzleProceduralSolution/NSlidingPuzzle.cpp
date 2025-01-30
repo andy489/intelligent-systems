@@ -2,13 +2,15 @@
 #include <vector>
 #include <stack>
 #include <fstream>
+#include <sstream>
 #include <cmath>
+#include <chrono>
 
 using namespace std;
 using namespace std::chrono;
 
 const string PUZZLES_RELATIVE_PATH = "./puzzles/";
-const string CURRENT_PUZZLE = "puzzle018-3x3.txt";
+const string CURRENT_PUZZLE = "puzzle101-4x4.txt";
 
 int grid_size;
 int blank_tile_target_index;
@@ -23,7 +25,7 @@ pair<int, int> blank_tile_target_coords;
 pair<int, int> blank_tile_curr_coords;
 
 enum Move { // clockwise
-    UP = 0, RIGHT, DOWN, LEFT, NEUTRAL
+    LEFT = 0, RIGHT, DOWN, UP, NEUTRAL
 };
 
 stack<Move> shifts_history;
@@ -401,7 +403,7 @@ void display_solution_moves() {
     }
 }
 
-void ida_star() { // depth limited search with heuristic = manhattan distance
+void ida_star() { // iterative deepening A* with heuristic = manhattan distance
     int heuristic = calc_total_manhattan_distance_cost();
 
     if (heuristic == 0) {
@@ -409,18 +411,34 @@ void ida_star() { // depth limited search with heuristic = manhattan distance
         return;
     }
 
-    int limit = heuristic;
+    int threshold = heuristic;
     int depth = 0;
     int result = 0;
 
     do {
-        result = depth_limited_search(blank_tile_curr_coords, limit, NEUTRAL, heuristic, depth);
-        limit = result;
+        result = depth_limited_search(blank_tile_curr_coords, threshold, NEUTRAL, heuristic, depth);
+        threshold = result;
     } while (result);
 }
 
+string format_duration(seconds sec) {
+    auto min = duration_cast<minutes>(sec);
+    sec -= duration_cast<seconds>(min);
+
+    auto hour = duration_cast<hours>(min);
+    min -= duration_cast<minutes>(hour);
+
+    stringstream ss;
+
+    ss << "Elapsed: " << (count_digits(hour.count()) < 2 ? "0" : "") << hour.count() << ":"
+       << (count_digits(min.count()) < 2 ? "0" : "") << min.count() << ":"
+       << (count_digits(sec.count()) < 2 ? "0" : "") << sec.count();
+
+    return ss.str();
+}
+
 int main() {
-     // read_current_state_from_console();
+    // read_current_state_from_console();
     read_current_state_from_file();
 
     int heuristic = calc_total_manhattan_distance_cost();
@@ -434,8 +452,14 @@ int main() {
             return 0;
         }
 
+        auto start = high_resolution_clock::now();
         ida_star(); // iterative deepening A* search
+        auto stop = high_resolution_clock::now();
+
         display_solution_moves();
+
+        auto elapsed = duration_cast<seconds>(stop - start);
+        cout << endl << format_duration(elapsed) << endl;
     }
 
     cout << endl << "Success!" << endl;
