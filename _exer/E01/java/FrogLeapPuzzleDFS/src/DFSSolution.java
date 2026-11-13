@@ -99,7 +99,7 @@ public class DFSSolution {
         return true;
     }
 
-    boolean shiftLeaf(char[] board, int leafPos, Pair<Integer, Integer> jumpType, LinkedList<Integer> jumpSequence,
+    private boolean shiftLeaf(char[] board, int leafPos, Pair<Integer, Integer> jumpType, LinkedList<Integer> jumpSequence,
                       int depth) {
         int frogPos = leafPos + jumpType.getKey() * jumpType.getValue();
 
@@ -110,18 +110,18 @@ public class DFSSolution {
         return false;
     }
 
-    boolean inRange(char[] board, int pos) {
+    private boolean inRange(char[] board, int pos) {
         return 0 <= pos && pos < board.length;
     }
 
-    boolean move(char[] board, int leafPos, int frogPos, LinkedList<Integer> jumpSequence, int depth) {
+    private boolean move(char[] board, int leafPos, int frogPos, LinkedList<Integer> jumpSequence, int depth) {
         ++depth;
         swap(board, leafPos, frogPos);
 
         if (dfs(board, frogPos, jumpSequence, depth)) {
             swap(board, leafPos, frogPos);
             print(board);
-            jumpSequence.add(frogPos + 1);
+            jumpSequence.addFirst(frogPos + 1);
             return true;
         }
 
@@ -145,15 +145,16 @@ public class DFSSolution {
     }
 
     private static void print(LinkedList<Integer> ll) {
-        int SIZE = ll.size();
-
-        for (int i = 0; i < SIZE - 1; i++) {
-            System.out.print(ll.get(i) + ", ");
+        java.util.Iterator<Integer> it = ll.iterator();
+        while (it.hasNext()) {
+            Integer val = it.next();
+            if (it.hasNext()) {
+                System.out.print(val + ", ");
+            } else {
+                System.out.println(val);
+            }
         }
-
-        if (!ll.isEmpty()) {
-            System.out.println(ll.get(SIZE - 1));
-        } else {
+        if (ll.isEmpty()) {
             System.out.println();
         }
     }

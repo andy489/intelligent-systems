@@ -86,5 +86,5 @@ class DFSSolution:
         self.start_time = time.time()
         depth = 0
         self.dfs(self.n, depth)
-        print(f"Jump Sequence: {", ".join(str(j) for j in self.jump_sequence)}")
+        print(f"Jump Sequence: " + ", ".join(str(j) for j in self.jump_sequence))
         print(f"Total jumps: {len(self.jump_sequence)}\nSuccess!")

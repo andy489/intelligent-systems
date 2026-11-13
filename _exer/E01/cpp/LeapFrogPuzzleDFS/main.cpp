@@ -1,5 +1,5 @@
 #include <cstdio>
-#include <iostream>
+#include <chrono>
 #include <vector>
 #include <list>
 
@@ -75,7 +75,7 @@ auto get_time() {
 void print(vector<char> &board) {
     int SIZE = (int) board.size();
 
-    for (int i = SIZE - 1; i >= 0; --i) {
+    for (int i = 0; i < SIZE; ++i) {
         printf("%c", board[i]);
     }
 
@@ -83,13 +83,18 @@ void print(vector<char> &board) {
 }
 
 void print(list<int>& ll) {
-    list<int>::iterator it;
-
-    for (it = ll.begin(); it != ll.end(); ++it) {
-        printf("%d, ", *it);
+    for (auto it = ll.begin(); it != ll.end(); ++it) {
+        auto next = it;
+        ++next;
+        if (next != ll.end()) {
+            printf("%d, ", *it);
+        } else {
+            printf("%d\n", *it);
+        }
     }
-
-    printf("\n");
+    if (ll.empty()) {
+        printf("\n");
+    }
 }
 
 bool dfs(vector<char> &board, int leaf_pos, list<int> &jump_sequence, int depth) {
@@ -124,8 +129,6 @@ bool move(vector<char> &board, int leaf_pos, int frog_pos, list<int> &jump_seque
         return true;
     }
 
-    --depth;
-
     swap(board[leaf_pos], board[frog_pos]);
 
     return false;
@@ -141,7 +144,7 @@ void dfs(int N) {
     dfs(board, N, linked_list, depth);
     printf("Jump Sequence: ");
     print(linked_list);
-    printf("Total jumps: %d\nSuccess!\n", linked_list.size());
+    printf("Total jumps: %zu\nSuccess!\n", linked_list.size());
 }
 
 int main() {

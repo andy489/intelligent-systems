@@ -33,18 +33,18 @@ void print_state(vector<char> &board) {
     printf("\n");
 }
 
-void print_jump_sequence(list<int> ll) {
-    int SIZE = ll.size();
-
-    for (int i = 0; i < SIZE - 1; i++) {
-        printf("%d, ", ll.front());
-        ll.pop_front();
+void print_jump_sequence(const list<int>& ll) {
+    for (auto it = ll.begin(); it != ll.end(); ++it) {
+        auto next = it;
+        ++next;
+        if (next != ll.end()) {
+            printf("%d, ", *it);
+        } else {
+            printf("%d\n", *it);
+        }
     }
 
-    if (!ll.empty()) {
-        printf("%d\n", ll.front());
-        ll.pop_front();
-    } else {
+    if (ll.empty()) {
         printf("\n");
     }
 }
@@ -145,7 +145,7 @@ int main() {
     linear_solution(board, N, leaf_pos, jump_sequence);
     printf("Jump sequence: ");
     print_jump_sequence(jump_sequence);
-    printf("Total jumps: %d\nSuccess!", jump_sequence.size());
+    printf("Total jumps: %zu\nSuccess!", jump_sequence.size());
 
     return 0;
 }

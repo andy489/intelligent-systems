@@ -39,15 +39,16 @@ public class FrogLeapPuzzleLinear {
     }
 
     private static void printJumpSequence(LinkedList<Integer> ll) {
-        int SIZE = ll.size();
-
-        for (int i = 0; i < SIZE - 1; i++) {
-            System.out.print(ll.get(i) + ", ");
+        java.util.Iterator<Integer> it = ll.iterator();
+        while (it.hasNext()) {
+            Integer val = it.next();
+            if (it.hasNext()) {
+                System.out.print(val + ", ");
+            } else {
+                System.out.println(val);
+            }
         }
-
-        if (!ll.isEmpty()) {
-            System.out.println(ll.get(SIZE - 1));
-        } else {
+        if (ll.isEmpty()) {
             System.out.println();
         }
     }
