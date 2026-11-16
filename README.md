@@ -2,8 +2,9 @@
 
 > Course exercises covering search algorithms, constraint satisfaction, genetic algorithms, games, and machine learning.
 
-**Textbook:** Stuart Russell & Peter Norvig — *Artificial Intelligence: A Modern Approach*, Prentice Hall  
-**Reference:** [aima.eecs.berkeley.edu](http://aima.eecs.berkeley.edu/)
+**Textbook:** Stuart Russell & Peter Norvig — *Artificial Intelligence: A Modern Approach*, Prentice Hall ([PDF](artificial-intelligence-a-modern-approach-3rd-edition.pdf) · [aima.eecs.berkeley.edu](http://aima.eecs.berkeley.edu/))  
+**Algorithms:** [algorithms-pseudo-code.pdf](algorithms-pseudo-code.pdf)  
+**Figures:** [global-figures.pdf](global-figures.pdf)
 
 ---
 
