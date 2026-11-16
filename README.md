@@ -10,7 +10,7 @@
 |---|---|---|---|---|
 | E01 | Uninformed Search — DFS *(warm-up)* | Frog Leap Puzzle | [is-e-01 (2021-10-03)](_exer/e-01-uninformed-warmup/is-e-01-(2021-10-03).pdf) | [C++](_exer/e-01-uninformed-warmup/cpp/) · [Java](_exer/e-01-uninformed-warmup/java/) · [Python](_exer/e-01-uninformed-warmup/python/) |
 | E02 | Uninformed (Blind) Search | — | [is-e-02 (2021-10-10)](_exer/e-02-uninformed-blind-search/is-e-02-(2021-10-10)-uninformed-blind-search.pdf) | — |
-| E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [is-e-03 (2021-10-17)](_exer/e-03/is-e-03-(2021-10-17)-informed-heuristic-search.pdf) | [C++](_exer/e-03/cpp/) · [Java](_exer/e-03/java/) · [Python](_exer/e-03/python/) |
+| E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [is-e-03 (2021-10-17)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-17)-informed-heuristic-search.pdf) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/) |
 
 ---
 
@@ -42,18 +42,18 @@ Covers BFS, DFS, UCS, DLS, IDS. No code solutions yet.
 ## E03 — Informed (Heuristic) Search — IDA*
 
 **Problem:** N-Sliding Blocks Puzzle  
-**Docs:** [Exercise Sheet](_exer/e-03/is-e-03-(2021-10-17)-informed-heuristic-search.pdf) · [README](_exer/e-03/README.md)
+**Docs:** [Exercise Sheet](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-17)-informed-heuristic-search.pdf) · [README](_exer/e-03-informed-heuristic-search/README.md)
 
 N-puzzle (8-puzzle, 15-puzzle, …): slide tiles on an N×N grid to reach the goal configuration.
 Solved with IDA\* using Manhattan Distance + Linear Conflict heuristic.
 
 | Language | Source |
 |---|---|
-| C++ | [`NSlidingPuzzle.cpp`](_exer/e-03/cpp/SlidingBlocksPuzzleProceduralSolution/NSlidingPuzzle.cpp) |
-| Java | [`NSlidingPuzzle.java`](_exer/e-03/java/SlidingBlocksPuzzleProceduralSolution/src/NSlidingPuzzle.java) |
-| Python | [`n_sliding_puzzle.py`](_exer/e-03/python/SlidingBlocksPuzzleProceduralSolution/n_sliding_puzzle.py) |
+| C++ | [`NSlidingPuzzle.cpp`](_exer/e-03-informed-heuristic-search/cpp/SlidingBlocksPuzzleProceduralSolution/NSlidingPuzzle.cpp) |
+| Java | [`NSlidingPuzzle.java`](_exer/e-03-informed-heuristic-search/java/SlidingBlocksPuzzleProceduralSolution/src/NSlidingPuzzle.java) |
+| Python | [`n_sliding_puzzle.py`](_exer/e-03-informed-heuristic-search/python/SlidingBlocksPuzzleProceduralSolution/n_sliding_puzzle.py) |
 
-Puzzles: [`data/puzzles/`](_exer/e-03/data/puzzles/) (160 puzzles: 2×2 through 10×10)  
-Results: [`data/results/`](_exer/e-03/data/results/) (one `.txt` per puzzle — moves + elapsed time)  
-Analysis: [`data/ANALYSIS.md`](_exer/e-03/data/ANALYSIS.md) (145 solved, 9 unsolvable, 1 timed out)  
-Runner: [`run_all_puzzles.py`](_exer/e-03/run_all_puzzles.py)
+Puzzles: [`data/puzzles/`](_exer/e-03-informed-heuristic-search/data/puzzles/) (160 puzzles: 2×2 through 10×10)  
+Results: [`data/results/`](_exer/e-03-informed-heuristic-search/data/results/) (one `.txt` per puzzle — moves + elapsed time)  
+Analysis: [`data/ANALYSIS.md`](_exer/e-03-informed-heuristic-search/data/ANALYSIS.md) (145 solved, 9 unsolvable, 1 timed out)  
+Runner: [`run_all_puzzles.py`](_exer/e-03-informed-heuristic-search/run_all_puzzles.py)
