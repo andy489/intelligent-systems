@@ -16,7 +16,7 @@
 
 ## E01 — Frog Leap Puzzle *(warm-up)*
 
-**Docs:** [README](_exer/e-01-uninformed-warmup/README.md) · [Problem](_exer/e-01-uninformed-warmup/PROBLEM.md) · [Solution](_exer/e-01-uninformed-warmup/SOLUTION.md) · [Exercise Sheet](_exer/e-01-uninformed-warmup/is-e-01-(2021-10-03).pdf)
+**Docs:** [Exercise Sheet](_exer/e-01-uninformed-warmup/is-e-01-(2021-10-03).pdf) · [README](_exer/e-01-uninformed-warmup/README.md) · [Problem](_exer/e-01-uninformed-warmup/PROBLEM.md) · [Solution](_exer/e-01-uninformed-warmup/SOLUTION.md)
 
 Classic puzzle on a `2N+1` board: swap N yellow (left-side) and N green (right-side) frogs using steps and jumps.
 Two approaches — DFS search and an O(N²) analytical linear solution.
@@ -31,7 +31,7 @@ Two approaches — DFS search and an O(N²) analytical linear solution.
 
 ## E02 — Uninformed (Blind) Search
 
-**Docs:** [README](_exer/e-02-uninformed-blind-search/README.md) · [Exercise Sheet](_exer/e-02-uninformed-blind-search/is-e-02-(2021-10-10)-uninformed-blind-search.pdf)
+**Docs:** [Exercise Sheet](_exer/e-02-uninformed-blind-search/is-e-02-(2021-10-10)-uninformed-blind-search.pdf) · [README](_exer/e-02-uninformed-blind-search/README.md)
 
 Covers BFS, DFS, UCS, DLS, IDS. No code solutions yet.
 
