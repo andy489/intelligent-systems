@@ -6,9 +6,6 @@
 using namespace std;
 using namespace std::chrono;
 
-#define f first
-#define s second
-
 typedef pair<int, int> pii;
 
 // pair = {key=RIGHT_FROG/LEFT_FROG, value=SINGLE_JUMP/DOUBLE_JUMP}
@@ -49,6 +46,12 @@ bool is_goal_state(vector<char> &board, int leaf_pos) {
         }
     }
 
+    for (int i = mid_ind + 1; i < (int) board.size(); ++i) {
+        if (board[i] != 'L') {
+            return false;
+        }
+    }
+
     return true;
 }
 
@@ -59,9 +62,9 @@ bool in_range(vector<char> &board, int pos) {
 bool move(vector<char> &, int, int, list<int> &, int);
 
 bool shift_leaf(vector<char> &board, int leaf_pos, pii jump_type, list<int> &jump_sequence, int depth) {
-    int frog_pos = leaf_pos + jump_type.f * jump_type.s;
+    int frog_pos = leaf_pos + jump_type.first * jump_type.second;
 
-    if (in_range(board, frog_pos) && board[frog_pos] == (jump_type.f == -1 ? 'L' : 'R')) {
+    if (in_range(board, frog_pos) && board[frog_pos] == (jump_type.first == -1 ? 'L' : 'R')) {
         return move(board, leaf_pos, frog_pos, jump_sequence, depth);
     }
 
@@ -102,15 +105,15 @@ bool dfs(vector<char> &board, int leaf_pos, list<int> &jump_sequence, int depth)
         printf("Goal State found at depth: %d\n", depth);
 
         auto end = get_time();
-        printf("Solving puzzle took: %lld µs ≈ %lld s.\n", duration_cast<milliseconds>(end - start).count(),
+        printf("Solving puzzle took: %lld ms ≈ %lld s.\n", duration_cast<milliseconds>(end - start).count(),
                (end - start) / 1s);
 
         print(board);
         return true;
     }
 
-    for (int i = 0; i < JUMP_TYPES.size(); ++i) {
-        if (shift_leaf(board, leaf_pos, JUMP_TYPES[i], jump_sequence, depth)) {
+    for (const auto& jump_type : JUMP_TYPES) {
+        if (shift_leaf(board, leaf_pos, jump_type, jump_sequence, depth)) {
             return true;
         }
     }
@@ -151,5 +154,10 @@ int main() {
     int N;
     printf("N: ");
     scanf("%d", &N);
-    return dfs(N), 0;
+    if (N <= 0) {
+        printf("N must be a positive integer.\n");
+        return 1;
+    }
+    dfs(N);
+    return 0;
 }

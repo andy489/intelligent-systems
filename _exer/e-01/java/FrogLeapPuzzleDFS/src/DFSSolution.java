@@ -40,6 +40,7 @@ public class DFSSolution {
         System.out.print("N: ");
 
         int N = sc.nextInt();
+        sc.close();
         int SIZE = N * 2 + 1;
 
         char[] board = new char[SIZE];
@@ -67,7 +68,7 @@ public class DFSSolution {
             long endTime = System.nanoTime();
             long ms = (endTime - startTime) / 1000000;
             long s = ms / 1000;
-            System.out.printf("Solving puzzle took: %d µs ≈ %d s.%n", ms, s);
+            System.out.printf("Solving puzzle took: %d ms ≈ %d s.%n", ms, s);
 
             print(board);
             return true;
@@ -92,6 +93,12 @@ public class DFSSolution {
 
         for (int i = 0; i < midIndex; i++) {
             if (board[i] != 'R') {
+                return false;
+            }
+        }
+
+        for (int i = midIndex + 1; i < board.length; i++) {
+            if (board[i] != 'L') {
                 return false;
             }
         }

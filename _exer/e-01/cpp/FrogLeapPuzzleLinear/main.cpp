@@ -135,6 +135,10 @@ int main() {
     int N;
     printf("N: ");
     scanf("%d", &N);
+    if (N <= 0) {
+        printf("N must be a positive integer.\n");
+        return 1;
+    }
 
     vector<char> board;
 
@@ -145,7 +149,7 @@ int main() {
     linear_solution(board, N, leaf_pos, jump_sequence);
     printf("Jump sequence: ");
     print_jump_sequence(jump_sequence);
-    printf("Total jumps: %zu\nSuccess!", jump_sequence.size());
+    printf("Total jumps: %zu\nSuccess!\n", jump_sequence.size());
 
     return 0;
 }

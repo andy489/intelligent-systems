@@ -3,14 +3,14 @@ import time
 
 class DFSSolution:
 
-    def __init__(self):
+    def __init__(self, n):
         # pair = {key=RIGHT_FROG/LEFT_FROG, value=SINGLE_JUMP/DOUBLE_JUMP}
         # -1 = right frog jumps left, 1 = left frog jumps right
         # 1 = single jump, 2 = double jump
         self.start_time = None
         self.jump_sequence = []
         self.jump_types = [(-1, 1), (-1, 2), (1, 1), (1, 2)]
-        self.n = int(input("N: "))
+        self.n = n
         self.board_size = self.n * 2 + 1
         self.board = [self.generate_frog(i) for i in range(self.board_size)]
 
@@ -34,15 +34,17 @@ class DFSSolution:
             if self.board[i] != "R":
                 return False
 
+        for i in range(mid_ind + 1, self.board_size):
+            if self.board[i] != "L":
+                return False
+
         return True
 
     def in_range(self, pos):
         return 0 <= pos < self.board_size
 
     def swap(self, ind1, ind2):
-        temp = self.board[ind1]
-        self.board[ind1] = self.board[ind2]
-        self.board[ind2] = temp
+        self.board[ind1], self.board[ind2] = self.board[ind2], self.board[ind1]
 
     def move(self, leaf_pos, frog_pos, depth):
         depth = depth + 1
@@ -58,7 +60,6 @@ class DFSSolution:
         return False
 
     def shift_leaf(self, leaf_pos, jump_type, depth):
-
         frog_pos = leaf_pos + jump_type[0] * jump_type[1]
 
         if self.in_range(frog_pos) and self.board[frog_pos] == ("L" if jump_type[0] == -1 else "R"):
@@ -71,8 +72,7 @@ class DFSSolution:
             print(f"Goal State found at depth: {depth}")
 
             elapsed_time_sec = time.time() - self.start_time
-            print(f"Solving puzzle took: {"{:.2f}".format(elapsed_time_sec * 1000)} µs ≈ "
-                  f"{"{:.2f}".format(elapsed_time_sec)} s.")
+            print(f"Solving puzzle took: {elapsed_time_sec * 1000:.2f} ms ≈ {elapsed_time_sec:.2f} s.")
             self.print_board()
             return True
 
@@ -86,5 +86,5 @@ class DFSSolution:
         self.start_time = time.time()
         depth = 0
         self.dfs(self.n, depth)
-        print(f"Jump Sequence: " + ", ".join(str(j) for j in self.jump_sequence))
+        print("Jump Sequence: " + ", ".join(str(j) for j in self.jump_sequence))
         print(f"Total jumps: {len(self.jump_sequence)}\nSuccess!")

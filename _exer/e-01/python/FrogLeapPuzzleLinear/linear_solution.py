@@ -1,11 +1,5 @@
 def init_board(n):
-    board = []
-    for _ in range(n):
-        board.append("L")
-    board.append("_")
-    for _ in range(n):
-        board.append("R")
-    return board
+    return ["L"] * n + ["_"] + ["R"] * n
 
 
 def print_state(arr):
@@ -77,10 +71,11 @@ def linear_solution(board, n, jump_sequence):
     process_second_half(board, n, leaf_pos, jump_sequence)
 
 
-n = int(input("N: "))
-board = init_board(n)
-jump_sequence = []
-linear_solution(board, n, jump_sequence)
-print("Jump sequence: " + ", ".join(str(j) for j in jump_sequence))
-print(f"Total jumps: {len(jump_sequence)}")
-print("Success!")
+if __name__ == "__main__":
+    n = int(input("N: "))
+    board = init_board(n)
+    jump_sequence = []
+    linear_solution(board, n, jump_sequence)
+    print("Jump sequence: " + ", ".join(str(j) for j in jump_sequence))
+    print(f"Total jumps: {len(jump_sequence)}")
+    print("Success!")

@@ -11,6 +11,7 @@ public class FrogLeapPuzzleLinear {
         System.out.print("N: ");
 
         int N = sc.nextInt();
+        sc.close();
         int SIZE = N * 2 + 1;
 
         char[] board = new char[SIZE];
