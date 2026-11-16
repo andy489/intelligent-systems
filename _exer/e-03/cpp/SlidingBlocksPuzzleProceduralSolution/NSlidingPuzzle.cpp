@@ -141,10 +141,16 @@ static size_t merge_count(int *arr, int *tmp, int n) {
     return inv;
 }
 
+// Parity rule for the N-puzzle:
+//   Odd grid width:  puzzle is solvable iff #inversions is even.
+//   Even grid width: puzzle is solvable iff
+//     (inversions + blank_row_from_bottom + blank_target_row_from_bottom) is even.
+// "Row from bottom" = (grid_size - 1) - row_from_top.
+// Both the blank's current row AND its goal row must be included; omitting the
+// goal row gives wrong results when blank_target is not at the default position.
 bool check_solvable() {
     int flat[MAX_TILES], tmp[MAX_TILES];
     int p = 0;
-    int blank_row = blank_curr / grid_size;
 
     for (int i = 0; i < grid_size * grid_size; ++i) {
         if (board[i] != BLANK_TILE_ID) flat[p++] = board[i];
@@ -153,7 +159,10 @@ bool check_solvable() {
     size_t inv = merge_count(flat, tmp, tiles_count);
 
     if (grid_size % 2 == 1) return inv % 2 == 0;
-    return ((size_t) blank_row + inv) % 2 == 1;
+
+    int blank_row_from_bottom  = (grid_size - 1) - (blank_curr   / grid_size);
+    int target_row_from_bottom = (grid_size - 1) - (blank_target / grid_size);
+    return (inv + (size_t)blank_row_from_bottom + (size_t)target_row_from_bottom) % 2 == 0;
 }
 
 // ---------------------------------------------------------------------------
@@ -251,6 +260,10 @@ static Move reverse_move(Move m) {
 }
 
 // Returns 0 on success, or the minimum exceeded cost (next threshold).
+// prev_move is the move that brought the blank TO blank_pos (not the next move).
+// On the way back up the call stack each frame pushes its own prev_move, so the
+// stack ends up as [NEUTRAL(root), m1, m2, ..., mN] with mN on top — popping it
+// gives forward move order. NEUTRAL at the bottom is skipped by default: break.
 int dls(int blank_pos, int limit, Move prev_move, int h, int depth) {
     int cost = h + depth;
     if (cost > limit) return cost;
@@ -294,10 +307,11 @@ int dls(int blank_pos, int limit, Move prev_move, int h, int depth) {
 }
 
 // IDA* with Manhattan + Linear Conflict.
-// Linear Conflict is computed only at the root of each iteration to set the
-// initial threshold — it is admissible and still tightens every threshold.
-// Inside dls, only Manhattan distance is tracked incrementally (O(1) per move).
-// This is correct because the incremental h is still admissible (pure MD ≤ true cost).
+// The running heuristic inside dls is pure Manhattan (incremental O(1) per move).
+// LC is recomputed at the start of each outer iteration and used only to raise the
+// threshold — this is safe because LC is admissible, so the threshold is never set
+// above the true optimal cost. Using pure MD inside dls is also admissible (MD ≤
+// true cost), keeping the search complete and optimal.
 void ida_star(int md_init, int lc_init) {
     int threshold = md_init + lc_init;
     int result;

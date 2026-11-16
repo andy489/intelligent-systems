@@ -20,7 +20,9 @@ public class NSlidingPuzzle {
     static int blankTarget;
     static int[] offset = new int[5];
 
-    // Solution path built in reverse during DLS, reversed at output
+    // Solution path — each frame pushes its own prevMove on the way back up,
+    // so after the search the deque holds [NEUTRAL(front), m1, m2, ..., mN].
+    // Pop NEUTRAL first, then pop m1..mN in forward order for output.
     static Deque<Integer> history = new ArrayDeque<>();
 
     static void initOffsets() {
@@ -82,10 +84,15 @@ public class NSlidingPuzzle {
         return inv;
     }
 
+    // Parity rule for the N-puzzle:
+    //   Odd grid width:  solvable iff #inversions is even.
+    //   Even grid width: solvable iff
+    //     (inversions + blank_row_from_bottom + blank_target_row_from_bottom) is even.
+    // Both the blank's current row AND its goal row must be counted from the bottom.
+    // Omitting the goal row gives wrong results when blankTarget is not the default.
     static boolean checkSolvable() {
         int[] flat = new int[tilesCount];
         int p = 0;
-        int blankRow = blankCurr / gridSize;
 
         for (int i = 0; i < gridSize * gridSize; ++i) {
             if (board[i] != BLANK) flat[p++] = board[i];
@@ -94,7 +101,10 @@ public class NSlidingPuzzle {
         long inv = mergeCount(flat, new int[tilesCount], 0, tilesCount);
 
         if (gridSize % 2 == 1) return inv % 2 == 0;
-        return (blankRow + inv) % 2 == 1;
+
+        int blankRowFromBottom  = (gridSize - 1) - (blankCurr   / gridSize);
+        int targetRowFromBottom = (gridSize - 1) - (blankTarget / gridSize);
+        return (inv + blankRowFromBottom + targetRowFromBottom) % 2 == 0;
     }
 
     // ---------------------------------------------------------------------------
@@ -161,18 +171,17 @@ public class NSlidingPuzzle {
         return np;
     }
 
-    static int reverseMove(int m) {
-        if (m == UP)    return DOWN;
-        if (m == DOWN)  return UP;
-        if (m == LEFT)  return RIGHT;
-        if (m == RIGHT) return LEFT;
-        return NEUTRAL;
-    }
+    // O(1) reverse-move lookup: REVERSE[m] is the opposite of move m.
+    static final int[] REVERSE = { RIGHT, LEFT, UP, DOWN, NEUTRAL };
+
+    static int reverseMove(int m) { return REVERSE[m]; }
 
     // ---------------------------------------------------------------------------
     // IDA* search
     // ---------------------------------------------------------------------------
 
+    // prevMove is the move that brought the blank TO blankPos.
+    // On success each frame pushes its own prevMove, building the path bottom-up.
     static int dls(int blankPos, int limit, int prevMove, int h, int depth) {
         int cost = h + depth;
         if (cost > limit) return cost;
@@ -265,7 +274,7 @@ public class NSlidingPuzzle {
 
         if (md + lc == 0) {
             System.out.println(0);
-            System.out.println("\nSuccess!");
+            System.out.print("\nSuccess!\n");
             return;
         }
 
@@ -286,6 +295,6 @@ public class NSlidingPuzzle {
 
         System.out.println();
         System.out.println(formatDuration(elapsed));
-        System.out.println("\nSuccess!");
+        System.out.print("\nSuccess!\n");
     }
 }

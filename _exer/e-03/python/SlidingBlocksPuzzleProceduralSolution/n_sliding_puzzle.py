@@ -41,20 +41,19 @@ def set_goal_state(blank_target_index):
 def read_input(source):
     global grid_size, tiles_count, blank_curr, board, goal_row, goal_col
 
-    tokens = source.read().split()
-    idx = 0
-    grid_size = int(tokens[idx]); idx += 1
-    target_index = int(tokens[idx]); idx += 1
+    it = iter(source.read().split())
+    grid_size    = int(next(it))
+    target_index = int(next(it))
 
     tiles_count = grid_size * grid_size - 1
     blank_target_index = tiles_count if target_index < 0 else target_index
 
-    board = [0] * (grid_size * grid_size)
+    board    = [0] * (grid_size * grid_size)
     goal_row = [0] * (grid_size * grid_size)
     goal_col = [0] * (grid_size * grid_size)
 
     for i in range(grid_size * grid_size):
-        board[i] = int(tokens[idx]); idx += 1
+        board[i] = int(next(it))
         if board[i] == 0:
             blank_curr = i
 
@@ -89,14 +88,22 @@ def merge_count(arr, lo, hi):
     return inv
 
 
+# Parity rule for the N-puzzle:
+#   Odd grid width:  solvable iff #inversions is even.
+#   Even grid width: solvable iff
+#     (inversions + blank_row_from_bottom + blank_target_row_from_bottom) is even.
+# Both the blank's current row AND its goal row must be counted from the bottom.
+# Omitting the goal row gives wrong results when blank_target is not the default.
 def check_solvable():
     flat = [board[i] for i in range(grid_size * grid_size) if board[i] != 0]
     inv = merge_count(flat, 0, len(flat))
-    blank_row = blank_curr // grid_size
 
     if grid_size % 2 == 1:
         return inv % 2 == 0
-    return (blank_row + inv) % 2 == 1
+
+    blank_row_from_bottom  = (grid_size - 1) - (blank_curr   // grid_size)
+    target_row_from_bottom = (grid_size - 1) - (blank_target // grid_size)
+    return (inv + blank_row_from_bottom + target_row_from_bottom) % 2 == 0
 
 
 # ---------------------------------------------------------------------------
@@ -167,6 +174,7 @@ def neighbour_pos(blank_pos, move):
     return np
 
 
+# REVERSE[m] gives the opposite of move m — used to avoid reversing the last move.
 REVERSE = [RIGHT, LEFT, UP, DOWN, NEUTRAL]
 
 
@@ -197,11 +205,12 @@ def dls(blank_pos, limit, prev_move, h, depth):
 
         new_h = update_heuristic(blank_pos, np, h)
 
+        # Swap blank with the tile at np; RHS fully evaluated before assignment.
         board[blank_pos], board[np] = board[np], 0
 
         result = dls(np, limit, move, new_h, depth + 1)
 
-        board[np], board[blank_pos] = board[blank_pos], 0
+        board[np], board[blank_pos] = board[blank_pos], 0  # undo
 
         if result == 0:
             history.append(prev_move)
