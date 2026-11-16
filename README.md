@@ -30,10 +30,10 @@
 
 | # | Topic | Problem | Exercise Sheet | Solutions |
 |---|---|---|---|---|
-| E01 | Introduction | — | [is-e-01 (2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) | — |
-| E02a | Uninformed (Blind) Search | — | [is-e-02-pt-1 Uninformed Blind Search (2021-10-07)](_exer/e-02-uninformed-search/is-e-02-pt-1-(2021-10-07).pdf) | — |
-| E02b | Uninformed Search — Warm-Up | Frog Leap Puzzle | [is-e-02-pt-2 Uninformed Warm-Up (2021-10-07)](_exer/e-02-uninformed-search/is-e-02-pt-2-(2021-10-07).pdf) | [C++](_exer/e-02-uninformed-search/cpp/) · [Java](_exer/e-02-uninformed-search/java/) · [Python](_exer/e-02-uninformed-search/python/) |
-| E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [is-e-03 (2021-10-17)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-17)-informed-heuristic-search.pdf) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/) |
+| E01 | Introduction | — | [is-e-01-(2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) | — |
+| E02a | Uninformed (Blind) Search | — | [is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-search/is-e-02-pt-1-(2021-10-07).pdf) | — |
+| E02b | Uninformed Search — Warm-Up | Frog Leap Puzzle | [is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-search/is-e-02-pt-2-(2021-10-07).pdf) | [C++](_exer/e-02-uninformed-search/cpp/) · [Java](_exer/e-02-uninformed-search/java/) · [Python](_exer/e-02-uninformed-search/python/) |
+| E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [is-e-03-(2021-10-17)-informed-heuristic-search](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-17)-informed-heuristic-search.pdf) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/) |
 | E04 | Constraint Satisfaction Problems | — | — | — |
 | E05 | Genetic Algorithms | — | — | — |
 | E06 | Games | — | — | — |
