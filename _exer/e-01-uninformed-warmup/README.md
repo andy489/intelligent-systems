@@ -1,13 +1,11 @@
-# E01 — Frog Leap Puzzle
+# E01 — Frog Leap Puzzle *(warm-up)*
 
-**Problem:** Frog Leap Puzzle  
-**Topic:** Uninformed (Blind) Search — DFS  
+**Topic:** Uninformed Search — DFS  
 **Exercise Sheet:** [is-e-01-(2021-10-03).pdf](is-e-01-(2021-10-03).pdf)
 
-Play the puzzle online: [NIEHS Frog Leap Game](https://www.niehs.nih.gov/health/kids/games/brainteasers/frog-leap)
-
-See [PROBLEM.md](PROBLEM.md) for the full problem statement and rules.  
-See [SOLUTION.md](SOLUTION.md) for algorithm explanations and pseudocode.
+Play the puzzle online: [NIEHS Frog Leap Game](https://www.niehs.nih.gov/health/kids/games/brainteasers/frog-leap)  
+Full problem statement and rules: [PROBLEM.md](PROBLEM.md)  
+Algorithm explanations and pseudocode: [SOLUTION.md](SOLUTION.md)
 
 ---
 
@@ -15,27 +13,14 @@ See [SOLUTION.md](SOLUTION.md) for algorithm explanations and pseudocode.
 
 Both solutions produce the **optimal** number of moves: **N² + 2N**.
 
-### Linear Solution
+| Solution | Time | Space |
+|---|---|---|
+| Linear | O(N²) — executes N² + 2N moves analytically, no search | O(N) — board of size 2N+1 |
+| DFS | O(N²) — visits each state once on the unique optimal path | O(N²) — recursion depth N² + 2N |
 
-| | Complexity |
-|---|---|
-| Time | O(N²) — executes exactly N² + 2N moves |
-| Space | O(N) — board of size 2N + 1; no call stack growth |
-| Move count | N² + 2N (optimal) |
+The fixed move-ordering (`step-L, jump-L, step-R, jump-R`) guides DFS directly to the optimal path without backtracking.
 
-No search, no backtracking. The move sequence is derived analytically from the pattern structure.
-
-### DFS Solution
-
-| | Complexity |
-|---|---|
-| Time | O(N²) — visits each state at most once on the unique optimal path |
-| Space | O(N²) — recursion depth = N² + 2N; each frame is O(1) extra |
-| Move count | N² + 2N (optimal) |
-
-The fixed move-ordering in the search (`step-L, jump-L, step-R, jump-R`) guides DFS directly to the optimal path without wasted backtracking.
-
-### Practical Performance (measured wall-clock)
+### Practical performance (measured wall-clock)
 
 | N | Linear | DFS |
 |---|---|---|
@@ -44,7 +29,7 @@ The fixed move-ordering in the search (`step-L, jump-L, step-R, jump-R`) guides 
 | 20 | < 1 ms | ~1 ms |
 | 25 | < 1 ms | ~5 ms |
 
-The DFS limit is ~N = 25 due to recursion depth (N² + 2N ≈ 675 frames). The linear solution has no practical upper bound.
+DFS practical limit is ~N = 25 (recursion depth N² + 2N ≈ 675 frames). The linear solution has no practical upper bound.
 
 ---
 
@@ -52,11 +37,20 @@ The DFS limit is ~N = 25 due to recursion depth (N² + 2N ≈ 675 frames). The l
 
 | Language | Linear | DFS |
 |---|---|---|
+| C++ | `cpp/FrogLeapPuzzleLinear/` | `cpp/LeapFrogPuzzleDFS/` |
 | Java | `java/FrogLeapPuzzleLinear/` | `java/FrogLeapPuzzleDFS/` |
 | Python | `python/FrogLeapPuzzleLinear/` | `python/FrogLeapPuzzleDFS/` |
-| C++ | `cpp/FrogLeapPuzzleLinear/` | `cpp/LeapFrogPuzzleDFS/` |
 
 ### Running
+
+**C++**
+```bash
+# Linear
+cmake -S cpp/FrogLeapPuzzleLinear -B cpp/FrogLeapPuzzleLinear/build && cmake --build cpp/FrogLeapPuzzleLinear/build
+
+# DFS
+cmake -S cpp/LeapFrogPuzzleDFS -B cpp/LeapFrogPuzzleDFS/build && cmake --build cpp/LeapFrogPuzzleDFS/build
+```
 
 **Java**
 ```bash
@@ -75,21 +69,12 @@ javac src/*.java -d out && java -cp out Main
 python3 python/FrogLeapPuzzleLinear/linear_solution.py
 
 # DFS
-python3 python/FrogLeapPuzzleDFS/main.py
-```
-
-**C++**
-```bash
-# Linear
-cmake -S cpp/FrogLeapPuzzleLinear -B cpp/FrogLeapPuzzleLinear/build && cmake --build cpp/FrogLeapPuzzleLinear/build
-
-# DFS
-cmake -S cpp/LeapFrogPuzzleDFS -B cpp/LeapFrogPuzzleDFS/build && cmake --build cpp/LeapFrogPuzzleDFS/build
+python3 python/FrogLeapPuzzleDFS/dfs_solution.py
 ```
 
 All programs read `N` from stdin.
 
-### Example Output (N = 2)
+### Example output (N = 2)
 
 ```
 LL_RR
@@ -101,7 +86,6 @@ _RLRL
 R_LRL
 RRL_L
 RR_LL
-RRRLL   ← wrong, shown for illustration; actual goal: RR_LL → RRLL_... 
 ```
 
-For N = 2 the goal state is `RR_LL` and total moves = 2² + 2×2 = 8.
+Goal state `RR_LL` reached in 2² + 2×2 = **8 moves**.
