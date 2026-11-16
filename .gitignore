@@ -338,3 +338,7 @@ cpp/.idea
 
 _exer/**/**/**/.idea
 _exer/**/**/**/*.iml
+
+# Compiled C++ binaries (no extension, platform-specific)
+_exer/**/n_sliding_puzzle
+_exer/**/dfs
