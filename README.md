@@ -6,16 +6,17 @@
 
 ## Exercises
 
-| # | Topic | Exercise Sheet | Solutions |
-|---|---|---|---|
-| E01 | Uninformed Search — Warm-Up | [is-e-01 (2021-10-10)](_exer/e-01-uninformed-warmup/is-e-01-(2021-10-03).pdf) | [C++](_exer/e-01-uninformed-warmup/cpp/) · [Java](_exer/e-01-uninformed-warmup/java/) · [Python](_exer/e-01-uninformed-warmup/python/) |
-| E02 | Uninformed (Blind) Search | [is-e-02 (2021-10-10)](_exer/e-02-uninformed-blind-search/is-e-02-(2021-10-10)-uninformed-blind-search.pdf) | — |
-| E03 | Informed (Heuristic) Search — IDA* | [is-e-03 (2021-10-17)](_exer/e-03/is-e-03-(2021-10-17)-informed-heuristic-search.pdf) | [C++](_exer/e-03/cpp/) · [Java](_exer/e-03/java/) · [Python](_exer/e-03/python/) |
+| # | Problem | Topic | Exercise Sheet | Solutions |
+|---|---|---|---|---|
+| E01 | Frog Leap Puzzle | Uninformed Search — DFS | [is-e-01 (2021-10-03)](_exer/e-01-uninformed-warmup/is-e-01-(2021-10-03).pdf) | [C++](_exer/e-01-uninformed-warmup/cpp/) · [Java](_exer/e-01-uninformed-warmup/java/) · [Python](_exer/e-01-uninformed-warmup/python/) |
+| E02 | — | Uninformed (Blind) Search | [is-e-02 (2021-10-10)](_exer/e-02-uninformed-blind-search/is-e-02-(2021-10-10)-uninformed-blind-search.pdf) | — |
+| E03 | N-Sliding Blocks Puzzle | Informed (Heuristic) Search — IDA* | [is-e-03 (2021-10-17)](_exer/e-03/is-e-03-(2021-10-17)-informed-heuristic-search.pdf) | [C++](_exer/e-03/cpp/) · [Java](_exer/e-03/java/) · [Python](_exer/e-03/python/) |
 
 ---
 
 ## E01 — Frog Leap Puzzle *(warm-up)*
 
+**Problem:** Frog Leap Puzzle  
 **Topic:** Uninformed (Blind) Search — DFS  
 **Docs:** [Problem](_exer/e-01-uninformed-warmup/PROBLEM.md) · [Solution](_exer/e-01-uninformed-warmup/SOLUTION.md) · [Exercise Sheet](_exer/e-01-uninformed-warmup/is-e-01-(2021-10-03).pdf)
 
@@ -32,7 +33,7 @@ Two approaches — DFS search and an O(N²) analytical linear solution.
 
 ## E02 — Uninformed (Blind) Search
 
-**Topic:** Uninformed Search — BFS, DFS, UCS, DLS, IDS  
+**Topic:** Uninformed (Blind) Search — BFS, DFS, UCS, DLS, IDS  
 **Docs:** [Exercise Sheet](_exer/e-02-uninformed-blind-search/is-e-02-(2021-10-10)-uninformed-blind-search.pdf)
 
 No code solutions yet.
@@ -41,6 +42,7 @@ No code solutions yet.
 
 ## E03 — N-Sliding Blocks Puzzle
 
+**Problem:** N-Sliding Blocks Puzzle  
 **Topic:** Informed (Heuristic) Search — IDA\*  
 **Docs:** [Exercise Sheet](_exer/e-03/is-e-03-(2021-10-17)-informed-heuristic-search.pdf)
 

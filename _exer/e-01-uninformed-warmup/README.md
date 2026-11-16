@@ -1,10 +1,13 @@
 # E01 — Frog Leap Puzzle
 
+**Problem:** Frog Leap Puzzle  
+**Topic:** Uninformed (Blind) Search — DFS  
+**Exercise Sheet:** [is-e-01-(2021-10-03).pdf](is-e-01-(2021-10-03).pdf)
+
 Play the puzzle online: [NIEHS Frog Leap Game](https://www.niehs.nih.gov/health/kids/games/brainteasers/frog-leap)
 
 See [PROBLEM.md](PROBLEM.md) for the full problem statement and rules.  
-See [SOLUTION.md](SOLUTION.md) for algorithm explanations and pseudocode.  
-See [is-e-01-(2021-10-03).pdf](is-e-01-(2021-10-03).pdf) for the original exercise sheet.
+See [SOLUTION.md](SOLUTION.md) for algorithm explanations and pseudocode.
 
 ---
 

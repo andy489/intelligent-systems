@@ -1,5 +1,6 @@
 # E03 — N-Sliding Blocks Puzzle
 
+**Problem:** N-Sliding Blocks Puzzle  
 **Topic:** Informed (Heuristic) Search — IDA\*  
 **Exercise Sheet:** [is-e-03-(2021-10-17)-informed-heuristic-search.pdf](is-e-03-(2021-10-17)-informed-heuristic-search.pdf)
 
