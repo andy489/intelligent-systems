@@ -1,5 +1,6 @@
-# E01 — Frog Leap Puzzle *(warm-up)*
+# E01 — Uninformed Search — Warm-Up
 
+**Problem:** Frog Leap Puzzle  
 **Topic:** Uninformed Search — DFS  
 **Exercise Sheet:** [is-e-01-(2021-10-03).pdf](is-e-01-(2021-10-03).pdf)
 
