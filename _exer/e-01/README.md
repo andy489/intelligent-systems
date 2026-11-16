@@ -3,7 +3,8 @@
 Play the puzzle online: [NIEHS Frog Leap Game](https://www.niehs.nih.gov/health/kids/games/brainteasers/frog-leap)
 
 See [PROBLEM.md](PROBLEM.md) for the full problem statement and rules.  
-See [SOLUTION.md](SOLUTION.md) for algorithm explanations and pseudocode.
+See [SOLUTION.md](SOLUTION.md) for algorithm explanations and pseudocode.  
+See [is-e-01-(2021-10-10).pdf](is-e-01-(2021-10-10).pdf) for the original exercise sheet.
 
 ---
 
@@ -68,10 +69,10 @@ javac src/*.java -d out && java -cp out Main
 **Python**
 ```bash
 # Linear
-python python/FrogLeapPuzzleLinear/linear_solution.py
+python3 python/FrogLeapPuzzleLinear/linear_solution.py
 
 # DFS
-python python/FrogLeapPuzzleDFS/main.py
+python3 python/FrogLeapPuzzleDFS/main.py
 ```
 
 **C++**
