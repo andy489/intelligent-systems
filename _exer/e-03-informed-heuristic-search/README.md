@@ -1,7 +1,7 @@
 # E03 — Informed (Heuristic) Search — IDA*
 
 **Problem:** N-Sliding Blocks Puzzle  
-**Exercise Sheet:** [is-e-03-(2021-10-17).pdf](is-e-03-(2021-10-17).pdf)
+**Exercise Sheet:** [is-e-03-(2021-10-17)](is-e-03-(2021-10-17).pdf)
 
 An N×N grid holds tiles numbered 1 to N²−1 and one blank. A move slides an adjacent tile into the blank. The goal is to reach a specified target configuration in the **minimum number of moves**.
 
