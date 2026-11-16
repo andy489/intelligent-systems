@@ -26,26 +26,6 @@
 
 ---
 
-## Exercises by Week
-
-| Week | Topic |
-|---|---|
-| 1 | Introduction |
-| 2 | Uninformed (Blind) Search |
-| 3 | Informed (Heuristic) Search |
-| 4 | Constraint Satisfaction Problems |
-| 5 | Genetic Algorithms |
-| 6 | Games |
-| 7 | Introduction to Machine Learning |
-| 8 | k-Nearest Neighbours |
-| 9 | Naive Bayes Classifier |
-| 10 | Decision Tree |
-| 11 | kMeans |
-| 12 | Neural Networks |
-| 13–15 | Additional Topics, Questions, Presentations and Project Defenses |
-
----
-
 ## Exercise Sheets
 
 | # | Topic | Problem | Exercise Sheet | Solutions |
