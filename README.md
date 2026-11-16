@@ -40,7 +40,7 @@ No code solutions yet.
 
 ---
 
-## E03 — N-Sliding Blocks Puzzle
+## E03 — Informed (Heuristic) Search — IDA*
 
 **Problem:** N-Sliding Blocks Puzzle  
 **Topic:** Informed (Heuristic) Search — IDA\*  
