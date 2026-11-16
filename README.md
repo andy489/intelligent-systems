@@ -1,16 +1,66 @@
 # Intelligent Systems
 
-> Course exercises covering search algorithms, clustering, classification, and neural networks.
+> Course exercises covering search algorithms, constraint satisfaction, genetic algorithms, games, and machine learning.
+
+**Textbook:** Stuart Russell & Peter Norvig — *Artificial Intelligence: A Modern Approach*, Prentice Hall  
+**Reference:** [aima.eecs.berkeley.edu](http://aima.eecs.berkeley.edu/)
 
 ---
 
-## Exercises
+## Course Topics
+
+### Problem Solving and Search
+- Uninformed (Blind) Search
+- Informed (Heuristic) Search
+- Constraint Satisfaction Problems
+- Genetic Algorithms
+- Games
+
+### Machine Learning
+- k-Nearest Neighbours
+- Naive Bayes Classifier
+- Decision Tree
+- kMeans
+- Neural Networks
+
+---
+
+## Exercises by Week
+
+| Week | Topic |
+|---|---|
+| 1 | Introduction |
+| 2 | Uninformed (Blind) Search |
+| 3 | Informed (Heuristic) Search |
+| 4 | Constraint Satisfaction Problems |
+| 5 | Genetic Algorithms |
+| 6 | Games |
+| 7 | Introduction to Machine Learning |
+| 8 | k-Nearest Neighbours |
+| 9 | Naive Bayes Classifier |
+| 10 | Decision Tree |
+| 11 | kMeans |
+| 12 | Neural Networks |
+| 13–15 | Additional Topics, Questions, Presentations and Project Defenses |
+
+---
+
+## Exercise Sheets
 
 | # | Topic | Problem | Exercise Sheet | Solutions |
 |---|---|---|---|---|
-| E01 | Uninformed Search — DFS *(warm-up)* | Frog Leap Puzzle | [is-e-01 (2021-10-03)](_exer/e-01-uninformed-warmup/is-e-01-(2021-10-03).pdf) | [C++](_exer/e-01-uninformed-warmup/cpp/) · [Java](_exer/e-01-uninformed-warmup/java/) · [Python](_exer/e-01-uninformed-warmup/python/) |
+| E01 | Uninformed Search — Warm-Up | Frog Leap Puzzle | [is-e-01 (2021-10-03)](_exer/e-01-uninformed-warmup/is-e-01-(2021-10-03).pdf) | [C++](_exer/e-01-uninformed-warmup/cpp/) · [Java](_exer/e-01-uninformed-warmup/java/) · [Python](_exer/e-01-uninformed-warmup/python/) |
 | E02 | Uninformed (Blind) Search | — | [is-e-02 (2021-10-10)](_exer/e-02-uninformed-blind-search/is-e-02-(2021-10-10)-uninformed-blind-search.pdf) | — |
 | E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [is-e-03 (2021-10-17)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-17)-informed-heuristic-search.pdf) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/) |
+| E04 | Constraint Satisfaction Problems | — | — | — |
+| E05 | Genetic Algorithms | — | — | — |
+| E06 | Games | — | — | — |
+| E07 | Introduction to Machine Learning | — | — | — |
+| E08 | k-Nearest Neighbours | — | — | — |
+| E09 | Naive Bayes Classifier | — | — | — |
+| E10 | Decision Tree | — | — | — |
+| E11 | kMeans | — | — | — |
+| E12 | Neural Networks | — | — | — |
 
 ---
 
@@ -57,3 +107,84 @@ Puzzles: [`data/puzzles/`](_exer/e-03-informed-heuristic-search/data/puzzles/) (
 Results: [`data/results/`](_exer/e-03-informed-heuristic-search/data/results/) (one `.txt` per puzzle — moves + elapsed time)  
 Analysis: [`data/ANALYSIS.md`](_exer/e-03-informed-heuristic-search/data/ANALYSIS.md) (145 solved, 9 unsolvable, 1 timed out)  
 Runner: [`run_all_puzzles.py`](_exer/e-03-informed-heuristic-search/run_all_puzzles.py)
+
+---
+
+## E04 — Constraint Satisfaction Problems
+
+**Problem:** —  
+**Docs:** —
+
+No content yet.
+
+---
+
+## E05 — Genetic Algorithms
+
+**Problem:** —  
+**Docs:** —
+
+No content yet.
+
+---
+
+## E06 — Games
+
+**Problem:** —  
+**Docs:** —
+
+No content yet.
+
+---
+
+## E07 — Introduction to Machine Learning
+
+**Problem:** —  
+**Docs:** —
+
+No content yet.
+
+---
+
+## E08 — k-Nearest Neighbours
+
+**Problem:** —  
+**Docs:** —
+
+No content yet.
+
+---
+
+## E09 — Naive Bayes Classifier
+
+**Problem:** —  
+**Docs:** —
+
+No content yet.
+
+---
+
+## E10 — Decision Tree
+
+**Problem:** —  
+**Docs:** —
+
+No content yet.
+
+---
+
+## E11 — kMeans
+
+**Problem:** —  
+**Docs:** —
+
+No content yet.
+
+---
+
+## E12 — Neural Networks
+
+**Problem:** —  
+**Docs:** —
+
+No content yet.
