@@ -4,7 +4,7 @@ Play the puzzle online: [NIEHS Frog Leap Game](https://www.niehs.nih.gov/health/
 
 See [PROBLEM.md](PROBLEM.md) for the full problem statement and rules.  
 See [SOLUTION.md](SOLUTION.md) for algorithm explanations and pseudocode.  
-See [is-e-01-(2021-10-10).pdf](is-e-01-(2021-10-10).pdf) for the original exercise sheet.
+See [is-e-01-(2021-10-03).pdf](is-e-01-(2021-10-03).pdf) for the original exercise sheet.
 
 ---
 
