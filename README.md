@@ -31,7 +31,7 @@
 | # | Topic | Problem | Exercise Sheet | Solutions |
 |---|---|---|---|---|
 | E01 | Introduction | — | [is-e-01-(2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) | [README](_exer/e-01-introduction/README.md) |
-| E02 | Uninformed (Blind) Search | Frog Leap Puzzle | [is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-search/is-e-02-pt-1-(2021-10-07).pdf)<br>[is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-search/is-e-02-pt-2-(2021-10-07).pdf) | [C++](_exer/e-02-uninformed-search/cpp/) · [Java](_exer/e-02-uninformed-search/java/) · [Python](_exer/e-02-uninformed-search/python/) |
+| E02 | Uninformed (Blind) Search | Frog Leap Puzzle | [is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf)<br>[is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) | [C++](_exer/e-02-uninformed-blind-search/cpp/) · [Java](_exer/e-02-uninformed-blind-search/java/) · [Python](_exer/e-02-uninformed-blind-search/python/) |
 | E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [is-e-03-(2021-10-17)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-17).pdf) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/) |
 | E04 | Constraint Satisfaction Problems | — | — | — |
 | E05 | Genetic Algorithms | — | — | — |
@@ -57,16 +57,16 @@ Course table of contents and overview. No code solutions.
 ## E02 — Uninformed Search
 
 **Problem:** Frog Leap Puzzle  
-**Docs:** [Part 1 — Blind Search](_exer/e-02-uninformed-search/is-e-02-pt-1-(2021-10-07).pdf) · [Part 2 — Warm-Up](_exer/e-02-uninformed-search/is-e-02-pt-2-(2021-10-07).pdf) · [README](_exer/e-02-uninformed-search/README.md) · [Problem](_exer/e-02-uninformed-search/PROBLEM.md) · [Solution](_exer/e-02-uninformed-search/SOLUTION.md)
+**Docs:** [Part 1 — Blind Search](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf) · [Part 2 — Warm-Up](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) · [README](_exer/e-02-uninformed-blind-search/README.md) · [Problem](_exer/e-02-uninformed-blind-search/PROBLEM.md) · [Solution](_exer/e-02-uninformed-blind-search/SOLUTION.md)
 
 Classic puzzle on a `2N+1` board: swap N yellow (left-side) and N green (right-side) frogs using steps and jumps.
 Two approaches — DFS search and an O(N²) analytical linear solution.
 
 | Language | Linear | DFS |
 |---|---|---|
-| C++ | [`FrogLeapPuzzleLinear/main.cpp`](_exer/e-02-uninformed-search/cpp/FrogLeapPuzzleLinear/main.cpp) | [`LeapFrogPuzzleDFS/main.cpp`](_exer/e-02-uninformed-search/cpp/LeapFrogPuzzleDFS/main.cpp) |
-| Java | [`FrogLeapPuzzleLinear.java`](_exer/e-02-uninformed-search/java/FrogLeapPuzzleLinear/src/FrogLeapPuzzleLinear.java) | [`DFSSolution.java`](_exer/e-02-uninformed-search/java/FrogLeapPuzzleDFS/src/DFSSolution.java) |
-| Python | [`linear_solution.py`](_exer/e-02-uninformed-search/python/FrogLeapPuzzleLinear/linear_solution.py) | [`dfs_solution.py`](_exer/e-02-uninformed-search/python/FrogLeapPuzzleDFS/dfs_solution.py) |
+| C++ | [`FrogLeapPuzzleLinear/main.cpp`](_exer/e-02-uninformed-blind-search/cpp/FrogLeapPuzzleLinear/main.cpp) | [`LeapFrogPuzzleDFS/main.cpp`](_exer/e-02-uninformed-blind-search/cpp/LeapFrogPuzzleDFS/main.cpp) |
+| Java | [`FrogLeapPuzzleLinear.java`](_exer/e-02-uninformed-blind-search/java/FrogLeapPuzzleLinear/src/FrogLeapPuzzleLinear.java) | [`DFSSolution.java`](_exer/e-02-uninformed-blind-search/java/FrogLeapPuzzleDFS/src/DFSSolution.java) |
+| Python | [`linear_solution.py`](_exer/e-02-uninformed-blind-search/python/FrogLeapPuzzleLinear/linear_solution.py) | [`dfs_solution.py`](_exer/e-02-uninformed-blind-search/python/FrogLeapPuzzleDFS/dfs_solution.py) |
 
 ---
 
