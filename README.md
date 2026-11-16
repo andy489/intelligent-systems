@@ -19,7 +19,7 @@
 **Topic:** Uninformed (Blind) Search — DFS  
 **Docs:** [Problem](_exer/e-01/PROBLEM.md) · [Solution](_exer/e-01/SOLUTION.md) · [Exercise Sheet](_exer/e-01/is-e-01-(2021-10-10).pdf)
 
-Classic puzzle on a `2N+1` board: swap N left-facing and N right-facing frogs using steps and jumps.  
+Classic puzzle on a `2N+1` board: swap N yellow (left-side) and N green (right-side) frogs using steps and jumps.  
 Two approaches — DFS search and an O(N²) analytical linear solution.
 
 | Language | Linear | DFS |

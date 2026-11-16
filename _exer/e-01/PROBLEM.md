@@ -6,8 +6,8 @@ The **Frog Leap Puzzle** is a classic combinatorial puzzle played on a linear bo
 
 ### Setup
 
-- `N` green frogs sit on the left half of the board (positions `0..N-1`), each facing right.
-- `N` brown frogs sit on the right half (positions `N+1..2N`), each facing left.
+- `N` yellow frogs sit on the left half of the board (positions `0..N-1`), each facing right.
+- `N` green frogs sit on the right half (positions `N+1..2N`), each facing left.
 - One empty cell (the "leaf") sits in the middle at position `N`.
 
 ```

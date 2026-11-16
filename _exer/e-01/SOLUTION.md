@@ -77,10 +77,10 @@ Model the puzzle as a state-space search. The state is the board configuration p
 
 | Direction | Distance | Applied to |
 |---|---|---|
-| Left | 1 (step) | green frog to the right of leaf |
-| Left | 2 (jump) | green frog two cells right of leaf |
-| Right | 1 (step) | brown frog to the left of leaf |
-| Right | 2 (jump) | brown frog two cells left of leaf |
+| Left | 1 (step) | yellow frog to the right of leaf |
+| Left | 2 (jump) | yellow frog two cells right of leaf |
+| Right | 1 (step) | green frog to the left of leaf |
+| Right | 2 (jump) | green frog two cells left of leaf |
 
 Because the puzzle has a unique solution path from any reachable state, DFS with no revisited-state tracking finds the solution without any backtracking beyond dead ends caused by illegal move directions.
 
@@ -88,9 +88,8 @@ Because the puzzle has a unique solution path from any reachable state, DFS with
 
 The puzzle is solved when:
 1. The leaf is back at the centre (position `N`).
-2. The first half of the board (`0..N-1`) is all brown frogs (`R`).
-
-(The second half is guaranteed correct if both conditions hold and the total frog count is conserved.)
+2. The first half of the board (`0..N-1`) is all green frogs (`R`).
+3. The second half of the board (`N+1..2N`) is all yellow frogs (`L`).
 
 ### Recursive Structure
 
