@@ -1,8 +1,8 @@
-# E01 — Uninformed Search — Warm-Up
+# E01 — Uninformed Search
 
 **Problem:** Frog Leap Puzzle  
 **Topic:** Uninformed Search — DFS  
-**Exercise Sheet:** [is-e-01-(2021-10-03).pdf](is-e-01-(2021-10-03).pdf)
+**Exercise Sheets:** [Part 1](is-e-01-pt-1-(2021-10-10).pdf) · [Part 2](is-e-01-pt-2-(2021-10-10).pdf)
 
 Play the puzzle online: [NIEHS Frog Leap Game](https://www.niehs.nih.gov/health/kids/games/brainteasers/frog-leap)  
 Full problem statement and rules: [PROBLEM.md](PROBLEM.md)  
