@@ -1,4 +1,4 @@
-# E02 — N-Sliding Blocks Puzzle: Results Analysis
+# E03 — N-Sliding Blocks Puzzle: Results Analysis
 
 Algorithm: **IDA\*** with **Manhattan Distance + Linear Conflict** heuristic  
 Implementation: [`cpp/SlidingBlocksPuzzleProceduralSolution/NSlidingPuzzle.cpp`](../cpp/SlidingBlocksPuzzleProceduralSolution/NSlidingPuzzle.cpp)  
