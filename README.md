@@ -30,7 +30,7 @@
 
 | # | Topic | Problem | Exercise Sheet | Solutions |
 |---|---|---|---|---|
-| E01 | Introduction | — | [is-e-01-(2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) | — |
+| E01 | Introduction | — | [is-e-01-(2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) | [README](_exer/e-01-introduction/README.md) |
 | E02 | Uninformed (Blind) Search | Frog Leap Puzzle | [is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-search/is-e-02-pt-1-(2021-10-07).pdf)<br>[is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-search/is-e-02-pt-2-(2021-10-07).pdf) | [C++](_exer/e-02-uninformed-search/cpp/) · [Java](_exer/e-02-uninformed-search/java/) · [Python](_exer/e-02-uninformed-search/python/) |
 | E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [is-e-03-(2021-10-17)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-17).pdf) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/) |
 | E04 | Constraint Satisfaction Problems | — | — | — |
@@ -48,7 +48,7 @@
 ## E01 — Introduction
 
 **Problem:** —  
-**Docs:** [Exercise Sheet](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf)
+**Docs:** [Exercise Sheet](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) · [README](_exer/e-01-introduction/README.md)
 
 Course table of contents and overview. No code solutions.
 
