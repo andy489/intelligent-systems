@@ -55,4 +55,5 @@ Solved with IDA\* using Manhattan distance + linear conflict heuristic.
 
 Puzzles: [`data/puzzles/`](_exer/e-03/data/puzzles/) (160 puzzles: 2×2 through 10×10)  
 Results: [`data/results/`](_exer/e-03/data/results/) (one `.txt` per puzzle — moves + elapsed time)  
+Analysis: [`data/ANALYSIS.md`](_exer/e-03/data/ANALYSIS.md) (145 solved, 9 unsolvable, 1 timed out)  
 Runner: [`run_all_puzzles.py`](_exer/e-03/run_all_puzzles.py)

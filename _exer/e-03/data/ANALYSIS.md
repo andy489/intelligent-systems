@@ -14,8 +14,10 @@ Timeout per puzzle: **300 s**
 | Solved | 145 |
 | Unsolvable (detected correctly) | 9 |
 | Timed out — hard puzzle | 1 |
-| Timed out — solvability check bug | 3 |
 | **Total** | **160** |
+
+> **Note:** Puzzles 158–160 were initially timed out due to a solvability-check bug (even-width grids with non-default blank target).
+> After fixing `check_solvable()` to also account for `blank_target_row_from_bottom`, all three are correctly detected as unsolvable instantly.
 
 ---
 
@@ -180,9 +182,9 @@ Timeout per puzzle: **300 s**
 | 155 | puzzle155-4x4 | 4×4 | Solved | 53 | 913 ms |
 | 156 | puzzle156-4x4 | 4×4 | Solved | 52 | 197 ms |
 | 157 | puzzle157-4x4 | 4×4 | Solved | 51 | 109 ms |
-| 158 | puzzle158-4x4-unsolvable | 4×4 | **Timed out** ⚠️ | — | >300 s |
-| 159 | puzzle159-4x4-unsolvable | 4×4 | **Timed out** ⚠️ | — | >300 s |
-| 160 | puzzle160-4x4-unsolvable | 4×4 | **Timed out** ⚠️ | — | >300 s |
+| 158 | puzzle158-4x4-unsolvable | 4×4 | Unsolvable | — | — |
+| 159 | puzzle159-4x4-unsolvable | 4×4 | Unsolvable | — | — |
+| 160 | puzzle160-4x4-unsolvable | 4×4 | Unsolvable | — | — |
 
 ---
 
@@ -232,7 +234,7 @@ Puzzle 100 (78 moves) took **11 min 30 s** — the current longest solved case. 
 
 Blank at top-left, all tiles heavily scrambled. The optimal solution is likely 60–80+ moves. Given that puzzle100 (78 moves) took 11.5 minutes, puzzle101 likely requires similar or greater search time. It is solvable — IDA\* will find it eventually, but exceeds the 5-minute timeout.
 
-#### puzzle158 / puzzle159 / puzzle160 — solvability check bug ⚠️
+#### puzzle158 / puzzle159 / puzzle160 — solvability check bug (fixed) ✓
 
 All three share the same board but have non-standard blank target positions (0, 2, and 8 respectively instead of the default 15):
 
@@ -243,15 +245,15 @@ All three share the same board but have non-standard blank target positions (0, 
  6  1 10 14
 ```
 
-The `check_solvable()` function computes parity using only the blank's **current** row but does not account for the blank's **target** row. For even-width grids the correct condition is:
+The original `check_solvable()` computed parity using only the blank's **current** row but did not account for the blank's **target** row. For even-width grids the correct condition is:
 
 ```
 (inversions + blank_current_row_from_bottom + blank_target_row_from_bottom) % 2 == 0
 ```
 
-The current implementation omits `blank_target_row_from_bottom`, so the parity check gives the wrong answer when the blank target is not at the bottom-right. IDA\* then searches indefinitely for a solution that does not exist.
+Without `blank_target_row_from_bottom` the check returned the wrong answer for non-default blank targets, so IDA\* searched indefinitely for a solution that does not exist.
 
-**Fix:** add `(blank_target / grid_size)` to the parity sum in `check_solvable()`.
+**Fix applied:** `check_solvable()` now computes both rows from the bottom and sums them with the inversion count. All three puzzles are now correctly detected as unsolvable in under 1 ms.
 
 ---
 
@@ -262,4 +264,4 @@ The current implementation omits `blank_target_row_from_bottom`, so the parity c
 3. **Exponential blow-up** starts around 50 moves for the 15-puzzle; at 78 moves it takes 11+ minutes.
 4. **Puzzle100** (78 moves, 11 min 30 s) is the hardest successfully solved puzzle in this dataset.
 5. **Puzzle101** is the only genuinely unsolved solvable puzzle — it needs either more time or a stronger heuristic (e.g. Walking Distance or Pattern Databases).
-6. **Puzzles 158–160** are data bugs: they are unsolvable but the solver incorrectly concludes they are solvable due to a parity check that does not account for a non-default blank target position.
+6. **Puzzles 158–160** had a data + solvability-check bug: they are unsolvable, but the original solver incorrectly concluded they were solvable due to a parity check that did not account for the non-default blank target row. Fixed in all three implementations (C++, Java, Python).
