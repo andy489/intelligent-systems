@@ -5,9 +5,8 @@ import java.util.Scanner;
 
 public class DFSSolution {
 
-    // pair = {key=RIGHT_FROG/LEFT_FROG, value=SINGLE_JUMP/DOUBLE_JUMP}
-    // -1 = right frog jumps left, 1 = left frog jumps right
-    // 1 = single jump, 2 = double jump
+    // direction: -1 = right frog jumps left, +1 = left frog jumps right
+    // distance:   1 = single jump,            2 = double jump
     private static final List<Pair<Integer, Integer>> JUMP_TYPES = new ArrayList<>();
 
     static {
@@ -17,65 +16,43 @@ public class DFSSolution {
         JUMP_TYPES.add(new Pair<>(1, 2));
     }
 
-    private long startTime;
-
+    @Timed(label = "DFS Frog Leap Puzzle")
     public void solve() {
-
         char[] board = initBoard();
-
         LinkedList<Integer> jumpSequence = new LinkedList<>();
 
-        int depth = 0;
-        startTime = System.nanoTime();
-        dfs(board, board.length / 2, jumpSequence, depth);
+        dfs(board, board.length / 2, jumpSequence, 0);
+
         System.out.print("Jump Sequence: ");
-        print(jumpSequence);
+        printJumpSequence(jumpSequence);
         System.out.println("Total jumps: " + jumpSequence.size());
         System.out.println("Success!");
     }
 
     private char[] initBoard() {
-
         Scanner sc = new Scanner(System.in);
         System.out.print("N: ");
-
-        int N = sc.nextInt();
+        int n = sc.nextInt();
         sc.close();
-        int SIZE = N * 2 + 1;
 
-        char[] board = new char[SIZE];
-
+        int size = n * 2 + 1;
+        char[] board = new char[size];
         int i = 0;
-
-        while (i < N) {
-            board[i++] = 'L';
-        }
-
+        while (i < n)    board[i++] = 'L';
         board[i++] = '_';
-
-        while (i < SIZE) {
-            board[i++] = 'R';
-        }
-
+        while (i < size) board[i++] = 'R';
         return board;
     }
 
     private boolean dfs(char[] board, int leafPos, LinkedList<Integer> jumpSequence, int depth) {
-
         if (isGoalState(board, leafPos)) {
-            System.out.printf("Goal State found at depth: %d%n", depth);
-
-            long endTime = System.nanoTime();
-            long ms = (endTime - startTime) / 1000000;
-            long s = ms / 1000;
-            System.out.printf("Solving puzzle took: %d ms ≈ %d s.%n", ms, s);
-
-            print(board);
+            System.out.printf("Goal state found at depth: %d%n", depth);
+            printBoard(board);
             return true;
         }
 
         for (Pair<Integer, Integer> jumpType : JUMP_TYPES) {
-            if (shiftLeaf(board, leafPos, jumpType, jumpSequence, depth)) {
+            if (tryJump(board, leafPos, jumpType, jumpSequence, depth)) {
                 return true;
             }
         }
@@ -84,85 +61,56 @@ public class DFSSolution {
     }
 
     private boolean isGoalState(char[] board, int leafPos) {
-
-        int midIndex = board.length / 2;
-
-        if (midIndex != leafPos) {
-            return false;
-        }
-
-        for (int i = 0; i < midIndex; i++) {
-            if (board[i] != 'R') {
-                return false;
-            }
-        }
-
-        for (int i = midIndex + 1; i < board.length; i++) {
-            if (board[i] != 'L') {
-                return false;
-            }
-        }
-
+        int mid = board.length / 2;
+        if (leafPos != mid) return false;
+        for (int i = 0;       i < mid;          i++) if (board[i] != 'R') return false;
+        for (int i = mid + 1; i < board.length; i++) if (board[i] != 'L') return false;
         return true;
     }
 
-    private boolean shiftLeaf(char[] board, int leafPos, Pair<Integer, Integer> jumpType, LinkedList<Integer> jumpSequence,
-                      int depth) {
-        int frogPos = leafPos + jumpType.getKey() * jumpType.getValue();
+    private boolean tryJump(char[] board, int leafPos, Pair<Integer, Integer> jumpType,
+                            LinkedList<Integer> jumpSequence, int depth) {
+        int direction = jumpType.key();
+        int distance  = jumpType.value();
+        int frogPos   = leafPos + direction * distance;
+        char expected = direction == -1 ? 'L' : 'R';
 
-        if (inRange(board, frogPos) && board[frogPos] == (jumpType.getKey() == -1 ? 'L' : 'R')) {
-            return move(board, leafPos, frogPos, jumpSequence, depth);
-        }
+        if (!inRange(board, frogPos) || board[frogPos] != expected) return false;
 
-        return false;
-    }
-
-    private boolean inRange(char[] board, int pos) {
-        return 0 <= pos && pos < board.length;
-    }
-
-    private boolean move(char[] board, int leafPos, int frogPos, LinkedList<Integer> jumpSequence, int depth) {
-        ++depth;
         swap(board, leafPos, frogPos);
 
-        if (dfs(board, frogPos, jumpSequence, depth)) {
+        if (dfs(board, frogPos, jumpSequence, depth + 1)) {
             swap(board, leafPos, frogPos);
-            print(board);
+            printBoard(board);
             jumpSequence.addFirst(frogPos + 1);
             return true;
         }
 
         swap(board, leafPos, frogPos);
-
         return false;
     }
 
-    private void swap(char[] arr, int ind1, int ind2) {
-        char temp = arr[ind1];
-        arr[ind1] = arr[ind2];
-        arr[ind2] = temp;
+    private boolean inRange(char[] board, int pos) {
+        return pos >= 0 && pos < board.length;
     }
 
-    private void print(char[] board) {
-        for (char c : board) {
-            System.out.print(c);
-        }
+    private void swap(char[] arr, int i, int j) {
+        char tmp = arr[i];
+        arr[i]   = arr[j];
+        arr[j]   = tmp;
+    }
 
+    private void printBoard(char[] board) {
+        for (char c : board) System.out.print(c);
         System.out.println();
     }
 
-    private static void print(LinkedList<Integer> ll) {
-        java.util.Iterator<Integer> it = ll.iterator();
+    private void printJumpSequence(LinkedList<Integer> seq) {
+        java.util.Iterator<Integer> it = seq.iterator();
         while (it.hasNext()) {
-            Integer val = it.next();
-            if (it.hasNext()) {
-                System.out.print(val + ", ");
-            } else {
-                System.out.println(val);
-            }
+            System.out.print(it.next());
+            if (it.hasNext()) System.out.print(", ");
         }
-        if (ll.isEmpty()) {
-            System.out.println();
-        }
+        System.out.println();
     }
 }

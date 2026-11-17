@@ -1,3 +1,9 @@
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+from timed import timed
+
+
 def init_board(n):
     return ["L"] * n + ["_"] + ["R"] * n
 
@@ -64,18 +70,19 @@ def process_second_half(board, n, leaf_pos, jump_sequence):
     return leaf_pos
 
 
-def linear_solution(board, n, jump_sequence):
+@timed(label="Linear Frog Leap Puzzle")
+def linear_solution(n):
+    board = init_board(n)
+    jump_sequence = []
     print_state(board)
     leaf_pos = process_first_half(board, n, n, jump_sequence)
     leaf_pos = process_middle(board, n, leaf_pos, jump_sequence)
     process_second_half(board, n, leaf_pos, jump_sequence)
+    print("Jump sequence: " + ", ".join(str(j) for j in jump_sequence))
+    print(f"Total jumps: {len(jump_sequence)}")
+    print("Success!")
 
 
 if __name__ == "__main__":
     n = int(input("N: "))
-    board = init_board(n)
-    jump_sequence = []
-    linear_solution(board, n, jump_sequence)
-    print("Jump sequence: " + ", ".join(str(j) for j in jump_sequence))
-    print(f"Total jumps: {len(jump_sequence)}")
-    print("Success!")
+    linear_solution(n)

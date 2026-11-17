@@ -1,17 +1,12 @@
 public class Pair<K, V> {
-    private K key;
-    private V val;
+    private final K key;
+    private final V value;
 
-    public Pair(K key, V val) {
-        this.key = key;
-        this.val = val;
+    public Pair(K key, V value) {
+        this.key   = key;
+        this.value = value;
     }
 
-    public K getKey() {
-        return key;
-    }
-
-    public V getValue() {
-        return val;
-    }
+    public K key()   { return key;   }
+    public V value() { return value; }
 }

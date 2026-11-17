@@ -1,90 +1,81 @@
-import time
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+from timed import timed
 
 
 class DFSSolution:
 
     def __init__(self, n):
-        # pair = {key=RIGHT_FROG/LEFT_FROG, value=SINGLE_JUMP/DOUBLE_JUMP}
-        # -1 = right frog jumps left, 1 = left frog jumps right
-        # 1 = single jump, 2 = double jump
-        self.start_time = None
+        # direction: -1 = right frog jumps left, +1 = left frog jumps right
+        # distance:   1 = single jump,            2 = double jump
         self.jump_sequence = []
         self.jump_types = [(-1, 1), (-1, 2), (1, 1), (1, 2)]
         self.n = n
         self.board_size = self.n * 2 + 1
-        self.board = [self.generate_frog(i) for i in range(self.board_size)]
+        self.board = [self._generate_frog(i) for i in range(self.board_size)]
 
-    def print_board(self):
-        print("".join(self.board))
-
-    def generate_frog(self, position):
+    def _generate_frog(self, position):
         if position < self.n:
             return "L"
         if position > self.n:
             return "R"
         return "_"
 
-    def is_goal_state(self, leaf_pos):
-        mid_ind = self.n
+    def _print_board(self):
+        print("".join(self.board))
 
-        if mid_ind != leaf_pos:
+    def _is_goal_state(self, leaf_pos):
+        mid = self.n
+        if leaf_pos != mid:
             return False
-
-        for i in range(mid_ind):
+        for i in range(mid):
             if self.board[i] != "R":
                 return False
-
-        for i in range(mid_ind + 1, self.board_size):
+        for i in range(mid + 1, self.board_size):
             if self.board[i] != "L":
                 return False
-
         return True
 
-    def in_range(self, pos):
+    def _in_range(self, pos):
         return 0 <= pos < self.board_size
 
-    def swap(self, ind1, ind2):
-        self.board[ind1], self.board[ind2] = self.board[ind2], self.board[ind1]
+    def _swap(self, i, j):
+        self.board[i], self.board[j] = self.board[j], self.board[i]
 
-    def move(self, leaf_pos, frog_pos, depth):
-        depth = depth + 1
-        self.swap(leaf_pos, frog_pos)
+    def _try_jump(self, leaf_pos, jump_type, depth):
+        direction, distance = jump_type
+        frog_pos = leaf_pos + direction * distance
+        expected = "L" if direction == -1 else "R"
 
-        if self.dfs(frog_pos, depth):
-            self.swap(leaf_pos, frog_pos)
-            self.print_board()
+        if not self._in_range(frog_pos) or self.board[frog_pos] != expected:
+            return False
+
+        self._swap(leaf_pos, frog_pos)
+
+        if self._dfs(frog_pos, depth + 1):
+            self._swap(leaf_pos, frog_pos)
+            self._print_board()
             self.jump_sequence.append(frog_pos + 1)
             return True
 
-        self.swap(leaf_pos, frog_pos)
+        self._swap(leaf_pos, frog_pos)
         return False
 
-    def shift_leaf(self, leaf_pos, jump_type, depth):
-        frog_pos = leaf_pos + jump_type[0] * jump_type[1]
-
-        if self.in_range(frog_pos) and self.board[frog_pos] == ("L" if jump_type[0] == -1 else "R"):
-            return self.move(leaf_pos, frog_pos, depth)
-
-        return False
-
-    def dfs(self, leaf_pos, depth):
-        if self.is_goal_state(leaf_pos):
-            print(f"Goal State found at depth: {depth}")
-
-            elapsed_time_sec = time.time() - self.start_time
-            print(f"Solving puzzle took: {elapsed_time_sec * 1000:.2f} ms ≈ {elapsed_time_sec:.2f} s.")
-            self.print_board()
+    def _dfs(self, leaf_pos, depth):
+        if self._is_goal_state(leaf_pos):
+            print(f"Goal state found at depth: {depth}")
+            self._print_board()
             return True
 
         for jump_type in self.jump_types:
-            if self.shift_leaf(leaf_pos, jump_type, depth):
+            if self._try_jump(leaf_pos, jump_type, depth):
                 return True
 
         return False
 
+    @timed(label="DFS Frog Leap Puzzle")
     def solve(self):
-        self.start_time = time.time()
-        depth = 0
-        self.dfs(self.n, depth)
+        self._dfs(self.n, 0)
         print("Jump Sequence: " + ", ".join(str(j) for j in self.jump_sequence))
         print(f"Total jumps: {len(self.jump_sequence)}\nSuccess!")
