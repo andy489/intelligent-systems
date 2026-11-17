@@ -13,6 +13,6 @@ left
 up
 up
 
-Elapsed: 00:00:00.000
+Elapsed: 0.021 ms
 
 Success!

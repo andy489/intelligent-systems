@@ -31,6 +31,6 @@ up
 left
 left
 
-Elapsed: 00:00:00.000
+Elapsed: 1.131 ms
 
 Success!

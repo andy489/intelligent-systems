@@ -78,6 +78,6 @@ up
 up
 up
 
-Elapsed: 00:00:02.004
+Elapsed: 2.028 s
 
 Success!

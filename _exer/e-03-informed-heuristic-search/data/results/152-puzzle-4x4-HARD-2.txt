@@ -56,6 +56,6 @@ up
 up
 left
 
-Elapsed: 00:00:00.361
+Elapsed: 365.801 ms
 
 Success!

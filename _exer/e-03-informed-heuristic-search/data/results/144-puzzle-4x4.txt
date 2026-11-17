@@ -49,6 +49,6 @@ up
 left
 left
 
-Elapsed: 00:00:00.409
+Elapsed: 408.938 ms
 
 Success!

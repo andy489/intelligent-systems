@@ -166,7 +166,7 @@ The five hardest puzzles, ordered by number of optimal moves.
 
 | Language | Moves | Time |
 |---|---|---|
-| C++ | 53 | 1.326 s |
+| C++ | 53 | 1.327 s |
 | Java | 53 | ~12 s |
 | Python | 53 | ~5 min |
 
@@ -187,7 +187,7 @@ right, right, down, left, left, up, right, up, left, down, left, down, right, ri
 
 | Language | Moves | Time |
 |---|---|---|
-| C++ | 56 | 361 ms |
+| C++ | 56 | 365.801 ms |
 | Java | 56 | ~4.9 s |
 | Python | 56 | ~116 s |
 
@@ -208,7 +208,7 @@ right, down, left, left, up, left, up, up, right, down, down, down, left, up, up
 
 | Language | Moves | Time |
 |---|---|---|
-| C++ | 66 | 3.535 s |
+| C++ | 66 | 3.580 s |
 | Java | 66 | ~68 s |
 | Python | — | >600 s (timeout) |
 
@@ -231,7 +231,7 @@ The fully reversed board (tiles 15→1 read left-to-right, top-to-bottom, blank 
 
 | Language | Moves | Time |
 |---|---|---|
-| C++ | 78 | 2.004 s |
+| C++ | 78 | 2.028 s |
 | Java | — | >600 s (timeout) |
 | Python | — | >600 s (timeout) |
 
@@ -254,7 +254,7 @@ Previously timed out at 300 s with a weaker heuristic setup. Solved after enabli
 
 | Language | Moves | Time |
 |---|---|---|
-| C++ | 80 | 2 min 37 s |
+| C++ | 80 | 2 min 39 s |
 | Java | — | >600 s (timeout) |
 | Python | — | >600 s (timeout) |
 
@@ -265,6 +265,6 @@ left, left, left, up, right, up, right, right, down, left, left, down, left, up,
 
 ## Per-Language Notes
 
-- **C++** (`-O2`, clang++): solves all 162 puzzles including ULTRA-HARD (80 moves, 2:37).
+- **C++** (`-O2`, clang++): solves all 162 puzzles including ULTRA-HARD (80 moves, 2:39).
 - **Java**: solves puzzles up to ~57 moves within 300 s; MEGA-HARD-2 (78 moves) and ULTRA-HARD (80 moves) time out.
 - **Python**: correct algorithm, but recursion overhead makes depths >~57 impractical (>600 s). This is a language speed limitation, not an algorithmic one.

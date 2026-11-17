@@ -43,6 +43,6 @@ up
 up
 left
 
-Elapsed: 00:00:00.001
+Elapsed: 1.021 ms
 
 Success!

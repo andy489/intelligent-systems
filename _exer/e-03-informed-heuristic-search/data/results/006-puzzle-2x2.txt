@@ -1,6 +1,6 @@
 1
 left
 
-Elapsed: 00:00:00.000
+Elapsed: 0.032 ms
 
 Success!

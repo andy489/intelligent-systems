@@ -531,12 +531,23 @@ void display_solution_moves() {
     }
 }
 
-string format_duration(long long ms) {
+string format_duration(long long us) {
+    if (us < 1000) {
+        char buf[64];
+        snprintf(buf, sizeof(buf), "Elapsed: 0.%03lld ms", us);
+        return buf;
+    }
+    long long ms  = us / 1000; us %= 1000;
     long long s   = ms / 1000; ms %= 1000;
     long long min = s  / 60;   s  %= 60;
     long long h   = min / 60;  min %= 60;
     char buf[64];
-    snprintf(buf, sizeof(buf), "Elapsed: %02lld:%02lld:%02lld.%03lld", h, min, s, ms);
+    if (h == 0 && min == 0 && s == 0)
+        snprintf(buf, sizeof(buf), "Elapsed: %lld.%03lld ms", ms, us);
+    else if (h == 0 && min == 0)
+        snprintf(buf, sizeof(buf), "Elapsed: %lld.%03lld s", s, ms);
+    else
+        snprintf(buf, sizeof(buf), "Elapsed: %02lld:%02lld:%02lld.%03lld", h, min, s, ms);
     return buf;
 }
 
@@ -577,8 +588,8 @@ int main(int argc, char *argv[]) {
 
     display_solution_moves();
 
-    auto ms = duration_cast<milliseconds>(t1 - t0).count();
-    printf("\n%s\n\nSuccess!\n", format_duration(ms).c_str());
+    auto us = duration_cast<microseconds>(t1 - t0).count();
+    printf("\n%s\n\nSuccess!\n", format_duration(us).c_str());
 
     return 0;
 }

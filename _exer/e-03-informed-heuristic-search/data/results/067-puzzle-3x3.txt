@@ -31,6 +31,6 @@ down
 left
 up
 
-Elapsed: 00:00:00.000
+Elapsed: 1.098 ms
 
 Success!

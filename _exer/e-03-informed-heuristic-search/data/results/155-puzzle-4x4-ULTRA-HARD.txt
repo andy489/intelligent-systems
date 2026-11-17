@@ -80,6 +80,6 @@ right
 up
 left
 
-Elapsed: 00:02:37.769
+Elapsed: 00:02:39.367
 
 Success!

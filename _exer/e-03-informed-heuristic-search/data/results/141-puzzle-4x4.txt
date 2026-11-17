@@ -48,6 +48,6 @@ right
 up
 left
 
-Elapsed: 00:00:00.113
+Elapsed: 112.276 ms
 
 Success!
