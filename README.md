@@ -134,7 +134,9 @@ No code solutions yet.
 **Docs:** [Exercise Sheet](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf) · [Slides-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf) · [Romania Map](_exer/e-03-informed-heuristic-search/romania-map.pdf) · [README](_exer/e-03-informed-heuristic-search/README.md)
 
 N-puzzle (8-puzzle, 15-puzzle, …): slide tiles on an N×N grid to reach the goal configuration.
-Solved with IDA\* using Manhattan Distance + Linear Conflict heuristic.
+Solved with IDA\* using **h = Manhattan Distance + Linear Conflict**:
+- **Manhattan Distance (MD)** — sum of each tile's row+col distance to its goal position.
+- **Linear Conflict (LC)** — two tiles in their goal row/column but in reversed order must bypass each other, costing ≥2 extra moves not captured by MD. Added on top of MD for a tighter admissible bound.
 
 | Language | Source |
 |---|---|
