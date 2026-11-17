@@ -28,47 +28,103 @@
 
 ## Exercise Sheets
 
-**Filename legend:** `is` = Intelligent Systems · `e` = Exercise · `pt` = Part · `(YYYY-MM-DD)` = date of issue · `slides` = lecture slides
-
 | # | Topic | Problem | Exercise Sheet | Solutions |
 |---|---|---|---|---|
-| E01 | Introduction | — | [is-e-01-(2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) · [slides](_exer/e-01-introduction/is-e-01-intro-slides.pdf) | [README](_exer/e-01-introduction/README.md) |
-| E02 | Uninformed (Blind) Search | Frog Leap Puzzle | [is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf)<br>[is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf)<br>[slides](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf) | [C++](_exer/e-02-uninformed-blind-search/cpp/) · [Java](_exer/e-02-uninformed-blind-search/java/) · [Python](_exer/e-02-uninformed-blind-search/python/) |
-| E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [is-e-03-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf)<br>[slides](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf)<br>[romania-map](_exer/e-03-informed-heuristic-search/romania-map.pdf) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/) |
-| E04 | Constraint Satisfaction Problems | — | — | — |
-| E05 | Genetic Algorithms | — | — | — |
-| E06 | Games | — | — | — |
-| E07 | Introduction to Machine Learning | — | — | — |
-| E08 | k-Nearest Neighbours | — | — | — |
-| E09 | Naive Bayes Classifier | — | — | — |
-| E10 | Decision Tree | — | — | — |
-| E11 | kMeans | — | — | — |
 | E12 | Neural Networks | — | — | — |
+| E11 | kMeans | — | — | — |
+| E10 | Decision Tree | — | — | — |
+| E09 | Naive Bayes Classifier | — | — | — |
+| E08 | k-Nearest Neighbours | — | — | — |
+| E07 | Introduction to Machine Learning | — | — | — |
+| E06 | Games | — | — | — |
+| E05 | Genetic Algorithms | — | — | — |
+| E04 | Constraint Satisfaction Problems | — | — | — |
+| E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [is-e-03-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf)<br>[slides](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf)<br>[romania-map](_exer/e-03-informed-heuristic-search/romania-map.pdf) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/) |
+| E02 | Uninformed (Blind) Search | Frog Leap Puzzle | [is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf)<br>[is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf)<br>[slides](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf) | [C++](_exer/e-02-uninformed-blind-search/cpp/) · [Java](_exer/e-02-uninformed-blind-search/java/) · [Python](_exer/e-02-uninformed-blind-search/python/) |
+| E01 | Introduction | — | [is-e-01-(2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) · [slides](_exer/e-01-introduction/is-e-01-intro-slides.pdf) | [README](_exer/e-01-introduction/README.md) |
+
+> `is` = Intelligent Systems · `e` = Exercise · `pt` = Part · `(YYYY-MM-DD)` = date of issue · `slides` = lecture slides
 
 ---
 
-## E01 — Introduction
+## E12 — Neural Networks
 
 **Problem:** —  
-**Docs:** [Exercise Sheet](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) · [Slides](_exer/e-01-introduction/is-e-01-intro-slides.pdf) · [README](_exer/e-01-introduction/README.md)
+**Docs:** —
 
-Course table of contents and overview. No code solutions.
+No content yet.
 
 ---
 
-## E02 — Uninformed Search
+## E11 — kMeans
 
-**Problem:** Frog Leap Puzzle  
-**Docs:** [Part 1 — Blind Search](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf) · [Part 2 — Warm-Up](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) · [Slides](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf) · [README](_exer/e-02-uninformed-blind-search/README.md) · [Problem](_exer/e-02-uninformed-blind-search/PROBLEM.md) · [Solution](_exer/e-02-uninformed-blind-search/SOLUTION.md)
+**Problem:** —  
+**Docs:** —
 
-Classic puzzle on a `2N+1` board: swap N yellow (left-side) and N green (right-side) frogs using steps and jumps.
-Two approaches — DFS search and an O(N²) analytical linear solution.
+No content yet.
 
-| Language | Linear | DFS |
-|---|---|---|
-| C++ | [`FrogLeapPuzzleLinear/main.cpp`](_exer/e-02-uninformed-blind-search/cpp/FrogLeapPuzzleLinear/main.cpp) | [`LeapFrogPuzzleDFS/main.cpp`](_exer/e-02-uninformed-blind-search/cpp/LeapFrogPuzzleDFS/main.cpp) |
-| Java | [`FrogLeapPuzzleLinear.java`](_exer/e-02-uninformed-blind-search/java/FrogLeapPuzzleLinear/src/FrogLeapPuzzleLinear.java) | [`DFSSolution.java`](_exer/e-02-uninformed-blind-search/java/FrogLeapPuzzleDFS/src/DFSSolution.java) |
-| Python | [`linear_solution.py`](_exer/e-02-uninformed-blind-search/python/FrogLeapPuzzleLinear/linear_solution.py) | [`dfs_solution.py`](_exer/e-02-uninformed-blind-search/python/FrogLeapPuzzleDFS/dfs_solution.py) |
+---
+
+## E10 — Decision Tree
+
+**Problem:** —  
+**Docs:** —
+
+No content yet.
+
+---
+
+## E09 — Naive Bayes Classifier
+
+**Problem:** —  
+**Docs:** —
+
+No content yet.
+
+---
+
+## E08 — k-Nearest Neighbours
+
+**Problem:** —  
+**Docs:** —
+
+No content yet.
+
+---
+
+## E07 — Introduction to Machine Learning
+
+**Problem:** —  
+**Docs:** —
+
+No content yet.
+
+---
+
+## E06 — Games
+
+**Problem:** —  
+**Docs:** —
+
+No content yet.
+
+---
+
+## E05 — Genetic Algorithms
+
+**Problem:** —  
+**Docs:** —
+
+No content yet.
+
+---
+
+## E04 — Constraint Satisfaction Problems
+
+**Problem:** —  
+**Docs:** —
+
+No content yet.
 
 ---
 
@@ -93,81 +149,25 @@ Runner: [`run_all_puzzles.py`](_exer/e-03-informed-heuristic-search/run_all_puzz
 
 ---
 
-## E04 — Constraint Satisfaction Problems
+## E02 — Uninformed Search
 
-**Problem:** —  
-**Docs:** —
+**Problem:** Frog Leap Puzzle  
+**Docs:** [Part 1 — Blind Search](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf) · [Part 2 — Warm-Up](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) · [Slides](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf) · [README](_exer/e-02-uninformed-blind-search/README.md) · [Problem](_exer/e-02-uninformed-blind-search/PROBLEM.md) · [Solution](_exer/e-02-uninformed-blind-search/SOLUTION.md)
 
-No content yet.
+Classic puzzle on a `2N+1` board: swap N yellow (left-side) and N green (right-side) frogs using steps and jumps.
+Two approaches — DFS search and an O(N²) analytical linear solution.
 
----
-
-## E05 — Genetic Algorithms
-
-**Problem:** —  
-**Docs:** —
-
-No content yet.
+| Language | Linear | DFS |
+|---|---|---|
+| C++ | [`FrogLeapPuzzleLinear/main.cpp`](_exer/e-02-uninformed-blind-search/cpp/FrogLeapPuzzleLinear/main.cpp) | [`LeapFrogPuzzleDFS/main.cpp`](_exer/e-02-uninformed-blind-search/cpp/LeapFrogPuzzleDFS/main.cpp) |
+| Java | [`FrogLeapPuzzleLinear.java`](_exer/e-02-uninformed-blind-search/java/FrogLeapPuzzleLinear/src/FrogLeapPuzzleLinear.java) | [`DFSSolution.java`](_exer/e-02-uninformed-blind-search/java/FrogLeapPuzzleDFS/src/DFSSolution.java) |
+| Python | [`linear_solution.py`](_exer/e-02-uninformed-blind-search/python/FrogLeapPuzzleLinear/linear_solution.py) | [`dfs_solution.py`](_exer/e-02-uninformed-blind-search/python/FrogLeapPuzzleDFS/dfs_solution.py) |
 
 ---
 
-## E06 — Games
+## E01 — Introduction
 
 **Problem:** —  
-**Docs:** —
+**Docs:** [Exercise Sheet](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) · [Slides](_exer/e-01-introduction/is-e-01-intro-slides.pdf) · [README](_exer/e-01-introduction/README.md)
 
-No content yet.
-
----
-
-## E07 — Introduction to Machine Learning
-
-**Problem:** —  
-**Docs:** —
-
-No content yet.
-
----
-
-## E08 — k-Nearest Neighbours
-
-**Problem:** —  
-**Docs:** —
-
-No content yet.
-
----
-
-## E09 — Naive Bayes Classifier
-
-**Problem:** —  
-**Docs:** —
-
-No content yet.
-
----
-
-## E10 — Decision Tree
-
-**Problem:** —  
-**Docs:** —
-
-No content yet.
-
----
-
-## E11 — kMeans
-
-**Problem:** —  
-**Docs:** —
-
-No content yet.
-
----
-
-## E12 — Neural Networks
-
-**Problem:** —  
-**Docs:** —
-
-No content yet.
+Course table of contents and overview. No code solutions.
