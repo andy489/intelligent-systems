@@ -32,22 +32,23 @@ All three runners are Python 3 scripts. They build/compile the target language i
 
 ### macOS / Linux
 
-Run from the repository root or from this `data/` folder — both work because the scripts resolve paths relative to their own location.
-
 ```bash
-# From the e-03 exercise directory:
-python3 data/run_cpp.py
-python3 data/run_java.py
-python3 data/run_python.py
-
-# Or from inside data/:
-cd data
+# From inside the data/ folder:
+cd _exer/e-03-informed-heuristic-search/data
 python3 run_cpp.py
 python3 run_java.py
 python3 run_python.py
+
+# Or from the e-03 exercise directory:
+cd _exer/e-03-informed-heuristic-search
+python3 data/run_cpp.py
+python3 data/run_java.py
+python3 data/run_python.py
 ```
 
-### Windows (Command Prompt)
+> Do not run `python3 data/run_cpp.py` while already inside `data/` — the shell would look for `data/data/run_cpp.py`.
+
+### Windows (Command Prompt / PowerShell)
 
 ```bat
 cd _exer\e-03-informed-heuristic-search\data
@@ -58,16 +59,6 @@ python run_python.py
 ```
 
 > On Windows the C++ runner calls `clang++`. If you have MSVC instead, edit `run_cpp.py` and change `clang++` to `cl` and adjust the flags (`/O2 /std:c++17 /Fe:...`).
-
-### Windows (PowerShell)
-
-```powershell
-cd _exer\e-03-informed-heuristic-search\data
-
-python run_cpp.py
-python run_java.py
-python run_python.py
-```
 
 ---
 

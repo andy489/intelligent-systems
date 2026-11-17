@@ -248,15 +248,15 @@ The original check omitted `blank_target_row_from_bottom`. Once both rows are in
 
 1. **All three implementations now use the same heuristic.** For the standard 4×4 puzzle (blank at bottom-right), all use additive 5-5-5 PDB; for all other grids, MD + LC. PDB solves puzzle 160 in ~3.5 s (C++), ~10 s (Java) instead of 3 min 18 s with MD+LC. The PDB build cost (≈100 ms C++, ≈1 s Java, ≈44 s Python) is amortised over hard puzzles.
 
-2. **Recomputing LC per node is the single most important optimisation.** Without it, the heuristic degrades to pure MD inside DLS, and hard puzzles time out. With it, each node gets a tighter h-value that prunes branches MD alone would explore.
+2. **For non-4×4 grids, recomputing LC at every DLS node is the key optimisation.** Without it the heuristic degrades to pure MD inside DLS, and hard puzzles time out. With it, each node gets a tighter bound that prunes branches MD alone would explore.
 
 3. **Solution depth, not grid size, determines IDA\* cost.** A 10×10 puzzle with 16 optimal moves runs in 0.055 ms. A 4×4 puzzle with 80 moves takes 2 min 39 s. The large-grid puzzles (7×7–10×10) are experimental and were placed close to the goal state (≤16 moves), so they solve instantly despite the larger grid.
 
 4. **Exponential blow-up** is clearly visible in the 4×4 results: 47 moves can take anywhere from 1.211 ms to 116.174 ms depending on heuristic quality for that specific board; 80 moves takes >100× longer than 78 moves.
 
-5. **161-puzzle-4x4-MEGA-HARD-2** (fully reversed board, 78 moves) solves in **2.028 s** with MD+LC recomputed per node.
+5. **161-puzzle-4x4-MEGA-HARD-2** (fully reversed board, 78 moves) solves in **2.028 s** with PDB (C++).
 
-6. **162-puzzle-4x4-ULTRA-HARD** (80 moves) now solves in **2 min 39 s** — previously timed out at 300 s before the LC-per-node fix was applied.
+6. **162-puzzle-4x4-ULTRA-HARD** (80 moves) solves in **2 min 39 s** with PDB (C++).
 
 7. **Python is algorithmically correct** but the recursion overhead makes depths >~57 impractical. This is not an algorithmic limitation — it is a language speed issue. C++ solves all 162 puzzles; Python would need a native extension or iterative stack rewrite for the very hardest ones.
 
