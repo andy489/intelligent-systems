@@ -24,14 +24,6 @@ Algorithm details and hard puzzle solutions: [**SOLUTION.md**](SOLUTION.md)
 
 Sorted by optimal move count (ascending). Unsolvable puzzles appear first. Within the same move count, puzzles are ordered by puzzle number.
 
-**Time format legend:**
-- `0.007 ms` — sub-millisecond (C++ only; µs resolution): 7 microseconds
-- `1.225 ms` — milliseconds with µs fraction: 1225 µs
-- `3.580 s` — seconds with ms fraction: 3 s 580 ms
-- `00:02:39.367` — HH:MM:SS.mmm (used when ≥ 60 s)
-- Java timing is always HH:MM:SS.mmm (ms resolution only, no sub-ms)
-- `—` — not applicable (already solved / unsolvable)
-
 | # | Puzzle | Grid | Status | Optimal Moves | Elapsed (C++) | Elapsed (Java) |
 |---|---|---|---|---|---|---|
 | 1 | 001-puzzle-2x2-unsolvable | 2×2 | Unsolvable | — | — | — |
@@ -196,6 +188,16 @@ Sorted by optimal move count (ascending). Unsolvable puzzles appear first. Withi
 | 160 | 160-puzzle-4x4-MEGA-HARD | 4×4 | Solved | 66 | 3.580 s | |
 | 161 | 161-puzzle-4x4-MEGA-HARD-2 | 4×4 | Solved | 78 | 2.028 s | |
 | 162 | 162-puzzle-4x4-ULTRA-HARD | 4×4 | Solved | 80 | 00:02:39.367 | |
+
+<!--
+Time format legend:
+  0.007 ms       — sub-millisecond (C++ only; µs resolution): 7 microseconds
+  1.225 ms       — milliseconds with µs fraction: 1225 µs
+  3.580 s        — seconds with ms fraction: 3 s 580 ms
+  00:02:39.367   — HH:MM:SS.mmm (used when ≥ 60 s)
+  Java timing is always HH:MM:SS.mmm (ms resolution only, no sub-ms)
+  —              — not applicable (already solved / unsolvable)
+-->
 
 ---
 
