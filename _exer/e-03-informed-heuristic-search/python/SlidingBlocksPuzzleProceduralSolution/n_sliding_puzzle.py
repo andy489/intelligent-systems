@@ -436,8 +436,6 @@ class SlidingBlocksPuzzle:
     # -----------------------------------------------------------------------
 
     def setup(self):
-        """Pre-search setup (outside timed block, mirrors C++ structure).
-        Returns initial md, or -1 if already solved / unsolvable."""
         md = self._calc_manhattan()
 
         if md == 0:
@@ -456,12 +454,8 @@ class SlidingBlocksPuzzle:
         return md
 
     @timed(label="IDA* Sliding Blocks Puzzle")
-    def solve(self):
-        md = self._calc_manhattan()
-        if self._use_pdb:
-            initial_h = self._pdb_lookup()
-        else:
-            initial_h = md + self._calc_linear_conflict()
+    def solve(self, md):
+        initial_h = self._pdb_lookup() if self._use_pdb else md + self._calc_linear_conflict()
 
         self._ida_star(md, initial_h)
 
@@ -477,5 +471,6 @@ class SlidingBlocksPuzzle:
 if __name__ == "__main__":
     source = open(sys.argv[1]) if len(sys.argv) > 1 else sys.stdin
     puzzle = SlidingBlocksPuzzle(source)
-    if puzzle.setup() >= 0:
-        puzzle.solve()
+    md = puzzle.setup()
+    if md >= 0:
+        puzzle.solve(md)

@@ -1,7 +1,0 @@
-2
-up
-up
-
-Elapsed: 0.010 ms
-
-Success!

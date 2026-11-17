@@ -73,6 +73,7 @@ public class NSlidingPuzzle {
     private int blankCurr;
     private int blankTarget;
     private boolean usePdb;
+    private int setupMd;
 
     // PDB tables (allocated only when usePdb)
     private short[] pdbA;
@@ -458,20 +459,18 @@ public class NSlidingPuzzle {
     // Public entry point
     // -----------------------------------------------------------------------
 
-    // Called from main() before the timed solve — mirrors C++ which builds PDBs
-    // outside the timed block.
     public int setup() {
         int md = calcManhattan();
 
         if (md == 0) {
             System.out.println(0);
             System.out.println("\nSuccess!");
-            return -1; // signal: already solved, skip timed solve
+            return -1;
         }
 
         if (!isSolvable()) {
             System.out.println("Puzzle cannot be solved!");
-            return -1; // signal: unsolvable, skip timed solve
+            return -1;
         }
 
         if (usePdb) {
@@ -479,15 +478,15 @@ public class NSlidingPuzzle {
             initTilePos();
         }
 
+        setupMd = md;
         return md;
     }
 
     @Timed(label = "IDA* Sliding Blocks Puzzle")
     public void solve() {
-        int md = calcManhattan();
-        int initialH = usePdb ? pdbLookup() : md + calcLinearConflict();
+        int initialH = usePdb ? pdbLookup() : setupMd + calcLinearConflict();
 
-        idaStar(md, initialH);
+        idaStar(setupMd, initialH);
 
         history.pop(); // remove NEUTRAL sentinel
         while (!history.isEmpty()) System.out.println(history.pop());

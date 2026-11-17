@@ -1,7 +1,7 @@
 # E03 — N-Sliding Blocks Puzzle: Algorithm & Solutions
 
 Implementation: C++ · Java · Python  
-Algorithm: **IDA\*** with **Manhattan Distance + Linear Conflict**
+Algorithm: **IDA\*** with **Additive 5-5-5 Pattern Databases** (4×4 canonical) / **Manhattan Distance + Linear Conflict** (all other grids)
 
 ---
 
@@ -38,7 +38,81 @@ function DLS(node, depth, threshold):
 
 ---
 
-## Heuristic: Manhattan Distance + Linear Conflict
+## Heuristic: Additive Pattern Databases (4×4 canonical goal)
+
+For the standard 15-puzzle (4×4 with blank at bottom-right corner), all three implementations use **additive 5-5-5 disjoint pattern databases (PDB)**.
+
+### What is a Pattern Database?
+
+A PDB for a group of tiles is a precomputed lookup table that stores the **exact minimum number of moves** needed to bring just those tiles to their goal positions, treating all other tiles as wildcards (empty space the blank can pass through freely).
+
+It is built once by running a **BFS backwards from the goal state** in an abstract space where only the group tiles and the blank exist. Every reachable abstract state gets its exact cost recorded.
+
+### The 5-5-5 partition
+
+Tiles 1–15 are split into three disjoint groups of 5:
+
+| Group | Tiles |
+|---|---|
+| A | 1, 2, 3, 4, 5 |
+| B | 6, 7, 8, 9, 10 |
+| C | 11, 12, 13, 14, 15 |
+
+Each group has **16P5 = 524,160** distinct arrangements (5 tiles on 16 cells, ordered), so each PDB has 524,160 entries stored as bytes.
+
+### Why additive?
+
+Because the groups are **disjoint** — no tile appears in two groups — the three PDB values can be summed and the result is still admissible. Each move can advance at most one group, so no move is double-counted:
+
+```
+h = pdb_A[rank(positions of tiles 1–5)]
+  + pdb_B[rank(positions of tiles 6–10)]
+  + pdb_C[rank(positions of tiles 11–15)]
+```
+
+This heuristic is much tighter than MD+LC. For the hardest 4×4 puzzles it can return values close to the true optimal cost, pruning orders of magnitude more of the search tree.
+
+### Lehmer-code rank (perm_rank_5)
+
+Each group's 5 tile positions are encoded as a unique integer index using the **Lehmer code** (factoradic number system):
+
+```
+rank = Σ (pos[i] − count of used positions smaller than pos[i]) × factor[i]
+```
+
+where `factors = [15×14×13×12, 14×13×12, 13×12, 12, 1]`. This maps any ordered 5-tuple of distinct positions from 0–15 into `[0, 524160)`.
+
+### 0-1 BFS for PDB construction
+
+The BFS uses a **deque** (0-1 BFS / dial's algorithm):
+- Moving the blank through a **non-group tile** costs **0** (the group state doesn't change).
+- Moving a **group tile** costs **1**.
+
+Cost-0 edges go to the front of the deque; cost-1 edges go to the back. This gives exact shortest-path costs without Dijkstra's overhead.
+
+After BFS, each abstract state `(rank, blank_pos)` has a cost. The PDB is projected by taking the **minimum cost over all blank positions** for each rank — the blank's location is irrelevant to the group's distance to goal.
+
+### Incremental tile position tracking
+
+During IDA\* search, each group tile's current board position is maintained in a `tile_pos[]` array updated O(1) per move (instead of scanning the board). This makes `pdb_lookup()` O(1) per node.
+
+### PDB build cost
+
+The three PDBs are built once at startup:
+
+| Language | Build time |
+|---|---|
+| C++ | ~100 ms |
+| Java | ~1 s |
+| Python | ~44 s |
+
+After the first run they are cached to disk (C++ rebuilds each run; Java saves to `~/.n_sliding_puzzle_pdb.cache`; Python saves to `n_sliding_puzzle.pdb_cache` next to the script), so subsequent runs load in milliseconds.
+
+---
+
+## Heuristic: Manhattan Distance + Linear Conflict (other grids)
+
+For grids other than 4×4 standard, all implementations use **MD + LC**.
 
 ### Manhattan Distance (MD)
 
@@ -48,7 +122,7 @@ For each tile, count the sum of its row-distance and column-distance to its goal
 MD = Σ (|row(tile) − goal_row(tile)| + |col(tile) − goal_col(tile)|)
 ```
 
-This is admissible: every tile needs at least that many moves to reach its goal, because each move shifts one tile by one cell.
+Admissible: every tile needs at least that many moves to reach its goal.
 
 ### Linear Conflict (LC)
 
@@ -56,15 +130,14 @@ Two tiles are in **linear conflict** when:
 1. Both are in their goal row (or both in their goal column), **and**
 2. Their goal positions are reversed relative to their current positions.
 
-Such a pair must bypass each other, requiring at least **2 extra moves** that MD does not account for. LC counts all such pairs and adds 2 per conflict:
+Such a pair must bypass each other, requiring at least **2 extra moves** that MD does not account for:
 
 ```
-LC = 2 × (number of conflicting pairs in rows) + 2 × (number of conflicting pairs in columns)
+LC = 2 × (conflicting pairs in rows) + 2 × (conflicting pairs in columns)
+h = MD + LC
 ```
 
-**Combined heuristic: h = MD + LC**
-
-Still admissible (never overestimates), but strictly tighter than MD alone. For the hardest 4×4 puzzles LC can add 10–20 to the root heuristic, dramatically pruning the search tree.
+Still admissible, but strictly tighter than MD alone.
 
 ---
 
@@ -72,9 +145,7 @@ Still admissible (never overestimates), but strictly tighter than MD alone. For 
 
 ### 1. LC recomputed at every node inside DLS
 
-The naive approach is to compute LC only once at the root of each IDA\* iteration and use only MD inside the DLS. This makes the heuristic weaker for all nodes below the root and misses most of the pruning benefit.
-
-The fix: recompute h = MD + LC at **every node** inside DLS:
+The naive approach computes LC only once at the IDA\* root and uses only MD inside DLS. The fix: recompute `h = MD + LC` at **every node**:
 
 ```
 new_md = update_md(blank_pos, tile_pos, old_md)   // O(1) — only one tile changed
@@ -84,11 +155,11 @@ recurse(new_h, new_md, ...)
 board ← swap back
 ```
 
-For a 4×4 board, `calc_linear_conflict` touches 16 tiles — negligible overhead. The tighter h prunes enormous subtrees that MD alone would explore. This single change reduced the ULTRA-HARD puzzle from >300 s timeout to 2 min 37 s.
+For a 4×4 board `calc_linear_conflict` touches 16 tiles — negligible overhead. This single change reduced the ULTRA-HARD puzzle from >300 s timeout to 2 min 37 s (C++, MD+LC only, before PDB was added).
 
 ### 2. Incremental MD update — O(1) per move
 
-Only one tile moves per step (the tile sliding into the blank). Its old and new distances are cheap to compute:
+Only one tile moves per step. Its old and new distances are cheap to compute:
 
 ```cpp
 int update_md(int blank_pos, int from_pos, int md) {
@@ -99,37 +170,31 @@ int update_md(int blank_pos, int from_pos, int md) {
 }
 ```
 
-This is called **before** the swap so `from_pos` still holds the tile.
+Called **before** the swap so `from_pos` still holds the tile.
 
-### 3. Initial threshold = MD + LC (not just MD)
+### 3. Goal check: `md == 0`, not `h == 0`
 
-Starting the first IDA\* iteration at the full h = MD + LC avoids wasted iterations at lower thresholds. For hard puzzles this can skip many early iterations entirely.
-
-### 4. Goal check: `md == 0`, not `h == 0`
-
-With h = MD + LC, it is possible for LC = 0 at a non-goal state (all tiles in their goal row/column, but not yet at their exact position). If the goal check were `h == 0`, the search would never terminate correctly. The correct check is:
+With `h = MD + LC`, LC can be 0 at a non-goal state. The correct check is:
 
 ```
-if (md == 0):  // all tiles are at their goal positions
+if (md == 0):  // all tiles at their goal positions
     return FOUND
 ```
 
-This requires passing `md` separately from `h` through the recursion.
+### 4. Separate `md` argument
 
-### 5. Separate `md` argument prevents wrong delta computation
-
-`update_md` computes a delta and adds it to the current MD. If the wrong base is passed (e.g. `h = MD + LC` instead of `md`), the result is corrupted. Keeping `md` as a dedicated parameter ensures correctness.
+`update_md` computes a delta added to MD. Passing `h = MD + LC` instead of `md` as the base corrupts the result. `md` is kept as a dedicated parameter throughout the recursion.
 
 ---
 
 ## Solvability Check
 
-Before searching, the puzzle is checked for solvability using the inversion-count parity rule:
+Before searching, the puzzle is checked using the inversion-count parity rule:
 
-- **Odd grid** (3×3, 5×5, …): solvable iff the number of inversions is **even**.
+- **Odd grid** (3×3, 5×5, …): solvable iff inversions is **even**.
 - **Even grid** (4×4, …): solvable iff `(inversions + blank_row_from_bottom + blank_target_row_from_bottom)` is **even**.
 
-Both the blank's current row from the bottom and the blank's **target** row from the bottom must be included. A bug that omitted `blank_target_row_from_bottom` caused three puzzles (009, 010, 011) with non-default blank targets to be misclassified as solvable, sending IDA\* into an infinite search.
+Both the blank's current row and its **target** row from the bottom must be included. Omitting `blank_target_row_from_bottom` caused three puzzles with non-default blank targets to be misclassified as solvable.
 
 ---
 
@@ -143,8 +208,6 @@ Internally the algorithm tracks where the **blank** moves. The output convention
 | down  | up    |
 | left  | right |
 | right | left  |
-
-All three implementations (C++, Java, Python) follow this convention.
 
 ---
 
@@ -167,7 +230,7 @@ The five hardest puzzles, ordered by number of optimal moves.
 | Language | Moves | Time |
 |---|---|---|
 | C++ | 53 | 1.327 s |
-| Java | 53 | ~12 s |
+| Java | 53 | ~2 s |
 | Python | 53 | ~5 min |
 
 **Solution (53 moves):**
@@ -188,7 +251,7 @@ right, right, down, left, left, up, right, up, left, down, left, down, right, ri
 | Language | Moves | Time |
 |---|---|---|
 | C++ | 56 | 365.801 ms |
-| Java | 56 | ~4.9 s |
+| Java | 56 | ~2 s |
 | Python | 56 | ~116 s |
 
 **Solution (56 moves):**
@@ -209,8 +272,8 @@ right, down, left, left, up, left, up, up, right, down, down, down, left, up, up
 | Language | Moves | Time |
 |---|---|---|
 | C++ | 66 | 3.580 s |
-| Java | 66 | ~68 s |
-| Python | — | >600 s (timeout) |
+| Java | 66 | ~10 s |
+| Python | — | >300 s (timeout) |
 
 **Solution (66 moves):**
 down, down, down, right, up, right, up, left, up, left, down, down, right, up, up, right, down, down, down, left, up, right, up, left, up, left, down, right, down, right, up, right, down, down, left, up, up, up, right, down, down, down, left, up, up, up, left, down, right, right, up, left, down, right, down, left, left, up, left, down, down, right, up, up, left, up
@@ -233,7 +296,7 @@ The fully reversed board (tiles 15→1 read left-to-right, top-to-bottom, blank 
 |---|---|---|
 | C++ | 78 | 2.028 s |
 | Java | — | >600 s (timeout) |
-| Python | — | >600 s (timeout) |
+| Python | — | >300 s (timeout) |
 
 **Solution (78 moves):**
 left, left, left, up, right, right, up, left, down, left, up, right, down, right, up, left, left, up, right, right, right, down, down, down, left, left, left, up, up, up, right, right, right, down, down, down, left, left, left, up, up, up, right, right, right, down, down, down, left, left, left, up, up, up, right, right, right, down, down, down, left, left, left, up, up, up, right, right, right, down, down, down, left, left, left, up, up, up
@@ -250,13 +313,11 @@ left, left, left, up, right, right, up, left, down, left, up, right, down, right
  4   8  2  1
 ```
 
-Previously timed out at 300 s with a weaker heuristic setup. Solved after enabling full LC recomputation at every DLS node.
-
 | Language | Moves | Time |
 |---|---|---|
-| C++ | 80 | 2 min 39 s |
+| C++ | 80 | 00:02:39.367 |
 | Java | — | >600 s (timeout) |
-| Python | — | >600 s (timeout) |
+| Python | — | >300 s (timeout) |
 
 **Solution (80 moves):**
 left, left, left, up, right, up, right, right, down, left, left, down, left, up, up, up, right, right, right, down, down, down, left, up, left, left, up, up, right, right, right, down, down, left, left, up, right, right, down, down, left, left, left, up, up, right, up, right, right, down, down, left, down, left, left, up, up, right, right, down, down, left, left, up, up, up, right, right, down, down, right, down, left, left, left, up, up, right, up, left
@@ -265,6 +326,6 @@ left, left, left, up, right, up, right, right, down, left, left, down, left, up,
 
 ## Per-Language Notes
 
-- **C++** (`-O2`, clang++): solves all 162 puzzles including ULTRA-HARD (80 moves, 2:39).
-- **Java**: solves puzzles up to ~57 moves within 300 s; MEGA-HARD-2 (78 moves) and ULTRA-HARD (80 moves) time out.
-- **Python**: correct algorithm, but recursion overhead makes depths >~57 impractical (>600 s). This is a language speed limitation, not an algorithmic one.
+- **C++** (`-O2`, clang++): solves all 162 puzzles. PDB built in ~100 ms each run (no disk cache).
+- **Java**: solves puzzles up to ~66 moves within 600 s with PDB. PDB cached to `~/.n_sliding_puzzle_pdb.cache` after first run (~1 s build, ~5 ms load).
+- **Python**: correct algorithm; PDB cached to `n_sliding_puzzle.pdb_cache` after first run (~44 s build, ~0.1 s load). Recursion overhead makes depths >~57 impractical regardless of heuristic.

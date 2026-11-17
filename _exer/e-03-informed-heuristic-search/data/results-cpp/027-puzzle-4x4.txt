@@ -1,9 +1,0 @@
-4
-up
-up
-left
-left
-
-Elapsed: 0.011 ms
-
-Success!

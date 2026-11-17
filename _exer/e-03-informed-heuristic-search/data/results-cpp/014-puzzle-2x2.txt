@@ -1,6 +1,0 @@
-1
-left
-
-Elapsed: 0.032 ms
-
-Success!

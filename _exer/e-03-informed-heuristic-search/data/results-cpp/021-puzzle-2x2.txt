@@ -1,8 +1,0 @@
-3
-right
-up
-left
-
-Elapsed: 0.006 ms
-
-Success!

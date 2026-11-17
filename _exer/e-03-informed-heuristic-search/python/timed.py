@@ -8,8 +8,14 @@ def timed(label=None):
         def wrapper(*args, **kwargs):
             start = time.perf_counter()
             result = fn(*args, **kwargs)
-            elapsed_ms = (time.perf_counter() - start) * 1000
-            print(f"[{label or fn.__name__}] took: {elapsed_ms:.2f} ms ≈ {elapsed_ms / 1000:.2f} s")
+            elapsed_ms = int((time.perf_counter() - start) * 1000)
+            h   = elapsed_ms // 3_600_000
+            rem = elapsed_ms %  3_600_000
+            m   = rem // 60_000
+            rem = rem %  60_000
+            s   = rem // 1000
+            ms  = rem %  1000
+            print(f"[{label or fn.__name__}] {h:02d}:{m:02d}:{s:02d}.{ms:03d}")
             return result
         return wrapper
     return decorator

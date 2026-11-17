@@ -1,8 +1,0 @@
-4
-left
-left
-up
-up
-
-Success!
-[IDA* Sliding Blocks Puzzle] 00:00:00.000
