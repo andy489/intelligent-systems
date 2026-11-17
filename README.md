@@ -31,7 +31,7 @@
 | # | Topic | Problem | Exercise Sheet | Solutions |
 |---|---|---|---|---|
 | E01 | Introduction | — | [is-e-01-(2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) · [slides](_exer/e-01-introduction/is-e-01-intro-slides.pdf) | [README](_exer/e-01-introduction/README.md) |
-| E02 | Uninformed (Blind) Search | Frog Leap Puzzle | [is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf)<br>[is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) | [C++](_exer/e-02-uninformed-blind-search/cpp/) · [Java](_exer/e-02-uninformed-blind-search/java/) · [Python](_exer/e-02-uninformed-blind-search/python/) |
+| E02 | Uninformed (Blind) Search | Frog Leap Puzzle | [is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf)<br>[is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf)<br>[slides](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search.pdf) | [C++](_exer/e-02-uninformed-blind-search/cpp/) · [Java](_exer/e-02-uninformed-blind-search/java/) · [Python](_exer/e-02-uninformed-blind-search/python/) |
 | E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [is-e-03-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/) |
 | E04 | Constraint Satisfaction Problems | — | — | — |
 | E05 | Genetic Algorithms | — | — | — |
@@ -57,7 +57,7 @@ Course table of contents and overview. No code solutions.
 ## E02 — Uninformed Search
 
 **Problem:** Frog Leap Puzzle  
-**Docs:** [Part 1 — Blind Search](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf) · [Part 2 — Warm-Up](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) · [README](_exer/e-02-uninformed-blind-search/README.md) · [Problem](_exer/e-02-uninformed-blind-search/PROBLEM.md) · [Solution](_exer/e-02-uninformed-blind-search/SOLUTION.md)
+**Docs:** [Part 1 — Blind Search](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf) · [Part 2 — Warm-Up](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) · [Slides](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search.pdf) · [README](_exer/e-02-uninformed-blind-search/README.md) · [Problem](_exer/e-02-uninformed-blind-search/PROBLEM.md) · [Solution](_exer/e-02-uninformed-blind-search/SOLUTION.md)
 
 Classic puzzle on a `2N+1` board: swap N yellow (left-side) and N green (right-side) frogs using steps and jumps.
 Two approaches — DFS search and an O(N²) analytical linear solution.
