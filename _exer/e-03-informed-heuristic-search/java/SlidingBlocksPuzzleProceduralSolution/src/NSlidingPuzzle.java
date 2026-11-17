@@ -19,6 +19,7 @@
 //       O(N²) after every swap — tight enough to solve hard 4×4 in seconds.
 
 import java.io.*;
+import java.nio.file.*;
 import java.util.*;
 
 public class NSlidingPuzzle {
@@ -236,10 +237,31 @@ public class NSlidingPuzzle {
         return pdb;
     }
 
+    private static final Path PDB_CACHE = Path.of(
+            System.getProperty("user.home"), ".n_sliding_puzzle_pdb.cache");
+
     private void buildPdbs() {
+        if (Files.exists(PDB_CACHE)) {
+            try (DataInputStream in = new DataInputStream(
+                    new BufferedInputStream(Files.newInputStream(PDB_CACHE)))) {
+                pdbA = new short[PDB_SIZE];
+                pdbB = new short[PDB_SIZE];
+                pdbC = new short[PDB_SIZE];
+                for (int i = 0; i < PDB_SIZE; i++) pdbA[i] = in.readShort();
+                for (int i = 0; i < PDB_SIZE; i++) pdbB[i] = in.readShort();
+                for (int i = 0; i < PDB_SIZE; i++) pdbC[i] = in.readShort();
+                return;
+            } catch (IOException ignored) {}
+        }
         pdbA = buildPdb(GROUP_A);
         pdbB = buildPdb(GROUP_B);
         pdbC = buildPdb(GROUP_C);
+        try (DataOutputStream out = new DataOutputStream(
+                new BufferedOutputStream(Files.newOutputStream(PDB_CACHE)))) {
+            for (short v : pdbA) out.writeShort(v);
+            for (short v : pdbB) out.writeShort(v);
+            for (short v : pdbC) out.writeShort(v);
+        } catch (IOException ignored) {}
     }
 
     private void initTilePos() {

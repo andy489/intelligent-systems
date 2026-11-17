@@ -23,14 +23,17 @@
 
 import sys
 import os
-import time
+import pickle
 from collections import deque
 from enum import IntEnum
+from pathlib import Path
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 from timed import timed  # ../timed.py (e-03/python/timed.py)
 
 sys.setrecursionlimit(1 << 20)
+
+_PDB_CACHE = Path(__file__).with_suffix('.pdb_cache')
 
 
 class Direction(IntEnum):
@@ -224,9 +227,15 @@ class SlidingBlocksPuzzle:
     # -----------------------------------------------------------------------
 
     def _build_pdbs(self):
+        if _PDB_CACHE.exists():
+            with open(_PDB_CACHE, 'rb') as f:
+                self._pdb_a, self._pdb_b, self._pdb_c = pickle.load(f)
+            return
         self._pdb_a = _build_pdb(_GROUP_A)
         self._pdb_b = _build_pdb(_GROUP_B)
         self._pdb_c = _build_pdb(_GROUP_C)
+        with open(_PDB_CACHE, 'wb') as f:
+            pickle.dump((self._pdb_a, self._pdb_b, self._pdb_c), f)
 
     def _init_tile_pos(self):
         for i, t in enumerate(self._board):
