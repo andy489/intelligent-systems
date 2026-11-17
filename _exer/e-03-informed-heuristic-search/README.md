@@ -11,14 +11,63 @@ An N×N grid holds tiles numbered 1 to N²−1 and one blank. A move slides an a
 
 ## Algorithm
 
-**IDA\*** (Iterative Deepening A\*) with:
+**IDA\*** (Iterative Deepening A\*) — memory-efficient optimal search. Instead of keeping an open set like A\*, it runs repeated depth-limited searches (DLS), each time raising the cost threshold until the solution is found:
 
-- **Manhattan Distance** — sum of each tile's row + column distance from its goal; updated in O(1) per move inside the depth-limited search.
-- **Linear Conflict** — adds 2 per reversed pair of tiles already in their goal row/column; recomputed at the start of each IDA\* iteration to raise the f-cost threshold (never used inside the inner DLS, so admissibility is preserved).
+```
+threshold = h(start)
+loop:
+    result = dls(start, threshold, depth=0)
+    if solved → done
+    threshold = result   ← smallest f that exceeded the limit
+```
 
-**Solvability check** (O(N² log N) merge-sort inversion count):
-- Odd grid width: solvable iff inversions is even.
-- Even grid width: solvable iff `(inversions + blank_row_from_bottom + blank_target_row_from_bottom)` is even.
+Each DLS call returns 0 (solved) or the minimum `f = depth + h` that exceeded the threshold — which becomes the next threshold. This guarantees the **optimal** (minimum-move) solution.
+
+---
+
+## Heuristic: Manhattan Distance + Linear Conflict
+
+**Manhattan Distance (MD):** For each tile, count how many rows + columns it is away from its goal position. Admissible because each tile needs at least that many moves regardless of everything else.
+
+**Linear Conflict (LC):** If two tiles are both in their goal row (or column) but in reversed order relative to their goals, they must each leave and re-enter that row — adding at least 2 moves per conflicting pair. LC adds 2 per such pair on top of MD.
+
+`h = MD + LC` is a strictly tighter lower bound than MD alone, so it prunes more of the search tree while remaining admissible (never overestimates).
+
+---
+
+## Optimisation: LC recomputed at every node
+
+**The naive approach** computed LC only once per IDA\* iteration (at the root), then ran pure MD inside DLS. For hard puzzles this is too weak — the threshold creeps up slowly and the search tree explodes.
+
+**The fix:** recompute `h = MD + LC` at **every node** inside DLS:
+
+```
+new_md = update_md(blank, tile_pos, old_md)   // O(1) — only one tile changed
+board ← swap
+new_h  = new_md + calc_linear_conflict()      // O(N²) on the new board state
+recurse(new_h, new_md)
+board ← swap back
+```
+
+For a 4×4 board `calc_linear_conflict` touches 16 tiles — negligible cost. The tighter `h` prunes branches that MD alone would explore, reducing the search tree by orders of magnitude on hard instances.
+
+**Two correctness bugs fixed in the process:**
+
+| Bug | Wrong | Correct | Why |
+|---|---|---|---|
+| Goal check | `h == 0` | `md == 0` | With `h = MD + LC`, LC can be 0 at a non-goal state — the condition never triggered, causing an infinite loop |
+| MD update | passed `h = MD + LC` as the base | pass MD separately | `update_md` computes a delta — it must start from MD only, not the combined heuristic |
+
+---
+
+## Solvability check
+
+Before searching, verify the puzzle is reachable from the goal using inversion count (O(N² log N) merge sort):
+
+- **Odd grid width:** solvable iff number of inversions is even.
+- **Even grid width:** solvable iff `inversions + blank_row_from_bottom + blank_target_row_from_bottom` is even.
+
+Both the blank's current row and its goal row must be included; omitting the goal row gives wrong results when the blank target is not the default position.
 
 ---
 
@@ -60,10 +109,10 @@ Already-solved prints only `0` + `Success!`. Unsolvable prints `Puzzle cannot be
 
 | Path | Description |
 |---|---|
-| [`data/puzzles/`](data/puzzles/) | 160 input puzzles (2×2 through 10×10) |
+| [`data/puzzles/`](data/puzzles/) | 161 input puzzles (2×2 through 10×10, plus one hard 4×4) |
 | [`data/results/`](data/results/) | One `.txt` result per puzzle |
 | [`data/ANALYSIS.md`](data/ANALYSIS.md) | Full results table and performance analysis |
-| [`run_all_puzzles.py`](run_all_puzzles.py) | Batch runner — builds C++ binary, runs all 160 puzzles with 300 s timeout |
+| [`run_all_puzzles.py`](run_all_puzzles.py) | Batch runner — builds C++ binary, runs all puzzles with 300 s timeout |
 
 ### Run a single puzzle
 
@@ -76,14 +125,14 @@ clang++ -O2 -std=c++17 -o n_sliding_puzzle NSlidingPuzzle.cpp
 # Java
 cd java/SlidingBlocksPuzzleProceduralSolution
 javac -d out src/*.java
-java -cp out NSlidingPuzzle ../../data/puzzles/puzzle081-4x4.txt
+java -cp out Main ../../data/puzzles/puzzle081-4x4.txt
 
 # Python
 python3 python/SlidingBlocksPuzzleProceduralSolution/n_sliding_puzzle.py \
     data/puzzles/puzzle081-4x4.txt
 ```
 
-### Run all 160 puzzles
+### Run all puzzles
 
 ```bash
 python3 run_all_puzzles.py
