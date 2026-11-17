@@ -1,8 +1,0 @@
-3
-right
-right
-down
-
-Elapsed: 00:00:00.000
-
-Success!

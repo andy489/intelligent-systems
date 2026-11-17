@@ -42,11 +42,13 @@ _REVERSE = [
     Direction.NEUTRAL,
 ]
 
+# Internally directions describe where the blank moves.
+# _MOVE_NAMES gives where the TILE moves (opposite of blank).
 _MOVE_NAMES = {
-    Direction.LEFT:    "left",
-    Direction.RIGHT:   "right",
-    Direction.DOWN:    "down",
-    Direction.UP:      "up",
+    Direction.LEFT:    "right",
+    Direction.RIGHT:   "left",
+    Direction.DOWN:    "up",
+    Direction.UP:      "down",
     Direction.NEUTRAL: "",
 }
 

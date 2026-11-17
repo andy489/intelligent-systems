@@ -1,0 +1,20 @@
+15
+down
+right
+right
+down
+down
+left
+up
+up
+up
+right
+down
+left
+left
+up
+left
+
+Elapsed: 00:00:00.000
+
+Success!

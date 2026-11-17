@@ -37,10 +37,12 @@ public class NSlidingPuzzle {
         Direction reverse() { return BY_ID[REVERSE_ID[this.id]]; }
 
         @Override public String toString() {
-            if (this == LEFT)  return "left";
-            if (this == RIGHT) return "right";
-            if (this == DOWN)  return "down";
-            if (this == UP)    return "up";
+            // Internally directions describe where the blank moves.
+            // toString() returns where the TILE moves (opposite of blank).
+            if (this == LEFT)  return "right";
+            if (this == RIGHT) return "left";
+            if (this == DOWN)  return "up";
+            if (this == UP)    return "down";
             return "";
         }
     }

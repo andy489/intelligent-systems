@@ -38,7 +38,7 @@ def main():
 
     RESULTS.mkdir(parents=True, exist_ok=True)
 
-    puzzles = sorted(PUZZLES.glob("puzzle*.txt"))
+    puzzles = sorted(PUZZLES.glob("*.txt"))
     total = solved = unsolvable = skipped = timed_out = 0
 
     for puzzle in puzzles:
