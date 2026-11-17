@@ -142,7 +142,7 @@ Solved with IDA\* using Manhattan Distance + Linear Conflict heuristic.
 | Java | [`NSlidingPuzzle.java`](_exer/e-03-informed-heuristic-search/java/SlidingBlocksPuzzleProceduralSolution/src/NSlidingPuzzle.java) |
 | Python | [`n_sliding_puzzle.py`](_exer/e-03-informed-heuristic-search/python/SlidingBlocksPuzzleProceduralSolution/n_sliding_puzzle.py) |
 
-Puzzles: [`data/puzzles/`](_exer/e-03-informed-heuristic-search/data/puzzles/) (162 puzzles: 2×2 through 10×10 + 2 hard 4×4)  
+Puzzles: [`data/puzzles/`](_exer/e-03-informed-heuristic-search/data/puzzles/) (162 puzzles: 2×2 through 10×10, including 5 hard 4×4)  
 Results: [`data/results/`](_exer/e-03-informed-heuristic-search/data/results/) (one `.txt` per puzzle — moves + elapsed time)  
 Analysis: [`data/ANALYSIS.md`](_exer/e-03-informed-heuristic-search/data/ANALYSIS.md) (152 solved, 10 unsolvable, 0 timed out)  
 Solution: [`data/SOLUTION.md`](_exer/e-03-informed-heuristic-search/data/SOLUTION.md) (algorithm explanation, optimisations, move sequences for all 5 hard puzzles)  
