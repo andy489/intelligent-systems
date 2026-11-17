@@ -1,0 +1,2 @@
+Puzzle cannot be solved!
+[IDA* Sliding Blocks Puzzle] 00:00:00.000

@@ -1,24 +1,27 @@
 #!/usr/bin/env python3
-"""Run all sliding-block puzzles and write one result file per puzzle."""
+"""Run all sliding-block puzzles with the C++ binary and write results to data/results-cpp/."""
 
 import subprocess
 import sys
 from pathlib import Path
 
-SCRIPT_DIR = Path(__file__).parent
-BINARY     = SCRIPT_DIR / "cpp/SlidingBlocksPuzzleProceduralSolution/n_sliding_puzzle"
-PUZZLES    = SCRIPT_DIR / "data/puzzles"
-RESULTS    = SCRIPT_DIR / "data/results"
+DATA_DIR   = Path(__file__).parent
+ROOT_DIR   = DATA_DIR.parent
+BINARY     = ROOT_DIR / "cpp/SlidingBlocksPuzzleProceduralSolution/n_sliding_puzzle"
+PUZZLES    = DATA_DIR / "puzzles"
+RESULTS    = DATA_DIR / "results-cpp"
 TIMEOUT    = 300  # seconds per puzzle
 
+
 def build():
-    src = SCRIPT_DIR / "cpp/SlidingBlocksPuzzleProceduralSolution"
-    print("Building binary...")
+    src = ROOT_DIR / "cpp/SlidingBlocksPuzzleProceduralSolution"
+    print("Building C++ binary...")
     subprocess.run(
         ["clang++", "-O2", "-std=c++17", "-o", str(BINARY), "NSlidingPuzzle.cpp"],
         cwd=src, check=True
     )
     print("Build OK")
+
 
 def run_puzzle(puzzle: Path) -> str:
     proc = subprocess.Popen(
@@ -31,6 +34,7 @@ def run_puzzle(puzzle: Path) -> str:
     except subprocess.TimeoutExpired:
         proc.kill()
         return f"TIMED OUT (>{TIMEOUT}s)\n"
+
 
 def main():
     if not BINARY.exists():
@@ -47,7 +51,7 @@ def main():
         total += 1
 
         if result.exists():
-            print(f"  [skip] {name}  (result exists)")
+            print(f"  [skip] {name}")
             skipped += 1
             continue
 
@@ -76,6 +80,7 @@ def main():
     print(f"Timed out:  {timed_out}")
     print(f"Skipped:    {skipped}")
     print("─" * 50)
+
 
 if __name__ == "__main__":
     main()

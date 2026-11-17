@@ -1,0 +1,17 @@
+13
+up
+left
+down
+down
+right
+right
+right
+up
+up
+up
+left
+left
+left
+
+Success!
+[IDA* Sliding Blocks Puzzle] 00:00:00.000

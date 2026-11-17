@@ -25,7 +25,27 @@ Each DLS call returns 0 (solved) or the minimum `f = depth + h` that exceeded th
 
 ---
 
-## Heuristic: Manhattan Distance + Linear Conflict
+## Heuristic: Additive Pattern Databases (4×4 canonical goal)
+
+For the standard 4×4 puzzle with blank at bottom-right, all three implementations use **additive 5-5-5 disjoint pattern databases (PDB)**:
+
+Tiles 1–15 are split into three disjoint groups of 5:
+
+| Group | Tiles |
+|---|---|
+| A | 1, 2, 3, 4, 5 |
+| B | 6, 7, 8, 9, 10 |
+| C | 11, 12, 13, 14, 15 |
+
+A PDB for each group stores the **exact minimum moves** to place those 5 tiles at their goal positions (treating all other tiles as wildcards). Because the groups are disjoint, summing the three PDB values is admissible — no move is counted twice.
+
+Each PDB has 16P5 = 524,160 entries, built by 0-1 BFS from the goal state at startup (≈100 ms in C++, ≈1 s in Java, ≈44 s in Python). The PDB heuristic is far tighter than MD+LC and prunes orders of magnitude more of the search tree on hard instances.
+
+---
+
+## Heuristic: Manhattan Distance + Linear Conflict (other grids)
+
+For grids other than 4×4 standard, all implementations use **MD + LC**:
 
 **Manhattan Distance (MD):** For each tile, count how many rows + columns it is away from its goal position. Admissible because each tile needs at least that many moves regardless of everything else.
 
@@ -105,15 +125,19 @@ Already-solved prints only `0` + `Success!`. Unsolvable prints `Puzzle cannot be
 
 ---
 
-## Data & Runner
+## Data & Runners
 
 | Path | Description |
 |---|---|
 | [`data/puzzles/`](data/puzzles/) | 162 input puzzles (2×2 through 10×10, plus five hard 4×4) |
-| [`data/results/`](data/results/) | One `.txt` result per puzzle |
+| [`data/results-cpp/`](data/results-cpp/) | One `.txt` result per puzzle (C++) |
+| [`data/results-java/`](data/results-java/) | One `.txt` result per puzzle (Java) |
+| [`data/results-python/`](data/results-python/) | One `.txt` result per puzzle (Python) |
 | [`data/ANALYSIS.md`](data/ANALYSIS.md) | Full results table and performance analysis |
 | [`data/SOLUTION.md`](data/SOLUTION.md) | Algorithm explanation, optimisations, move sequences for all 5 hard puzzles |
-| [`run_all_puzzles.py`](run_all_puzzles.py) | Batch runner — builds C++ binary, runs all puzzles with 300 s timeout |
+| [`data/run_cpp.py`](data/run_cpp.py) | Batch runner — builds C++ binary, runs all puzzles, writes to `results-cpp/` |
+| [`data/run_java.py`](data/run_java.py) | Batch runner — compiles Java, runs all puzzles, writes to `results-java/` |
+| [`data/run_python.py`](data/run_python.py) | Batch runner — runs all puzzles with Python, writes to `results-python/` |
 
 ### Run a single puzzle
 
@@ -136,7 +160,9 @@ python3 python/SlidingBlocksPuzzleProceduralSolution/n_sliding_puzzle.py \
 ### Run all puzzles
 
 ```bash
-python3 run_all_puzzles.py
+python3 data/run_cpp.py     # C++    → data/results-cpp/
+python3 data/run_java.py    # Java   → data/results-java/
+python3 data/run_python.py  # Python → data/results-python/
 ```
 
-Builds the C++ binary if missing, runs each puzzle, writes results to `data/results/`. Existing result files are skipped.
+Each runner builds/compiles if needed, runs each puzzle with a 300 s timeout, and skips puzzles whose result file already exists.

@@ -134,7 +134,8 @@ No code solutions yet.
 **Docs:** [Exercise Sheet](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf) · [Slides-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf) · [Romania Map](_exer/e-03-informed-heuristic-search/romania-map.pdf) · [README](_exer/e-03-informed-heuristic-search/README.md)
 
 N-puzzle (8-puzzle, 15-puzzle, …): slide tiles on an N×N grid to reach the goal configuration.
-Solved with IDA\* using **h = Manhattan Distance + Linear Conflict**:
+Solved with IDA\* using **additive 5-5-5 disjoint pattern databases (PDB)** for the standard 4×4 puzzle, and **Manhattan Distance + Linear Conflict (MD+LC)** for all other grids:
+- **PDB (4×4 canonical)** — tiles 1–15 split into three groups of 5; each PDB stores exact minimum moves for that group, summed for an admissible tight bound.
 - **Manhattan Distance (MD)** — sum of each tile's row+col distance to its goal position.
 - **Linear Conflict (LC)** — two tiles in their goal row/column but in reversed order must bypass each other, costing ≥2 extra moves not captured by MD. Added on top of MD for a tighter admissible bound.
 
@@ -145,10 +146,10 @@ Solved with IDA\* using **h = Manhattan Distance + Linear Conflict**:
 | Python | [`n_sliding_puzzle.py`](_exer/e-03-informed-heuristic-search/python/SlidingBlocksPuzzleProceduralSolution/n_sliding_puzzle.py) |
 
 Puzzles: [`data/puzzles/`](_exer/e-03-informed-heuristic-search/data/puzzles/) (162 puzzles: 2×2 through 10×10, including 5 hard 4×4)  
-Results: [`data/results/`](_exer/e-03-informed-heuristic-search/data/results/) (one `.txt` per puzzle — moves + elapsed time)  
+Results: [`data/results-cpp/`](_exer/e-03-informed-heuristic-search/data/results-cpp/) · [`data/results-java/`](_exer/e-03-informed-heuristic-search/data/results-java/) · [`data/results-python/`](_exer/e-03-informed-heuristic-search/data/results-python/) (one `.txt` per puzzle — moves + elapsed time)  
 Analysis: [`data/ANALYSIS.md`](_exer/e-03-informed-heuristic-search/data/ANALYSIS.md) (152 solved, 10 unsolvable, 0 timed out)  
 Solution: [`data/SOLUTION.md`](_exer/e-03-informed-heuristic-search/data/SOLUTION.md) (algorithm explanation, optimisations, move sequences for all 5 hard puzzles)  
-Runner: [`run_all_puzzles.py`](_exer/e-03-informed-heuristic-search/run_all_puzzles.py)
+Runners: [`data/run_cpp.py`](_exer/e-03-informed-heuristic-search/data/run_cpp.py) · [`data/run_java.py`](_exer/e-03-informed-heuristic-search/data/run_java.py) · [`data/run_python.py`](_exer/e-03-informed-heuristic-search/data/run_python.py)
 
 ---
 
