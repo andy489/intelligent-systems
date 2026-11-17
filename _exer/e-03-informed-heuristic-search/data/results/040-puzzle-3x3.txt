@@ -1,23 +1,13 @@
-18
-down
-left
-up
-up
-right
-right
-down
-left
+8
 left
 down
 right
+right
 up
 left
-up
-right
-down
 left
 up
 
-Elapsed: 0.089 ms
+Elapsed: 0.008 ms
 
 Success!

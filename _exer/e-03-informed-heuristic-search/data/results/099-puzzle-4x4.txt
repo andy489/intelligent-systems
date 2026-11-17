@@ -1,29 +1,32 @@
-24
-down
-left
-down
+27
+up
 right
 right
-down
-left
+up
 left
 left
 up
 right
+right
+down
+left
 up
 right
 right
 down
+left
+up
+left
+left
 down
-left
-left
+right
+down
 left
 up
 right
 up
 left
-up
 
-Elapsed: 0.014 ms
+Elapsed: 0.028 ms
 
 Success!

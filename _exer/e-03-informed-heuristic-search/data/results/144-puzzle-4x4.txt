@@ -1,4 +1,4 @@
-49
+47
 down
 right
 up
@@ -46,9 +46,7 @@ down
 down
 right
 up
-left
-left
 
-Elapsed: 408.938 ms
+Elapsed: 116.174 ms
 
 Success!

@@ -1,7 +1,7 @@
-37
-up
-up
-left
+34
+down
+down
+right
 up
 right
 right
@@ -10,33 +10,30 @@ down
 left
 up
 up
-left
-left
-down
-right
-right
-up
-left
-left
-down
 right
 down
 down
-right
-right
+left
 up
 left
 left
 up
 right
+down
+down
+right
+up
+up
 right
 down
-left
-left
+down
 left
 up
+up
+left
+left
 up
 
-Elapsed: 0.261 ms
+Elapsed: 0.221 ms
 
 Success!

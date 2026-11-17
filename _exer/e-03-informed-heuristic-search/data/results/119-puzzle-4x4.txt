@@ -1,28 +1,4 @@
-38
-right
-right
-right
-down
-left
-left
-up
-right
-down
-left
-up
-left
-down
-right
-right
-up
-left
-down
-right
-right
-up
-left
-down
-down
+35
 left
 left
 down
@@ -30,14 +6,35 @@ right
 up
 right
 down
+left
+up
+left
+up
+right
+right
+down
+down
+left
+up
+right
+right
+down
+left
+down
 right
 up
 up
 up
 left
 left
+down
+down
+down
 left
+up
+up
+up
 
-Elapsed: 0.960 ms
+Elapsed: 0.273 ms
 
 Success!

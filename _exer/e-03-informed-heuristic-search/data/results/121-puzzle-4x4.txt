@@ -1,5 +1,4 @@
-39
-right
+36
 right
 right
 up
@@ -7,38 +6,36 @@ left
 left
 left
 down
-right
-down
 down
 right
-right
-up
-up
-up
-left
-left
-left
-down
-right
-up
-left
-down
-down
-down
-right
-right
-up
-left
-up
 right
 right
 up
 left
 left
+left
+up
+right
+right
 down
+right
+up
+left
+down
+down
+down
+left
+up
+right
+right
+down
+left
+left
+up
+up
 left
 up
 
-Elapsed: 0.062 ms
+Elapsed: 0.841 ms
 
 Success!

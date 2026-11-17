@@ -1,12 +1,9 @@
-7
+4
+left
 left
 up
-right
-down
-left
 up
-left
 
-Elapsed: 0.012 ms
+Elapsed: 0.007 ms
 
 Success!

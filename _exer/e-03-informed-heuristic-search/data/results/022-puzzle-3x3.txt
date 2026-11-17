@@ -1,10 +1,8 @@
-5
-down
+3
+left
 left
 up
-up
-left
 
-Elapsed: 0.009 ms
+Elapsed: 0.007 ms
 
 Success!
