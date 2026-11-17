@@ -31,7 +31,7 @@ Algorithm details and hard puzzle solutions: [**SOLUTION.md**](SOLUTION.md)
 | 005 | 005-puzzle-3x3-unsolvable | 3×3 | Unsolvable | — | — |
 | 006 | 006-puzzle-3x3-unsolvable | 3×3 | Unsolvable | — | — |
 | 007 | 007-puzzle-4x4-unsolvable | 4×4 | Unsolvable | — | — |
-| 008 | 008-puzzle-4x4 | 4×4 | Solved | 49 | 1.062 s |
+| 008 | 008-puzzle-4x4 | 4×4 | Solved | 37 | <1 ms |
 | 009 | 009-puzzle-4x4-unsolvable | 4×4 | Unsolvable | — | — |
 | 010 | 010-puzzle-4x4-unsolvable | 4×4 | Unsolvable | — | — |
 | 011 | 011-puzzle-4x4-unsolvable | 4×4 | Unsolvable | — | — |
@@ -264,4 +264,4 @@ The original check omitted `blank_target_row_from_bottom`. Once both rows are in
 
 8. **Variance within a move-count band** is large and unpredictable. Two 48-move puzzles (145 vs 147) differ by a factor of 100× (1 ms vs 112 ms). The heuristic's ability to prune a particular board state is highly problem-specific.
 
-9. **puzzle008-4x4** (49 moves, 1.062 s) is a good example of a nominally deep puzzle that is solved quickly — its specific layout allows the heuristic to prune very aggressively.
+9. **puzzle008-4x4** (37 moves, <1 ms) was previously misreported as 49 moves due to a missing `target_index` line in the puzzle file causing the parser to consume the first board tile as the target. With the corrected input the board solves in 37 optimal moves instantly.
