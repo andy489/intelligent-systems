@@ -458,29 +458,34 @@ public class NSlidingPuzzle {
     // Public entry point
     // -----------------------------------------------------------------------
 
-    @Timed(label = "IDA* Sliding Blocks Puzzle")
-    public void solve() {
+    // Called from main() before the timed solve — mirrors C++ which builds PDBs
+    // outside the timed block.
+    public int setup() {
         int md = calcManhattan();
 
         if (md == 0) {
             System.out.println(0);
             System.out.println("\nSuccess!");
-            return;
+            return -1; // signal: already solved, skip timed solve
         }
 
         if (!isSolvable()) {
             System.out.println("Puzzle cannot be solved!");
-            return;
+            return -1; // signal: unsolvable, skip timed solve
         }
 
-        int initialH;
         if (usePdb) {
             buildPdbs();
             initTilePos();
-            initialH = pdbLookup();
-        } else {
-            initialH = md + calcLinearConflict();
         }
+
+        return md;
+    }
+
+    @Timed(label = "IDA* Sliding Blocks Puzzle")
+    public void solve() {
+        int md = calcManhattan();
+        int initialH = usePdb ? pdbLookup() : md + calcLinearConflict();
 
         idaStar(md, initialH);
 
@@ -501,6 +506,8 @@ public class NSlidingPuzzle {
 
         NSlidingPuzzle puzzle = new NSlidingPuzzle(sc);
         sc.close();
+
+        if (puzzle.setup() < 0) return; // already solved or unsolvable
 
         TimingUtil.run(puzzle, "solve");
     }

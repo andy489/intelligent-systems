@@ -435,22 +435,30 @@ class SlidingBlocksPuzzle:
     # Public entry point
     # -----------------------------------------------------------------------
 
-    @timed(label="IDA* Sliding Blocks Puzzle")
-    def solve(self):
+    def setup(self):
+        """Pre-search setup (outside timed block, mirrors C++ structure).
+        Returns initial md, or -1 if already solved / unsolvable."""
         md = self._calc_manhattan()
 
         if md == 0:
             print(0)
             print("\nSuccess!")
-            return
+            return -1
 
         if not self._is_solvable():
             print("Puzzle cannot be solved!")
-            return
+            return -1
 
         if self._use_pdb:
             self._build_pdbs()
             self._init_tile_pos()
+
+        return md
+
+    @timed(label="IDA* Sliding Blocks Puzzle")
+    def solve(self):
+        md = self._calc_manhattan()
+        if self._use_pdb:
             initial_h = self._pdb_lookup()
         else:
             initial_h = md + self._calc_linear_conflict()
@@ -468,4 +476,6 @@ class SlidingBlocksPuzzle:
 
 if __name__ == "__main__":
     source = open(sys.argv[1]) if len(sys.argv) > 1 else sys.stdin
-    SlidingBlocksPuzzle(source).solve()
+    puzzle = SlidingBlocksPuzzle(source)
+    if puzzle.setup() >= 0:
+        puzzle.solve()
