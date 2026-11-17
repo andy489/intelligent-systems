@@ -255,10 +255,10 @@ int dls(int blank_pos, int limit, Move prev_move, int h, int md, int depth) {
 }
 
 void ida_star(int md, int lc) {
-    int threshold = md;  // start with MD only, like colleague's bound = manhattan
+    int threshold = md + lc;
     int result;
     do {
-        result = dls(blank_curr, threshold, NEUTRAL, md + lc, md, 0);
+        result = dls(blank_curr, threshold, NEUTRAL, threshold, md, 0);
         if (result == 0) return;
         threshold = result;
         md = calc_manhattan();
