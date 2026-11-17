@@ -142,9 +142,10 @@ Solved with IDA\* using Manhattan Distance + Linear Conflict heuristic.
 | Java | [`NSlidingPuzzle.java`](_exer/e-03-informed-heuristic-search/java/SlidingBlocksPuzzleProceduralSolution/src/NSlidingPuzzle.java) |
 | Python | [`n_sliding_puzzle.py`](_exer/e-03-informed-heuristic-search/python/SlidingBlocksPuzzleProceduralSolution/n_sliding_puzzle.py) |
 
-Puzzles: [`data/puzzles/`](_exer/e-03-informed-heuristic-search/data/puzzles/) (160 puzzles: 2×2 through 10×10)  
+Puzzles: [`data/puzzles/`](_exer/e-03-informed-heuristic-search/data/puzzles/) (162 puzzles: 2×2 through 10×10 + 2 hard 4×4)  
 Results: [`data/results/`](_exer/e-03-informed-heuristic-search/data/results/) (one `.txt` per puzzle — moves + elapsed time)  
-Analysis: [`data/ANALYSIS.md`](_exer/e-03-informed-heuristic-search/data/ANALYSIS.md) (145 solved, 9 unsolvable, 1 timed out)  
+Analysis: [`data/ANALYSIS.md`](_exer/e-03-informed-heuristic-search/data/ANALYSIS.md) (147 solved, 9 unsolvable, 1 timed out)  
+Solutions: [`data/SOLUTIONS.md`](_exer/e-03-informed-heuristic-search/data/SOLUTIONS.md) (move sequences + per-language timings for hard puzzles 161 & 162)  
 Runner: [`run_all_puzzles.py`](_exer/e-03-informed-heuristic-search/run_all_puzzles.py)
 
 ---

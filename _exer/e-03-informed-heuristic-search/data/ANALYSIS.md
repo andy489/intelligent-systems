@@ -5,16 +5,18 @@ Implementation: [`cpp/SlidingBlocksPuzzleProceduralSolution/NSlidingPuzzle.cpp`]
 Runner: [`run_all_puzzles.py`](../run_all_puzzles.py)  
 Timeout per puzzle: **300 s**
 
+Hard puzzle solutions (move sequences + per-language timings): [**SOLUTIONS.md**](SOLUTIONS.md)
+
 ---
 
 ## Summary
 
 | Status | Count |
 |---|---|
-| Solved | 145 |
+| Solved | 147 |
 | Unsolvable (detected correctly) | 9 |
 | Timed out — hard puzzle | 1 |
-| **Total** | **160** |
+| **Total** | **162** |
 
 > **Note:** Puzzles 158–160 were initially timed out due to a solvability-check bug (even-width grids with non-default blank target).
 > After fixing `check_solvable()` to also account for `blank_target_row_from_bottom`, all three are correctly detected as unsolvable instantly.
@@ -185,6 +187,8 @@ Timeout per puzzle: **300 s**
 | 158 | puzzle158-4x4-unsolvable | 4×4 | Unsolvable | — | — |
 | 159 | puzzle159-4x4-unsolvable | 4×4 | Unsolvable | — | — |
 | 160 | puzzle160-4x4-unsolvable | 4×4 | Unsolvable | — | — |
+| 161 | puzzle161-4x4-HARD | 4×4 | Solved | 56 | 3.7 s |
+| 162 | puzzle162-4x4-MEGA-HARD | 4×4 | Solved | 66 | 51.5 s |
 
 ---
 
@@ -262,6 +266,8 @@ Without `blank_target_row_from_bottom` the check returned the wrong answer for n
 1. **Manhattan Distance + Linear Conflict** is sufficient for all puzzles up to ~50 optimal moves in well under 1 second.
 2. **Solution depth, not grid size**, determines IDA\* runtime — a 10×10 puzzle solved in <1 ms because only 16 moves were needed.
 3. **Exponential blow-up** starts around 50 moves for the 15-puzzle; at 78 moves it takes 11+ minutes.
-4. **Puzzle100** (78 moves, 11 min 30 s) is the hardest successfully solved puzzle in this dataset.
+4. **Puzzle100** (78 moves, 11 min 30 s) is the hardest of the original 160 puzzles.
 5. **Puzzle101** is the only genuinely unsolved solvable puzzle — it needs either more time or a stronger heuristic (e.g. Walking Distance or Pattern Databases).
-6. **Puzzles 158–160** had a data + solvability-check bug: they are unsolvable, but the original solver incorrectly concluded they were solvable due to a parity check that did not account for the non-default blank target row. Fixed in all three implementations (C++, Java, Python).
+6. **Puzzles 158–160** had a solvability-check bug: unsolvable boards incorrectly classified as solvable due to a parity check that did not account for the non-default blank target row. Fixed in all three implementations.
+7. **Puzzle161 (HARD)** — 56 moves, solved in 3.7 s (C++), 4.9 s (Java), 116 s (Python). Added manually from the exercise sheet.
+8. **Puzzle162 (MEGA-HARD)** — 66 moves, solved in 51.5 s (C++), ~68 s (Java). Python exceeds 600 s; the IDA\* algorithm with MD+LC is correct but Python's recursion overhead makes the deepest searches impractical. Full move sequences in [SOLUTIONS.md](SOLUTIONS.md).
