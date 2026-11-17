@@ -67,9 +67,12 @@ def main():
             print("unsolvable")
             unsolvable += 1
         else:
-            moves   = lines[0] if lines else "?"
-            elapsed = next((l.replace("Elapsed: ", "") for l in lines if "Elapsed:" in l), "?")
-            print(f"solved  moves={moves}  time={elapsed}")
+            moves = lines[0] if lines else "?"
+            if moves == "0":
+                print(f"solved  moves=0  time=—")
+            else:
+                elapsed = next((l.replace("Elapsed: ", "") for l in lines if "Elapsed:" in l), "?")
+                print(f"solved  moves={moves}  time={elapsed}")
             solved += 1
 
     print()
