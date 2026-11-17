@@ -176,126 +176,14 @@ int calc_linear_conflict() {
 }
 
 // ---------------------------------------------------------------------------
-// Incremental heuristic update (O(N) per move — MD + LC together)
+// Incremental MD update (O(1), called BEFORE the swap)
 // ---------------------------------------------------------------------------
-// When the blank at `blank_pos` swaps with the tile `t` at `tile_pos`:
-//   - MD changes by (new_dist - old_dist) for tile t only
-//   - LC changes along the row and column that tile t moves INTO
-//     (the row/col of blank_pos) and OUT OF (the row/col of tile_pos).
-//
-// LC delta for a row r: count of tiles in goal-row r that are now in conflict
-// with tile t after the move, minus count that were in conflict before.
-
-inline int lc_row_delta(int tile, int old_col, int new_col, int row) {
-    // How many tiles in `row` conflict with `tile` after minus before the move.
-    // We scan the row in the current board state (after the swap has happened
-    // conceptually, but we do the scan before/after carefully in the caller).
-    // Actually this is called with the board already swapped, so we compute
-    // conflicts of `tile` (now at new_col) vs every other tile in `row`.
-    int delta = 0;
-    int gc_tile = goal_col[tile];
-    for (int c = 0; c < grid_size; ++c) {
-        if (c == new_col) continue;
-        int other = board[row * grid_size + c];
-        if (other == BLANK_TILE_ID || goal_row[other] != row) continue;
-        int gc_other = goal_col[other];
-        // After move: conflict if (tile is left of other but goal says tile right of other) or vice versa
-        bool conflict_after  = (new_col < c) ? (gc_tile > gc_other) : (gc_tile < gc_other);
-        // Before move: tile was at old_col
-        bool conflict_before = (old_col < c) ? (gc_tile > gc_other) : (gc_tile < gc_other);
-        delta += (conflict_after ? 2 : 0) - (conflict_before ? 2 : 0);
-    }
-    return delta;
-}
-
-inline int lc_col_delta(int tile, int old_row, int new_row, int col) {
-    int delta = 0;
-    int gr_tile = goal_row[tile];
-    for (int r = 0; r < grid_size; ++r) {
-        if (r == new_row) continue;
-        int other = board[r * grid_size + col];
-        if (other == BLANK_TILE_ID || goal_col[other] != col) continue;
-        int gr_other = goal_row[other];
-        bool conflict_after  = (new_row < r) ? (gr_tile > gr_other) : (gr_tile < gr_other);
-        bool conflict_before = (old_row < r) ? (gr_tile > gr_other) : (gr_tile < gr_other);
-        delta += (conflict_after ? 2 : 0) - (conflict_before ? 2 : 0);
-    }
-    return delta;
-}
-
-// Returns updated h = md + lc after moving blank from blank_pos to np.
-// The board is NOT swapped yet when this is called.
-inline int update_heuristic(int blank_pos, int np, int h) {
-    int t = board[np]; // tile sliding into blank_pos
+inline int update_md(int blank_pos, int np, int md) {
+    int t = board[np];
     int g = grid_size;
-
-    // Manhattan delta
     int old_dist = abs(np / g - goal_row[t]) + abs(np % g - goal_col[t]);
     int new_dist = abs(blank_pos / g - goal_row[t]) + abs(blank_pos % g - goal_col[t]);
-    int md_delta = new_dist - old_dist;
-
-    // LC delta — tile t moves from (np/g, np%g) to (blank_pos/g, blank_pos%g).
-    int old_row = np / g,        new_row = blank_pos / g;
-    int old_col = np % g,        new_col = blank_pos % g;
-
-    int lc_delta = 0;
-
-    // Row component: only relevant if tile t's goal row is one of the two rows.
-    // We must evaluate BEFORE the swap (board still has original values).
-    if (goal_row[t] == old_row) {
-        // Tile is leaving old_row — count conflicts it had there (subtract)
-        int gc_tile = goal_col[t];
-        for (int c = 0; c < g; ++c) {
-            if (c == old_col) continue;
-            int other = board[old_row * g + c];
-            if (other == BLANK_TILE_ID || goal_row[other] != old_row) continue;
-            int gc_other = goal_col[other];
-            bool had_conflict = (old_col < c) ? (gc_tile > gc_other) : (gc_tile < gc_other);
-            if (had_conflict) lc_delta -= 2;
-        }
-    }
-    if (goal_row[t] == new_row && new_row != old_row) {
-        // Tile is entering new_row — count conflicts it will have there (add).
-        // Scan board in new_row, excluding old position of tile t (which moves away)
-        // and blank_pos (which will become the tile t's new spot — currently blank).
-        int gc_tile = goal_col[t];
-        for (int c = 0; c < g; ++c) {
-            if (c == new_col) continue; // that's where tile t lands
-            int pos = new_row * g + c;
-            int other = (pos == np) ? BLANK_TILE_ID : board[pos]; // np will be vacated
-            if (other == BLANK_TILE_ID || goal_row[other] != new_row) continue;
-            int gc_other = goal_col[other];
-            bool will_conflict = (new_col < c) ? (gc_tile > gc_other) : (gc_tile < gc_other);
-            if (will_conflict) lc_delta += 2;
-        }
-    }
-
-    // Column component
-    if (goal_col[t] == old_col) {
-        int gr_tile = goal_row[t];
-        for (int r = 0; r < g; ++r) {
-            if (r == old_row) continue;
-            int other = board[r * g + old_col];
-            if (other == BLANK_TILE_ID || goal_col[other] != old_col) continue;
-            int gr_other = goal_row[other];
-            bool had_conflict = (old_row < r) ? (gr_tile > gr_other) : (gr_tile < gr_other);
-            if (had_conflict) lc_delta -= 2;
-        }
-    }
-    if (goal_col[t] == new_col && new_col != old_col) {
-        int gr_tile = goal_row[t];
-        for (int r = 0; r < g; ++r) {
-            if (r == new_row) continue;
-            int pos = r * g + new_col;
-            int other = (pos == np) ? BLANK_TILE_ID : board[pos];
-            if (other == BLANK_TILE_ID || goal_col[other] != new_col) continue;
-            int gr_other = goal_row[other];
-            bool will_conflict = (new_row < r) ? (gr_tile > gr_other) : (gr_tile < gr_other);
-            if (will_conflict) lc_delta += 2;
-        }
-    }
-
-    return h + md_delta + lc_delta;
+    return md - old_dist + new_dist;
 }
 
 // ---------------------------------------------------------------------------
@@ -324,11 +212,12 @@ static Move reverse_move(Move m) {
     }
 }
 
-int dls(int blank_pos, int limit, Move prev_move, int h, int depth) {
+// h = md + lc (full heuristic), md passed separately for incremental update
+int dls(int blank_pos, int limit, Move prev_move, int h, int md, int depth) {
     int cost = h + depth;
     if (cost > limit) return cost;
 
-    if (h == 0) {
+    if (md == 0) {  // solved: all tiles at goal positions
         shifts_history.push(prev_move);
         printf("%d\n", depth);
         return 0;
@@ -344,12 +233,13 @@ int dls(int blank_pos, int limit, Move prev_move, int h, int depth) {
         int np = neighbour_pos(blank_pos, move);
         if (np < 0) continue;
 
-        int new_h = update_heuristic(blank_pos, np, h);
+        int new_md = update_md(blank_pos, np, md);  // O(1), before swap
 
         board[blank_pos] = board[np];
         board[np] = BLANK_TILE_ID;
 
-        int result = dls(np, limit, move, new_h, depth + 1);
+        int new_h = new_md + calc_linear_conflict();  // LC recomputed after swap
+        int result = dls(np, limit, move, new_h, new_md, depth + 1);
 
         board[np] = board[blank_pos];
         board[blank_pos] = BLANK_TILE_ID;
@@ -364,15 +254,16 @@ int dls(int blank_pos, int limit, Move prev_move, int h, int depth) {
     return min_cost;
 }
 
-void ida_star(int h_init) {
-    int threshold = h_init;
+void ida_star(int md, int lc) {
+    int threshold = md;  // start with MD only, like colleague's bound = manhattan
     int result;
     do {
-        result = dls(blank_curr, threshold, NEUTRAL, h_init, 0);
+        result = dls(blank_curr, threshold, NEUTRAL, md + lc, md, 0);
         if (result == 0) return;
         threshold = result;
-        h_init = calc_manhattan() + calc_linear_conflict();
-        threshold = max(threshold, h_init);
+        md = calc_manhattan();
+        lc = calc_linear_conflict();
+        threshold = max(threshold, md + lc);
     } while (result != 0);
 }
 
@@ -414,9 +305,10 @@ int main(int argc, char *argv[]) {
     if (argc > 1) read_from_file(argv[1]);
     else          read_from_console();
 
-    int h = calc_manhattan() + calc_linear_conflict();
+    int md = calc_manhattan();
+    int lc = calc_linear_conflict();
 
-    if (h == 0) {
+    if (md + lc == 0) {
         printf("0\n\nSuccess!\n");
         return 0;
     }
@@ -427,7 +319,7 @@ int main(int argc, char *argv[]) {
     }
 
     auto t0 = high_resolution_clock::now();
-    ida_star(h);
+    ida_star(md, lc);
     auto t1 = high_resolution_clock::now();
 
     display_solution_moves();
