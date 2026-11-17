@@ -109,7 +109,7 @@ Already-solved prints only `0` + `Success!`. Unsolvable prints `Puzzle cannot be
 
 | Path | Description |
 |---|---|
-| [`data/puzzles/`](data/puzzles/) | 161 input puzzles (2×2 through 10×10, plus one hard 4×4) |
+| [`data/puzzles/`](data/puzzles/) | 162 input puzzles (2×2 through 10×10, plus two hard 4×4) |
 | [`data/results/`](data/results/) | One `.txt` result per puzzle |
 | [`data/ANALYSIS.md`](data/ANALYSIS.md) | Full results table and performance analysis |
 | [`run_all_puzzles.py`](run_all_puzzles.py) | Batch runner — builds C++ binary, runs all puzzles with 300 s timeout |

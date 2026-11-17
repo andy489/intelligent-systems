@@ -9,7 +9,7 @@
 
 **Direct** (no Maven):
 ```bash
-javac -d out src/NSlidingPuzzle.java
+javac -d out src/*.java
 ```
 
 **Maven:**
@@ -40,8 +40,9 @@ echo "3 -1
 
 ## Implementation notes
 
-- Single-class procedural Java 11. All state is in static fields (no instances).
+- Single-file Java. `NSlidingPuzzle` owns both the logic and `main()`.
+- `TimingUtil` + `@Timed` annotation wrap `solve()` with elapsed-time reporting via reflection.
 - Maximum grid: 10×10 (`MAX_TILES = 100`).
-- `REVERSE[] = { RIGHT, LEFT, UP, DOWN, NEUTRAL }` — O(1) opposite-direction lookup.
-- Path reconstruction: on success each `dls` frame pushes its own `prevMove` onto `history` (an `ArrayDeque` used as a stack); the root's `NEUTRAL` sentinel is discarded with `pop()` before output, then moves are popped in forward order.
+- `Direction.REVERSE_ID[]` — O(1) opposite-direction lookup by direction id.
+- Path reconstruction: on success each `dls` frame pushes its own `prevDir` onto `history` (an `ArrayDeque` used as a stack); the root's `NEUTRAL_DIR` sentinel is discarded with `pop()` before output, then moves are popped in forward order.
 - `MAX_H = 1 << 15` (32 768) — sentinel for "threshold not exceeded at this depth".
