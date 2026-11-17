@@ -440,16 +440,7 @@ public class NSlidingPuzzle {
     public void solve() {
         int md = calcManhattan();
 
-        int initialH;
-        if (usePdb) {
-            buildPdbs();
-            initTilePos();
-            initialH = pdbLookup();
-        } else {
-            initialH = md + calcLinearConflict();
-        }
-
-        if (initialH == 0 && md == 0) {
+        if (md == 0) {
             System.out.println(0);
             System.out.println("\nSuccess!");
             return;
@@ -458,6 +449,15 @@ public class NSlidingPuzzle {
         if (!isSolvable()) {
             System.out.println("Puzzle cannot be solved!");
             return;
+        }
+
+        int initialH;
+        if (usePdb) {
+            buildPdbs();
+            initTilePos();
+            initialH = pdbLookup();
+        } else {
+            initialH = md + calcLinearConflict();
         }
 
         idaStar(md, initialH);

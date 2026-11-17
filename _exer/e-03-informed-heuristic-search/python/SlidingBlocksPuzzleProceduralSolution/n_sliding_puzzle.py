@@ -430,14 +430,7 @@ class SlidingBlocksPuzzle:
     def solve(self):
         md = self._calc_manhattan()
 
-        if self._use_pdb:
-            self._build_pdbs()
-            self._init_tile_pos()
-            initial_h = self._pdb_lookup()
-        else:
-            initial_h = md + self._calc_linear_conflict()
-
-        if initial_h == 0 and md == 0:
+        if md == 0:
             print(0)
             print("\nSuccess!")
             return
@@ -445,6 +438,13 @@ class SlidingBlocksPuzzle:
         if not self._is_solvable():
             print("Puzzle cannot be solved!")
             return
+
+        if self._use_pdb:
+            self._build_pdbs()
+            self._init_tile_pos()
+            initial_h = self._pdb_lookup()
+        else:
+            initial_h = md + self._calc_linear_conflict()
 
         self._ida_star(md, initial_h)
 
