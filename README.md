@@ -38,7 +38,7 @@
 | E07 | Introduction to Machine Learning | — | — | — |
 | E06 | Games | — | — | — |
 | E05 | Genetic Algorithms | — | — | — |
-| E04 | Constraint Satisfaction Problems | — | — | — |
+| E04 | Constraint Satisfaction Problems | — | [is-e-04-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/is-e-04-(2021-10-25).pdf)<br>[slides](_exer/e-04-constraint-satisfaction-problems/e-04-constraint-satisfaction-problems-slides.pdf) | — |
 | E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [is-e-03-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf)<br>[slides](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf)<br>[romania-map](_exer/e-03-informed-heuristic-search/romania-map.pdf) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/) |
 | E02 | Uninformed (Blind) Search | Frog Leap Puzzle | [is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf)<br>[is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf)<br>[slides](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf) | [C++](_exer/e-02-uninformed-blind-search/cpp/) · [Java](_exer/e-02-uninformed-blind-search/java/) · [Python](_exer/e-02-uninformed-blind-search/python/) |
 | E01 | Introduction | — | [is-e-01-(2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) · [slides](_exer/e-01-introduction/is-e-01-intro-slides.pdf) | [README](_exer/e-01-introduction/README.md) |
@@ -122,9 +122,9 @@ No content yet.
 ## E04 — Constraint Satisfaction Problems
 
 **Problem:** —  
-**Docs:** —
+**Docs:** [Exercise Sheet](_exer/e-04-constraint-satisfaction-problems/is-e-04-(2021-10-25).pdf) · [Slides](_exer/e-04-constraint-satisfaction-problems/e-04-constraint-satisfaction-problems-slides.pdf)
 
-No content yet.
+No code solutions yet.
 
 ---
 
