@@ -10,7 +10,7 @@ ROOT_DIR   = DATA_DIR.parent
 PY_SCRIPT  = ROOT_DIR / "python/SlidingBlocksPuzzleProceduralSolution/n_sliding_puzzle.py"
 PUZZLES    = DATA_DIR / "puzzles"
 RESULTS    = DATA_DIR / "results-python"
-TIMEOUT    = 300  # seconds per puzzle
+TIMEOUT    = 1000  # seconds per puzzle
 
 
 def run_puzzle(puzzle: Path) -> str:
