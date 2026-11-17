@@ -3,39 +3,85 @@ import java.util.*;
 
 public class NSlidingPuzzle {
 
-    static final int MAX_TILES = 100;
-    static final int BLANK = 0;
-    static final int NEUTRAL = 4;
-    static final int MAX_H = 1 << 15;
+    // -----------------------------------------------------------------------
+    // Constants
+    // -----------------------------------------------------------------------
 
-    // Direction constants: LEFT=0, RIGHT=1, DOWN=2, UP=3
-    static final int LEFT = 0, RIGHT = 1, DOWN = 2, UP = 3;
+    private static final int BLANK   = 0;
+    private static final int NEUTRAL = 4;
+    private static final int MAX_H   = 1 << 15;
 
-    static int gridSize;
-    static int tilesCount;
-    static int[] board = new int[MAX_TILES];
-    static int[] goalRow = new int[MAX_TILES];
-    static int[] goalCol = new int[MAX_TILES];
-    static int blankCurr;
-    static int blankTarget;
-    static int[] offset = new int[5];
+    private enum Direction {
+        LEFT(0), RIGHT(1), DOWN(2), UP(3), NEUTRAL_DIR(4);
 
-    // Solution path — each frame pushes its own prevMove on the way back up,
-    // so after the search the deque holds [NEUTRAL(front), m1, m2, ..., mN].
-    // Pop NEUTRAL first, then pop m1..mN in forward order for output.
-    static Deque<Integer> history = new ArrayDeque<>();
+        final int id;
+        Direction(int id) { this.id = id; }
 
-    static void initOffsets() {
-        offset[LEFT]    = -1;
-        offset[RIGHT]   = +1;
-        offset[DOWN]    = +gridSize;
-        offset[UP]      = -gridSize;
-        offset[NEUTRAL] = 0;
+        static final Direction[] BY_ID = { LEFT, RIGHT, DOWN, UP, NEUTRAL_DIR };
+        // Opposite of each direction by id: LEFT<->RIGHT, DOWN<->UP, NEUTRAL<->NEUTRAL
+        private static final int[] REVERSE_ID = { RIGHT.id, LEFT.id, UP.id, DOWN.id, NEUTRAL_DIR.id };
+
+        Direction reverse() { return BY_ID[REVERSE_ID[this.id]]; }
+
+        @Override public String toString() {
+            if (this == LEFT)  return "left";
+            if (this == RIGHT) return "right";
+            if (this == DOWN)  return "down";
+            if (this == UP)    return "up";
+            return "";
+        }
     }
 
-    static void setGoalState(int blankTargetIndex) {
-        blankTarget = blankTargetIndex;
-        for (int t = 1; t <= tilesCount; ++t) {
+    // -----------------------------------------------------------------------
+    // State
+    // -----------------------------------------------------------------------
+
+    private final int   gridSize;
+    private final int   tilesCount;
+    private final int[] board;
+    private final int[] goalRow;
+    private final int[] goalCol;
+    private final int[] offset;
+
+    private int blankCurr;
+    private int blankTarget;
+
+    private final Deque<Direction> history = new ArrayDeque<>();
+
+    // -----------------------------------------------------------------------
+    // Construction / input
+    // -----------------------------------------------------------------------
+
+    private NSlidingPuzzle(Scanner sc) {
+        gridSize   = sc.nextInt();
+        int targetIndex = sc.nextInt();
+        tilesCount = gridSize * gridSize - 1;
+        blankTarget = (targetIndex < 0) ? tilesCount : targetIndex;
+
+        board   = new int[gridSize * gridSize];
+        goalRow = new int[gridSize * gridSize];
+        goalCol = new int[gridSize * gridSize];
+        offset  = new int[5];
+
+        for (int i = 0; i < board.length; i++) {
+            board[i] = sc.nextInt();
+            if (board[i] == BLANK) blankCurr = i;
+        }
+
+        initOffsets();
+        initGoalState();
+    }
+
+    private void initOffsets() {
+        offset[Direction.LEFT.id]        = -1;
+        offset[Direction.RIGHT.id]       = +1;
+        offset[Direction.DOWN.id]        = +gridSize;
+        offset[Direction.UP.id]          = -gridSize;
+        offset[Direction.NEUTRAL_DIR.id] = 0;
+    }
+
+    private void initGoalState() {
+        for (int t = 1; t <= tilesCount; t++) {
             int pos = (t <= blankTarget) ? (t - 1) : t;
             goalRow[t] = pos / gridSize;
             goalCol[t] = pos % gridSize;
@@ -44,31 +90,11 @@ public class NSlidingPuzzle {
         goalCol[BLANK] = blankTarget % gridSize;
     }
 
-    // ---------------------------------------------------------------------------
-    // Input
-    // ---------------------------------------------------------------------------
+    // -----------------------------------------------------------------------
+    // Solvability
+    // -----------------------------------------------------------------------
 
-    static void readInput(Scanner sc) {
-        gridSize = sc.nextInt();
-        int targetIndex = sc.nextInt();
-
-        tilesCount = gridSize * gridSize - 1;
-        int blankTargetIndex = (targetIndex < 0) ? tilesCount : targetIndex;
-
-        for (int i = 0; i < gridSize * gridSize; ++i) {
-            board[i] = sc.nextInt();
-            if (board[i] == BLANK) blankCurr = i;
-        }
-
-        initOffsets();
-        setGoalState(blankTargetIndex);
-    }
-
-    // ---------------------------------------------------------------------------
-    // Solvability check
-    // ---------------------------------------------------------------------------
-
-    static long mergeCount(int[] arr, int[] tmp, int lo, int hi) {
+    private long mergeCount(int[] arr, int[] tmp, int lo, int hi) {
         if (hi - lo < 2) return 0;
         int mid = (lo + hi) / 2;
         long inv = mergeCount(arr, tmp, lo, mid) + mergeCount(arr, tmp, mid, hi);
@@ -84,19 +110,13 @@ public class NSlidingPuzzle {
         return inv;
     }
 
-    // Parity rule for the N-puzzle:
-    //   Odd grid width:  solvable iff #inversions is even.
-    //   Even grid width: solvable iff
-    //     (inversions + blank_row_from_bottom + blank_target_row_from_bottom) is even.
-    // Both the blank's current row AND its goal row must be counted from the bottom.
-    // Omitting the goal row gives wrong results when blankTarget is not the default.
-    static boolean checkSolvable() {
+    // Parity rule:
+    //   Odd grid:  solvable iff #inversions is even.
+    //   Even grid: solvable iff (inversions + blank_row_from_bottom + target_row_from_bottom) is even.
+    private boolean isSolvable() {
         int[] flat = new int[tilesCount];
         int p = 0;
-
-        for (int i = 0; i < gridSize * gridSize; ++i) {
-            if (board[i] != BLANK) flat[p++] = board[i];
-        }
+        for (int v : board) if (v != BLANK) flat[p++] = v;
 
         long inv = mergeCount(flat, new int[tilesCount], 0, tilesCount);
 
@@ -107,13 +127,13 @@ public class NSlidingPuzzle {
         return (inv + blankRowFromBottom + targetRowFromBottom) % 2 == 0;
     }
 
-    // ---------------------------------------------------------------------------
+    // -----------------------------------------------------------------------
     // Heuristic
-    // ---------------------------------------------------------------------------
+    // -----------------------------------------------------------------------
 
-    static int calcManhattan() {
+    private int calcManhattan() {
         int cost = 0;
-        for (int i = 0; i < gridSize * gridSize; ++i) {
+        for (int i = 0; i < board.length; i++) {
             int t = board[i];
             if (t == BLANK) continue;
             cost += Math.abs(i / gridSize - goalRow[t]) + Math.abs(i % gridSize - goalCol[t]);
@@ -121,84 +141,76 @@ public class NSlidingPuzzle {
         return cost;
     }
 
-    static int calcLinearConflict() {
+    private int calcLinearConflict() {
         int conflict = 0;
-
-        for (int row = 0; row < gridSize; ++row) {
-            for (int c1 = 0; c1 < gridSize - 1; ++c1) {
+        for (int row = 0; row < gridSize; row++) {
+            for (int c1 = 0; c1 < gridSize - 1; c1++) {
                 int t1 = board[row * gridSize + c1];
                 if (t1 == BLANK || goalRow[t1] != row) continue;
-                for (int c2 = c1 + 1; c2 < gridSize; ++c2) {
+                for (int c2 = c1 + 1; c2 < gridSize; c2++) {
                     int t2 = board[row * gridSize + c2];
                     if (t2 == BLANK || goalRow[t2] != row) continue;
                     if (goalCol[t1] > goalCol[t2]) conflict += 2;
                 }
             }
         }
-
-        for (int col = 0; col < gridSize; ++col) {
-            for (int r1 = 0; r1 < gridSize - 1; ++r1) {
+        for (int col = 0; col < gridSize; col++) {
+            for (int r1 = 0; r1 < gridSize - 1; r1++) {
                 int t1 = board[r1 * gridSize + col];
                 if (t1 == BLANK || goalCol[t1] != col) continue;
-                for (int r2 = r1 + 1; r2 < gridSize; ++r2) {
+                for (int r2 = r1 + 1; r2 < gridSize; r2++) {
                     int t2 = board[r2 * gridSize + col];
                     if (t2 == BLANK || goalCol[t2] != col) continue;
                     if (goalRow[t1] > goalRow[t2]) conflict += 2;
                 }
             }
         }
-
         return conflict;
     }
 
-    static int updateHeuristic(int blankPos, int fromPos, int h) {
+    private int updateHeuristic(int blankPos, int fromPos, int h) {
         int t = board[fromPos];
-        int gr = goalRow[t], gc = goalCol[t];
-        int oldDist = Math.abs(fromPos / gridSize - gr) + Math.abs(fromPos % gridSize - gc);
-        int newDist = Math.abs(blankPos / gridSize - gr) + Math.abs(blankPos % gridSize - gc);
+        int oldDist = Math.abs(fromPos / gridSize - goalRow[t]) + Math.abs(fromPos % gridSize - goalCol[t]);
+        int newDist = Math.abs(blankPos / gridSize - goalRow[t]) + Math.abs(blankPos % gridSize - goalCol[t]);
         return h - oldDist + newDist;
     }
 
-    // ---------------------------------------------------------------------------
+    // -----------------------------------------------------------------------
     // Move validation
-    // ---------------------------------------------------------------------------
+    // -----------------------------------------------------------------------
 
-    static int neighbourPos(int blankPos, int move) {
-        int np = blankPos + offset[move];
-        if (np < 0 || np >= gridSize * gridSize) return -1;
-        if (move == LEFT  && blankPos % gridSize == 0)             return -1;
-        if (move == RIGHT && blankPos % gridSize == gridSize - 1)  return -1;
+    private int neighbourPos(int blankPos, Direction dir) {
+        int np = blankPos + offset[dir.id];
+        if (np < 0 || np >= board.length)                              return -1;
+        if (dir == Direction.LEFT  && blankPos % gridSize == 0)        return -1;
+        if (dir == Direction.RIGHT && blankPos % gridSize == gridSize - 1) return -1;
         return np;
     }
 
-    // O(1) reverse-move lookup: REVERSE[m] is the opposite of move m.
-    static final int[] REVERSE = { RIGHT, LEFT, UP, DOWN, NEUTRAL };
-
-    static int reverseMove(int m) { return REVERSE[m]; }
-
-    // ---------------------------------------------------------------------------
+    // -----------------------------------------------------------------------
     // IDA* search
-    // ---------------------------------------------------------------------------
+    // -----------------------------------------------------------------------
 
-    // prevMove is the move that brought the blank TO blankPos.
-    // On success each frame pushes its own prevMove, building the path bottom-up.
-    static int dls(int blankPos, int limit, int prevMove, int h, int depth) {
+    // prevDir is the direction that brought the blank TO blankPos.
+    // On success each frame pushes its own prevDir, building the path bottom-up.
+    private int dls(int blankPos, int limit, Direction prevDir, int h, int depth) {
         int cost = h + depth;
         if (cost > limit) return cost;
 
         if (h == 0) {
-            history.push(prevMove);
+            history.push(prevDir);
             System.out.println(depth);
             return 0;
         }
 
-        int opposite = reverseMove(prevMove);
+        Direction opposite = prevDir.reverse();
         int minCost = MAX_H;
 
-        for (int move = 0; move < 4; ++move) {
-            if (move == opposite) continue;
+        for (int d = 0; d < 4; d++) {
+            Direction dir = Direction.BY_ID[d];
+            if (dir == opposite) continue;
 
-            int np = neighbourPos(blankPos, move);
+            int np = neighbourPos(blankPos, dir);
             if (np < 0) continue;
 
             int newH = updateHeuristic(blankPos, np, h);
@@ -206,13 +218,13 @@ public class NSlidingPuzzle {
             board[blankPos] = board[np];
             board[np] = BLANK;
 
-            int result = dls(np, limit, move, newH, depth + 1);
+            int result = dls(np, limit, dir, newH, depth + 1);
 
             board[np] = board[blankPos];
             board[blankPos] = BLANK;
 
             if (result == 0) {
-                history.push(prevMove);
+                history.push(prevDir);
                 return 0;
             }
             if (result < minCost) minCost = result;
@@ -221,80 +233,60 @@ public class NSlidingPuzzle {
         return minCost;
     }
 
-    static void idaStar(int mdInit, int lcInit) {
-        int threshold = mdInit + lcInit;
+    private void idaStar(int md, int lc) {
+        int threshold = md + lc;
         int result;
-
         do {
-            result = dls(blankCurr, threshold, NEUTRAL, mdInit, 0);
+            result = dls(blankCurr, threshold, Direction.NEUTRAL_DIR, md, 0);
             if (result == 0) return;
             threshold = result;
-            mdInit = calcManhattan();
-            lcInit = calcLinearConflict();
-            threshold = Math.max(threshold, mdInit + lcInit);
+            md = calcManhattan();
+            lc = calcLinearConflict();
+            threshold = Math.max(threshold, md + lc);
         } while (result != 0);
     }
 
-    // ---------------------------------------------------------------------------
-    // Output
-    // ---------------------------------------------------------------------------
+    // -----------------------------------------------------------------------
+    // Public entry point
+    // -----------------------------------------------------------------------
 
-    static String moveName(int m) {
-        if (m == UP)    return "up";
-        if (m == DOWN)  return "down";
-        if (m == LEFT)  return "left";
-        if (m == RIGHT) return "right";
-        return "";
-    }
-
-    static String formatDuration(long ms) {
-        long s   = ms / 1000; ms %= 1000;
-        long min = s  / 60;   s  %= 60;
-        long h   = min / 60;  min %= 60;
-        return String.format("Elapsed: %02d:%02d:%02d.%03d", h, min, s, ms);
-    }
-
-    // ---------------------------------------------------------------------------
-    // Main
-    // ---------------------------------------------------------------------------
-
-    public static void main(String[] args) throws IOException {
-        Scanner sc;
-        if (args.length > 0) {
-            sc = new Scanner(new File(args[0]));
-        } else {
-            sc = new Scanner(System.in);
-        }
-
-        readInput(sc);
-        sc.close();
-
+    @Timed(label = "IDA* Sliding Blocks Puzzle")
+    public void solve() {
         int md = calcManhattan();
         int lc = calcLinearConflict();
 
         if (md + lc == 0) {
             System.out.println(0);
-            System.out.print("\nSuccess!\n");
+            System.out.println("\nSuccess!");
             return;
         }
 
-        if (!checkSolvable()) {
+        if (!isSolvable()) {
             System.out.println("Puzzle cannot be solved!");
             return;
         }
 
-        long t0 = System.currentTimeMillis();
         idaStar(md, lc);
-        long elapsed = System.currentTimeMillis() - t0;
 
-        // history: front=NEUTRAL (root sentinel), then move1..moveN in order
-        history.pop(); // discard NEUTRAL
-        while (!history.isEmpty()) {
-            System.out.println(moveName(history.pop()));
-        }
+        // history: front = NEUTRAL sentinel, then move1..moveN in order — pop NEUTRAL first
+        history.pop();
+        while (!history.isEmpty()) System.out.println(history.pop());
 
-        System.out.println();
-        System.out.println(formatDuration(elapsed));
-        System.out.print("\nSuccess!\n");
+        System.out.println("\nSuccess!");
+    }
+
+    // -----------------------------------------------------------------------
+    // Main
+    // -----------------------------------------------------------------------
+
+    public static void main(String[] args) throws IOException {
+        Scanner sc = (args.length > 0)
+                ? new Scanner(new File(args[0]))
+                : new Scanner(System.in);
+
+        NSlidingPuzzle puzzle = new NSlidingPuzzle(sc);
+        sc.close();
+
+        TimingUtil.run(puzzle, "solve");
     }
 }
