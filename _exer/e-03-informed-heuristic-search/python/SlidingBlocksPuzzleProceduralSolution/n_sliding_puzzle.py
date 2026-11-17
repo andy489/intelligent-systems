@@ -164,12 +164,12 @@ class SlidingBlocksPuzzle:
                         conflict += 2
         return conflict
 
-    def _update_heuristic(self, blank_pos, from_pos, h):
+    def _update_md(self, blank_pos, from_pos, md):
         t = self._board[from_pos]
         g = self._grid_size
         old_dist = abs(from_pos // g - self._goal_row[t]) + abs(from_pos % g - self._goal_col[t])
         new_dist = abs(blank_pos // g - self._goal_row[t]) + abs(blank_pos % g - self._goal_col[t])
-        return h - old_dist + new_dist
+        return md - old_dist + new_dist
 
     # -----------------------------------------------------------------------
     # Move validation
@@ -190,12 +190,12 @@ class SlidingBlocksPuzzle:
     # IDA* search
     # -----------------------------------------------------------------------
 
-    def _dls(self, blank_pos, limit, prev_dir, h, depth):
+    def _dls(self, blank_pos, limit, prev_dir, h, md, depth):
         cost = h + depth
         if cost > limit:
             return cost
 
-        if h == 0:
+        if md == 0:  # all tiles at goal positions
             self._history.append(prev_dir)
             print(depth)
             return 0
@@ -210,10 +210,11 @@ class SlidingBlocksPuzzle:
             if np < 0:
                 continue
 
-            new_h = self._update_heuristic(blank_pos, np, h)
+            new_md = self._update_md(blank_pos, np, md)  # O(1) before swap
 
             self._board[blank_pos], self._board[np] = self._board[np], BLANK
-            result = self._dls(np, limit, direction, new_h, depth + 1)
+            new_h = new_md + self._calc_linear_conflict()  # full LC after swap
+            result = self._dls(np, limit, direction, new_h, new_md, depth + 1)
             self._board[np], self._board[blank_pos] = self._board[blank_pos], BLANK
 
             if result == 0:
@@ -225,9 +226,9 @@ class SlidingBlocksPuzzle:
         return min_cost
 
     def _ida_star(self, md, lc):
-        threshold = md + lc
+        threshold = md  # start with MD only
         while True:
-            result = self._dls(self._blank_curr, threshold, Direction.NEUTRAL, md, 0)
+            result = self._dls(self._blank_curr, threshold, Direction.NEUTRAL, md + lc, md, 0)
             if result == 0:
                 return
             threshold = result

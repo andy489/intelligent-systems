@@ -168,11 +168,11 @@ public class NSlidingPuzzle {
         return conflict;
     }
 
-    private int updateHeuristic(int blankPos, int fromPos, int h) {
+    private int updateMd(int blankPos, int fromPos, int md) {
         int t = board[fromPos];
         int oldDist = Math.abs(fromPos / gridSize - goalRow[t]) + Math.abs(fromPos % gridSize - goalCol[t]);
         int newDist = Math.abs(blankPos / gridSize - goalRow[t]) + Math.abs(blankPos % gridSize - goalCol[t]);
-        return h - oldDist + newDist;
+        return md - oldDist + newDist;
     }
 
     // -----------------------------------------------------------------------
@@ -193,11 +193,11 @@ public class NSlidingPuzzle {
 
     // prevDir is the direction that brought the blank TO blankPos.
     // On success each frame pushes its own prevDir, building the path bottom-up.
-    private int dls(int blankPos, int limit, Direction prevDir, int h, int depth) {
+    private int dls(int blankPos, int limit, Direction prevDir, int h, int md, int depth) {
         int cost = h + depth;
         if (cost > limit) return cost;
 
-        if (h == 0) {
+        if (md == 0) {  // all tiles at goal positions
             history.push(prevDir);
             System.out.println(depth);
             return 0;
@@ -213,12 +213,13 @@ public class NSlidingPuzzle {
             int np = neighbourPos(blankPos, dir);
             if (np < 0) continue;
 
-            int newH = updateHeuristic(blankPos, np, h);
+            int newMd = updateMd(blankPos, np, md);  // O(1) before swap
 
             board[blankPos] = board[np];
             board[np] = BLANK;
 
-            int result = dls(np, limit, dir, newH, depth + 1);
+            int newH = newMd + calcLinearConflict();  // full LC after swap
+            int result = dls(np, limit, dir, newH, newMd, depth + 1);
 
             board[np] = board[blankPos];
             board[blankPos] = BLANK;
@@ -234,10 +235,10 @@ public class NSlidingPuzzle {
     }
 
     private void idaStar(int md, int lc) {
-        int threshold = md + lc;
+        int threshold = md;  // start with MD only
         int result;
         do {
-            result = dls(blankCurr, threshold, Direction.NEUTRAL_DIR, md, 0);
+            result = dls(blankCurr, threshold, Direction.NEUTRAL_DIR, md + lc, md, 0);
             if (result == 0) return;
             threshold = result;
             md = calcManhattan();
