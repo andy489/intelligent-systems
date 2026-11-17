@@ -95,7 +95,7 @@ t1 t2 ... tN²
 **Output:**
 ```
 <number of moves>
-<move 1>       ← up / down / left / right  (where the blank moves)
+<move 1>       ← up / down / left / right  (where the tile moves)
 ...
 Elapsed: HH:MM:SS.mmm
 
@@ -109,9 +109,10 @@ Already-solved prints only `0` + `Success!`. Unsolvable prints `Puzzle cannot be
 
 | Path | Description |
 |---|---|
-| [`data/puzzles/`](data/puzzles/) | 162 input puzzles (2×2 through 10×10, plus two hard 4×4) |
+| [`data/puzzles/`](data/puzzles/) | 162 input puzzles (2×2 through 10×10, plus five hard 4×4) |
 | [`data/results/`](data/results/) | One `.txt` result per puzzle |
 | [`data/ANALYSIS.md`](data/ANALYSIS.md) | Full results table and performance analysis |
+| [`data/SOLUTION.md`](data/SOLUTION.md) | Algorithm explanation, optimisations, move sequences for all 5 hard puzzles |
 | [`run_all_puzzles.py`](run_all_puzzles.py) | Batch runner — builds C++ binary, runs all puzzles with 300 s timeout |
 
 ### Run a single puzzle
@@ -120,16 +121,16 @@ Already-solved prints only `0` + `Success!`. Unsolvable prints `Puzzle cannot be
 # C++
 cd cpp/SlidingBlocksPuzzleProceduralSolution
 clang++ -O2 -std=c++17 -o n_sliding_puzzle NSlidingPuzzle.cpp
-./n_sliding_puzzle ../../data/puzzles/puzzle081-4x4.txt
+./n_sliding_puzzle ../../data/puzzles/081-puzzle-4x4.txt
 
 # Java
 cd java/SlidingBlocksPuzzleProceduralSolution
 javac -d out src/*.java
-java -cp out Main ../../data/puzzles/puzzle081-4x4.txt
+java -cp out NSlidingPuzzle ../../data/puzzles/081-puzzle-4x4.txt
 
 # Python
 python3 python/SlidingBlocksPuzzleProceduralSolution/n_sliding_puzzle.py \
-    data/puzzles/puzzle081-4x4.txt
+    data/puzzles/081-puzzle-4x4.txt
 ```
 
 ### Run all puzzles
