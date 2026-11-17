@@ -235,10 +235,10 @@ public class NSlidingPuzzle {
     }
 
     private void idaStar(int md, int lc) {
-        int threshold = md;  // start with MD only
+        int threshold = md + lc;  // start with full MD + LC
         int result;
         do {
-            result = dls(blankCurr, threshold, Direction.NEUTRAL_DIR, md + lc, md, 0);
+            result = dls(blankCurr, threshold, Direction.NEUTRAL_DIR, threshold, md, 0);
             if (result == 0) return;
             threshold = result;
             md = calcManhattan();

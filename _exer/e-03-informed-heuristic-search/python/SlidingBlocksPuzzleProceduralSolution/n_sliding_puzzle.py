@@ -226,9 +226,9 @@ class SlidingBlocksPuzzle:
         return min_cost
 
     def _ida_star(self, md, lc):
-        threshold = md  # start with MD only
+        threshold = md + lc  # start with full MD + LC
         while True:
-            result = self._dls(self._blank_curr, threshold, Direction.NEUTRAL, md + lc, md, 0)
+            result = self._dls(self._blank_curr, threshold, Direction.NEUTRAL, threshold, md, 0)
             if result == 0:
                 return
             threshold = result
