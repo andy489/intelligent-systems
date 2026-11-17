@@ -38,10 +38,10 @@
 | E07 | Introduction to Machine Learning | — | — | — |
 | E06 | Games | — | — | — |
 | E05 | Genetic Algorithms | — | — | — |
-| E04 | Constraint Satisfaction Problems | — | [is-e-04-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/is-e-04-(2021-10-25).pdf)<br>[slides (2021-10-25)](_exer/e-04-constraint-satisfaction-problems/e-04-constraint-satisfaction-problems-slides.pdf) | — |
-| E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [is-e-03-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf)<br>[slides (2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf)<br>[romania-map](_exer/e-03-informed-heuristic-search/romania-map.pdf) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/) |
-| E02 | Uninformed (Blind) Search | Frog Leap Puzzle | [is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf)<br>[is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf)<br>[slides (2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf) | [C++](_exer/e-02-uninformed-blind-search/cpp/) · [Java](_exer/e-02-uninformed-blind-search/java/) · [Python](_exer/e-02-uninformed-blind-search/python/) |
-| E01 | Introduction | — | [is-e-01-(2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) · [slides (2021-10-07)](_exer/e-01-introduction/is-e-01-intro-slides.pdf) | [README](_exer/e-01-introduction/README.md) |
+| E04 | Constraint Satisfaction Problems | — | [is-e-04-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/is-e-04-(2021-10-25).pdf)<br>[slides-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/e-04-constraint-satisfaction-problems-slides.pdf) | — |
+| E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [is-e-03-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf)<br>[slides-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf)<br>[romania-map](_exer/e-03-informed-heuristic-search/romania-map.pdf) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/) |
+| E02 | Uninformed (Blind) Search | Frog Leap Puzzle | [is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf)<br>[is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf)<br>[slides-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf) | [C++](_exer/e-02-uninformed-blind-search/cpp/) · [Java](_exer/e-02-uninformed-blind-search/java/) · [Python](_exer/e-02-uninformed-blind-search/python/) |
+| E01 | Introduction | — | [is-e-01-(2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) · [slides-(2021-10-07)](_exer/e-01-introduction/is-e-01-intro-slides.pdf) | [README](_exer/e-01-introduction/README.md) |
 
 > `is` = Intelligent Systems · `e` = Exercise · `pt` = Part · `(YYYY-MM-DD)` = date of issue · `slides` = lecture slides
 
@@ -122,7 +122,7 @@ No content yet.
 ## E04 — Constraint Satisfaction Problems
 
 **Problem:** —  
-**Docs:** [Exercise Sheet](_exer/e-04-constraint-satisfaction-problems/is-e-04-(2021-10-25).pdf) · [Slides (2021-10-25)](_exer/e-04-constraint-satisfaction-problems/e-04-constraint-satisfaction-problems-slides.pdf)
+**Docs:** [Exercise Sheet](_exer/e-04-constraint-satisfaction-problems/is-e-04-(2021-10-25).pdf) · [Slides-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/e-04-constraint-satisfaction-problems-slides.pdf)
 
 No code solutions yet.
 
@@ -131,7 +131,7 @@ No code solutions yet.
 ## E03 — Informed (Heuristic) Search — IDA*
 
 **Problem:** N-Sliding Blocks Puzzle  
-**Docs:** [Exercise Sheet](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf) · [Slides (2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf) · [Romania Map](_exer/e-03-informed-heuristic-search/romania-map.pdf) · [README](_exer/e-03-informed-heuristic-search/README.md)
+**Docs:** [Exercise Sheet](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf) · [Slides-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf) · [Romania Map](_exer/e-03-informed-heuristic-search/romania-map.pdf) · [README](_exer/e-03-informed-heuristic-search/README.md)
 
 N-puzzle (8-puzzle, 15-puzzle, …): slide tiles on an N×N grid to reach the goal configuration.
 Solved with IDA\* using Manhattan Distance + Linear Conflict heuristic.
@@ -152,7 +152,7 @@ Runner: [`run_all_puzzles.py`](_exer/e-03-informed-heuristic-search/run_all_puzz
 ## E02 — Uninformed Search
 
 **Problem:** Frog Leap Puzzle  
-**Docs:** [Part 1 — Blind Search](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf) · [Part 2 — Warm-Up](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) · [Slides (2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf) · [README](_exer/e-02-uninformed-blind-search/README.md) · [Problem](_exer/e-02-uninformed-blind-search/PROBLEM.md) · [Solution](_exer/e-02-uninformed-blind-search/SOLUTION.md)
+**Docs:** [Part 1 — Blind Search](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf) · [Part 2 — Warm-Up](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) · [Slides-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf) · [README](_exer/e-02-uninformed-blind-search/README.md) · [Problem](_exer/e-02-uninformed-blind-search/PROBLEM.md) · [Solution](_exer/e-02-uninformed-blind-search/SOLUTION.md)
 
 Classic puzzle on a `2N+1` board: swap N yellow (left-side) and N green (right-side) frogs using steps and jumps.
 Two approaches — DFS search and an O(N²) analytical linear solution.
@@ -168,6 +168,6 @@ Two approaches — DFS search and an O(N²) analytical linear solution.
 ## E01 — Introduction
 
 **Problem:** —  
-**Docs:** [Exercise Sheet](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) · [Slides (2021-10-07)](_exer/e-01-introduction/is-e-01-intro-slides.pdf) · [README](_exer/e-01-introduction/README.md)
+**Docs:** [Exercise Sheet](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) · [Slides-(2021-10-07)](_exer/e-01-introduction/is-e-01-intro-slides.pdf) · [README](_exer/e-01-introduction/README.md)
 
 Course table of contents and overview. No code solutions.
