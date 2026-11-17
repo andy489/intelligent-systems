@@ -154,7 +154,7 @@ The five hardest puzzles, ordered by number of optimal moves.
 
 ---
 
-### 158-puzzle-4x4-HARD — 53 moves
+### 151-puzzle-4x4-HARD — 53 moves
 
 **Initial state:**
 ```
@@ -175,7 +175,7 @@ right, right, down, left, left, up, right, up, left, down, left, down, right, ri
 
 ---
 
-### 159-puzzle-4x4-HARD-2 — 56 moves
+### 152-puzzle-4x4-HARD-2 — 56 moves
 
 **Initial state:**
 ```
@@ -196,7 +196,7 @@ right, down, left, left, up, left, up, up, right, down, down, down, left, up, up
 
 ---
 
-### 160-puzzle-4x4-MEGA-HARD — 66 moves
+### 153-puzzle-4x4-MEGA-HARD — 66 moves
 
 **Initial state:**
 ```
@@ -217,7 +217,7 @@ down, down, down, right, up, right, up, left, up, left, down, down, right, up, u
 
 ---
 
-### 161-puzzle-4x4-MEGA-HARD-2 — 78 moves
+### 154-puzzle-4x4-MEGA-HARD-2 — 78 moves
 
 **Initial state:**
 ```
@@ -240,7 +240,7 @@ left, left, left, up, right, right, up, left, down, left, up, right, down, right
 
 ---
 
-### 162-puzzle-4x4-ULTRA-HARD — 80 moves
+### 155-puzzle-4x4-ULTRA-HARD — 80 moves
 
 **Initial state:**
 ```

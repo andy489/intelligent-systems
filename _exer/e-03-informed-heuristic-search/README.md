@@ -121,16 +121,16 @@ Already-solved prints only `0` + `Success!`. Unsolvable prints `Puzzle cannot be
 # C++
 cd cpp/SlidingBlocksPuzzleProceduralSolution
 clang++ -O2 -std=c++17 -o n_sliding_puzzle NSlidingPuzzle.cpp
-./n_sliding_puzzle ../../data/puzzles/081-puzzle-4x4.txt
+./n_sliding_puzzle ../../data/puzzles/096-puzzle-4x4.txt
 
 # Java
 cd java/SlidingBlocksPuzzleProceduralSolution
 javac -d out src/*.java
-java -cp out NSlidingPuzzle ../../data/puzzles/081-puzzle-4x4.txt
+java -cp out NSlidingPuzzle ../../data/puzzles/096-puzzle-4x4.txt
 
 # Python
 python3 python/SlidingBlocksPuzzleProceduralSolution/n_sliding_puzzle.py \
-    data/puzzles/081-puzzle-4x4.txt
+    data/puzzles/096-puzzle-4x4.txt
 ```
 
 ### Run all puzzles

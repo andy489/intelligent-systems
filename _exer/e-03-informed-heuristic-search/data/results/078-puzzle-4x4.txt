@@ -1,24 +1,10 @@
-20
+6
+down
 left
-left
-down
-right
-down
-down
-right
-right
 up
 up
 left
-down
-down
-right
 up
-up
-left
-left
-up
-left
 
 Elapsed: 00:00:00.000
 

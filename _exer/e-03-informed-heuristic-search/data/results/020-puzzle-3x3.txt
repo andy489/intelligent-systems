@@ -1,0 +1,9 @@
+4
+left
+up
+left
+up
+
+Elapsed: 00:00:00.000
+
+Success!

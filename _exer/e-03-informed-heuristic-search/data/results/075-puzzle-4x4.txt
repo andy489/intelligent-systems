@@ -1,21 +1,5 @@
-19
-right
+3
 up
-left
-left
-down
-down
-down
-right
-right
-up
-left
-left
-down
-right
-up
-up
-left
 up
 left
 

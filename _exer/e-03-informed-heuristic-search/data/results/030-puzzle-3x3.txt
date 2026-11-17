@@ -1,9 +1,15 @@
-5
+11
 left
-up
+down
+down
 right
 up
+up
+right
+down
 left
+left
+up
 
 Elapsed: 00:00:00.000
 

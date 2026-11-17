@@ -1,21 +1,19 @@
-48
+50
 down
 right
 up
 up
 left
 down
+left
+down
+right
 down
 right
 up
-right
+up
 up
 left
-left
-down
-left
-up
-right
 down
 right
 right
@@ -23,19 +21,10 @@ up
 left
 left
 down
+right
+right
+down
 left
-down
-right
-down
-left
-up
-up
-up
-right
-down
-right
-right
-down
 left
 down
 left
@@ -47,7 +36,20 @@ down
 right
 up
 left
+left
+down
+right
+right
+right
+up
+left
+up
+left
+up
+left
+down
+down
 
-Elapsed: 00:00:00.113
+Elapsed: 00:00:00.764
 
 Success!
