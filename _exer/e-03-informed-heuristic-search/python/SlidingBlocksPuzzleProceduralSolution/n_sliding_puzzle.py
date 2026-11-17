@@ -1,3 +1,19 @@
+# N-Sliding Blocks Puzzle — IDA* with Manhattan Distance + Linear Conflict
+#
+# Algorithm: IDA* (Iterative Deepening A*)
+#   Repeated depth-limited search with rising f-cost threshold (depth + h).
+#   The threshold for each new iteration is the smallest f-cost that exceeded
+#   the previous limit. Guarantees optimal solution with O(solution_length) memory.
+#
+# Heuristic: h = Manhattan Distance + Linear Conflict
+#   MD: sum of per-tile row+col distances to goal — admissible lower bound.
+#   LC: two tiles in their goal row/col but in reversed order need ≥2 extra
+#       moves to bypass each other. MD updated O(1) per move; LC recomputed
+#       O(N²) after every swap — tight enough to solve hard 4×4 in seconds (C++/Java).
+#
+# Note: Python recursion overhead makes depths >~56 impractical (>600 s). The
+#   algorithm is correct; this is a language speed limitation, not an algorithmic one.
+
 import sys
 import os
 import time
@@ -76,6 +92,7 @@ class SlidingBlocksPuzzle:
             Direction.NEUTRAL:  0,
         }
 
+    # Tile t occupies reading-order position (t-1) before blank_target, else t.
     def _init_goal_state(self):
         bt = self._blank_target
         g  = self._grid_size
@@ -87,8 +104,11 @@ class SlidingBlocksPuzzle:
         self._goal_col[BLANK] = bt % g
 
     # -----------------------------------------------------------------------
-    # Solvability
+    # Solvability — O(N² log N) merge-sort inversion count
     # -----------------------------------------------------------------------
+    # Odd grid:  solvable iff #inversions is even.
+    # Even grid: solvable iff (inversions + blank_row_from_bottom
+    #                                      + target_row_from_bottom) is even.
 
     def _merge_count(self, arr, lo, hi):
         if hi - lo < 2:
@@ -125,7 +145,7 @@ class SlidingBlocksPuzzle:
         return (inv + blank_row_from_bottom + target_row_from_bottom) % 2 == 0
 
     # -----------------------------------------------------------------------
-    # Heuristic
+    # Heuristic: Manhattan Distance (full recompute — used at IDA* root)
     # -----------------------------------------------------------------------
 
     def _calc_manhattan(self):
@@ -136,6 +156,12 @@ class SlidingBlocksPuzzle:
                 continue
             cost += abs(i // g - self._goal_row[t]) + abs(i % g - self._goal_col[t])
         return cost
+
+    # -----------------------------------------------------------------------
+    # Heuristic: Linear Conflict (full recompute after each swap inside DLS)
+    # -----------------------------------------------------------------------
+    # Two tiles in their goal row with reversed goal columns → +2 per pair.
+    # Same for columns.
 
     def _calc_linear_conflict(self):
         g = self._grid_size
@@ -164,6 +190,8 @@ class SlidingBlocksPuzzle:
                         conflict += 2
         return conflict
 
+    # Incremental MD update — O(1), called BEFORE the swap.
+    # Only the tile sliding into blank_pos changes its distance.
     def _update_md(self, blank_pos, from_pos, md):
         t = self._board[from_pos]
         g = self._grid_size
@@ -189,11 +217,17 @@ class SlidingBlocksPuzzle:
     # -----------------------------------------------------------------------
     # IDA* search
     # -----------------------------------------------------------------------
+    # h        = MD + LC at this node.
+    # md       = MD only (separate so update can be done in O(1)).
+    # prev_dir = direction that brought blank TO blank_pos (skip its reverse).
+    #
+    # On success each frame appends its own prev_dir — path is built deepest-first.
+    # solve() strips the NEUTRAL sentinel and reverses for forward output.
 
     def _dls(self, blank_pos, limit, prev_dir, h, md, depth):
         cost = h + depth
         if cost > limit:
-            return cost
+            return cost  # over budget: return as next-threshold hint
 
         if md == 0:  # all tiles at goal positions
             self._history.append(prev_dir)
@@ -221,10 +255,12 @@ class SlidingBlocksPuzzle:
                 self._history.append(prev_dir)
                 return 0
             if result < min_cost:
-                min_cost = result
+                min_cost = result  # track tightest next threshold
 
         return min_cost
 
+    # IDA* outer loop: raise threshold until DLS finds the solution.
+    # Starts at MD + LC — the tightest admissible lower bound available.
     def _ida_star(self, md, lc):
         threshold = md + lc  # start with full MD + LC
         while True:

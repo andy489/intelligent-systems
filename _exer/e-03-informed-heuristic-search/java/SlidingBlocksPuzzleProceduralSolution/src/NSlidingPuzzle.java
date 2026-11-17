@@ -1,3 +1,16 @@
+// N-Sliding Blocks Puzzle — IDA* with Manhattan Distance + Linear Conflict
+//
+// Algorithm: IDA* (Iterative Deepening A*)
+//   Repeated depth-limited search with rising f-cost threshold (depth + h).
+//   The threshold for each new iteration is the smallest f-cost that exceeded
+//   the previous limit, ensuring optimal solution at minimum memory.
+//
+// Heuristic: h = Manhattan Distance + Linear Conflict
+//   MD: sum of per-tile row+col distances to goal — admissible lower bound.
+//   LC: two tiles in their goal row/col but in reversed order need ≥2 extra
+//       moves to pass each other. MD updated incrementally O(1); LC recomputed
+//       O(N²) after every swap — tight enough to solve hard 4×4 in seconds.
+
 import java.io.*;
 import java.util.*;
 
@@ -9,7 +22,7 @@ public class NSlidingPuzzle {
 
     private static final int BLANK   = 0;
     private static final int NEUTRAL = 4;
-    private static final int MAX_H   = 1 << 15;
+    private static final int MAX_H   = 1 << 15; // sentinel: larger than any real cost
 
     private enum Direction {
         LEFT(0), RIGHT(1), DOWN(2), UP(3), NEUTRAL_DIR(4);
@@ -18,7 +31,7 @@ public class NSlidingPuzzle {
         Direction(int id) { this.id = id; }
 
         static final Direction[] BY_ID = { LEFT, RIGHT, DOWN, UP, NEUTRAL_DIR };
-        // Opposite of each direction by id: LEFT<->RIGHT, DOWN<->UP, NEUTRAL<->NEUTRAL
+        // Reverse map: LEFT<->RIGHT, DOWN<->UP, NEUTRAL<->NEUTRAL
         private static final int[] REVERSE_ID = { RIGHT.id, LEFT.id, UP.id, DOWN.id, NEUTRAL_DIR.id };
 
         Direction reverse() { return BY_ID[REVERSE_ID[this.id]]; }
@@ -80,6 +93,7 @@ public class NSlidingPuzzle {
         offset[Direction.NEUTRAL_DIR.id] = 0;
     }
 
+    // Tile t occupies reading-order position (t-1) before blankTarget, else t.
     private void initGoalState() {
         for (int t = 1; t <= tilesCount; t++) {
             int pos = (t <= blankTarget) ? (t - 1) : t;
@@ -128,7 +142,7 @@ public class NSlidingPuzzle {
     }
 
     // -----------------------------------------------------------------------
-    // Heuristic
+    // Heuristic: Manhattan Distance (full recompute — used at IDA* root)
     // -----------------------------------------------------------------------
 
     private int calcManhattan() {
@@ -140,6 +154,12 @@ public class NSlidingPuzzle {
         }
         return cost;
     }
+
+    // -----------------------------------------------------------------------
+    // Heuristic: Linear Conflict (full recompute after each swap inside DLS)
+    // -----------------------------------------------------------------------
+    // Two tiles in their goal row with reversed goal columns → +2 per pair.
+    // Same for columns.
 
     private int calcLinearConflict() {
         int conflict = 0;
@@ -168,6 +188,8 @@ public class NSlidingPuzzle {
         return conflict;
     }
 
+    // Incremental MD update — O(1), called BEFORE the swap.
+    // Only the tile sliding into blankPos changes its distance.
     private int updateMd(int blankPos, int fromPos, int md) {
         int t = board[fromPos];
         int oldDist = Math.abs(fromPos / gridSize - goalRow[t]) + Math.abs(fromPos % gridSize - goalCol[t]);
@@ -188,14 +210,20 @@ public class NSlidingPuzzle {
     }
 
     // -----------------------------------------------------------------------
-    // IDA* search
+    // IDA* — depth-limited search (DLS)
     // -----------------------------------------------------------------------
+    // h   = MD + LC at this node.
+    // md  = MD only (separate so update can be done in O(1)).
+    // prevDir = direction that brought blank TO blankPos (skip its reverse).
+    //
+    // On success each frame pushes its own prevDir — path is built bottom-up.
+    // Popping history in solve() gives forward move order.
 
     // prevDir is the direction that brought the blank TO blankPos.
     // On success each frame pushes its own prevDir, building the path bottom-up.
     private int dls(int blankPos, int limit, Direction prevDir, int h, int md, int depth) {
         int cost = h + depth;
-        if (cost > limit) return cost;
+        if (cost > limit) return cost; // over budget: return as next-threshold hint
 
         if (md == 0) {  // all tiles at goal positions
             history.push(prevDir);
@@ -228,12 +256,14 @@ public class NSlidingPuzzle {
                 history.push(prevDir);
                 return 0;
             }
-            if (result < minCost) minCost = result;
+            if (result < minCost) minCost = result; // track tightest next threshold
         }
 
         return minCost;
     }
 
+    // IDA* outer loop: raise threshold until DLS finds the solution.
+    // Starts at MD + LC — the tightest admissible lower bound available.
     private void idaStar(int md, int lc) {
         int threshold = md + lc;  // start with full MD + LC
         int result;
