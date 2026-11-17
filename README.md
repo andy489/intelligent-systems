@@ -28,6 +28,8 @@
 
 ## Exercise Sheets
 
+**Filename legend:** `is` = Intelligent Systems · `e` = Exercise · `pt` = Part · `(YYYY-MM-DD)` = date of issue · `slides` = lecture slides
+
 | # | Topic | Problem | Exercise Sheet | Solutions |
 |---|---|---|---|---|
 | E01 | Introduction | — | [is-e-01-(2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) · [slides](_exer/e-01-introduction/is-e-01-intro-slides.pdf) | [README](_exer/e-01-introduction/README.md) |
