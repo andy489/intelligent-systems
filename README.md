@@ -30,9 +30,9 @@
 
 | # | Topic | Problem | Exercise Sheet | Solutions |
 |---|---|---|---|---|
-| E01 | Introduction | — | [is-e-01-(2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) | [README](_exer/e-01-introduction/README.md) |
+| E01 | Introduction | — | [is-e-01-(2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) · [slides](_exer/e-01-introduction/is-e-01-intro-slides.pdf) | [README](_exer/e-01-introduction/README.md) |
 | E02 | Uninformed (Blind) Search | Frog Leap Puzzle | [is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf)<br>[is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) | [C++](_exer/e-02-uninformed-blind-search/cpp/) · [Java](_exer/e-02-uninformed-blind-search/java/) · [Python](_exer/e-02-uninformed-blind-search/python/) |
-| E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [is-e-03-(2021-10-17)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-17).pdf) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/) |
+| E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [is-e-03-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/) |
 | E04 | Constraint Satisfaction Problems | — | — | — |
 | E05 | Genetic Algorithms | — | — | — |
 | E06 | Games | — | — | — |
@@ -48,7 +48,7 @@
 ## E01 — Introduction
 
 **Problem:** —  
-**Docs:** [Exercise Sheet](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) · [README](_exer/e-01-introduction/README.md)
+**Docs:** [Exercise Sheet](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) · [Slides](_exer/e-01-introduction/is-e-01-intro-slides.pdf) · [README](_exer/e-01-introduction/README.md)
 
 Course table of contents and overview. No code solutions.
 
@@ -73,7 +73,7 @@ Two approaches — DFS search and an O(N²) analytical linear solution.
 ## E03 — Informed (Heuristic) Search — IDA*
 
 **Problem:** N-Sliding Blocks Puzzle  
-**Docs:** [Exercise Sheet](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-17).pdf) · [README](_exer/e-03-informed-heuristic-search/README.md)
+**Docs:** [Exercise Sheet](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf) · [README](_exer/e-03-informed-heuristic-search/README.md)
 
 N-puzzle (8-puzzle, 15-puzzle, …): slide tiles on an N×N grid to reach the goal configuration.
 Solved with IDA\* using Manhattan Distance + Linear Conflict heuristic.

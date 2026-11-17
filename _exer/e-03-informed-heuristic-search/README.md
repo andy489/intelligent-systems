@@ -1,7 +1,7 @@
 # E03 — Informed (Heuristic) Search — IDA*
 
 **Problem:** N-Sliding Blocks Puzzle  
-**Exercise Sheet:** [is-e-03-(2021-10-17)](is-e-03-(2021-10-17).pdf)
+**Exercise Sheet:** [is-e-03-(2021-10-18)](is-e-03-(2021-10-18).pdf)
 
 An N×N grid holds tiles numbered 1 to N²−1 and one blank. A move slides an adjacent tile into the blank. The goal is to reach a specified target configuration in the **minimum number of moves**.
 
@@ -73,7 +73,7 @@ clang++ -O2 -std=c++17 -o n_sliding_puzzle NSlidingPuzzle.cpp
 
 # Java
 cd java/SlidingBlocksPuzzleProceduralSolution
-javac -d out src/NSlidingPuzzle.java
+javac -d out src/*.java
 java -cp out NSlidingPuzzle ../../data/puzzles/puzzle081-4x4.txt
 
 # Python
