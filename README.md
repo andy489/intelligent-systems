@@ -144,8 +144,8 @@ Solved with IDA\* using Manhattan Distance + Linear Conflict heuristic.
 
 Puzzles: [`data/puzzles/`](_exer/e-03-informed-heuristic-search/data/puzzles/) (162 puzzles: 2×2 through 10×10 + 2 hard 4×4)  
 Results: [`data/results/`](_exer/e-03-informed-heuristic-search/data/results/) (one `.txt` per puzzle — moves + elapsed time)  
-Analysis: [`data/ANALYSIS.md`](_exer/e-03-informed-heuristic-search/data/ANALYSIS.md) (147 solved, 9 unsolvable, 1 timed out)  
-Solutions: [`data/SOLUTIONS.md`](_exer/e-03-informed-heuristic-search/data/SOLUTIONS.md) (move sequences + per-language timings for hard puzzles 161 & 162)  
+Analysis: [`data/ANALYSIS.md`](_exer/e-03-informed-heuristic-search/data/ANALYSIS.md) (152 solved, 10 unsolvable, 0 timed out)  
+Solution: [`data/SOLUTION.md`](_exer/e-03-informed-heuristic-search/data/SOLUTION.md) (algorithm explanation, optimisations, move sequences for all 5 hard puzzles)  
 Runner: [`run_all_puzzles.py`](_exer/e-03-informed-heuristic-search/run_all_puzzles.py)
 
 ---
