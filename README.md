@@ -37,7 +37,7 @@
 | E08 | k-Nearest Neighbours | — | — | — |
 | E07 | Introduction to Machine Learning | — | — | — |
 | E06 | Games | — | — | — |
-| E05 | Genetic Algorithms | Travelling Salesman Problem (TSP) | [slides](_exer/e-05-genetic-algorithms/e-05-genetic-algorithms-slides.pdf) | [C++](_exer/e-05-genetic-algorithms/TSP/cpp/) · [Java](_exer/e-05-genetic-algorithms/TSP/java/) · [Python](_exer/e-05-genetic-algorithms/TSP/python/)<br>[README](_exer/e-05-genetic-algorithms/TSP/README.md) · [SOLUTION](_exer/e-05-genetic-algorithms/TSP/SOLUTION.md) |
+| E05 | Genetic Algorithms | [Travelling Salesman Problem (TSP)](_exer/e-05-genetic-algorithms/TSP/PROBLEM.md) | [slides](_exer/e-05-genetic-algorithms/e-05-genetic-algorithms-slides.pdf)<br>[data/](_exer/e-05-genetic-algorithms/TSP/data/) | [C++](_exer/e-05-genetic-algorithms/TSP/cpp/) · [Java](_exer/e-05-genetic-algorithms/TSP/java/) · [Python](_exer/e-05-genetic-algorithms/TSP/python/)<br>[README](_exer/e-05-genetic-algorithms/TSP/README.md) · [SOLUTION](_exer/e-05-genetic-algorithms/TSP/SOLUTION.md) |
 | E04 | Constraint Satisfaction Problems | N-Queens | [slides-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/e-04-constraint-satisfaction-problems-slides.pdf)<br>[is-e-04-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/is-e-04-(2021-10-25).pdf) | [C++](_exer/e-04-constraint-satisfaction-problems/cpp/) · [Java](_exer/e-04-constraint-satisfaction-problems/java/) · [Python](_exer/e-04-constraint-satisfaction-problems/python/)<br>[SOLUTION.md](_exer/e-04-constraint-satisfaction-problems/SOLUTION.md) · [ANALYSIS.md](_exer/e-04-constraint-satisfaction-problems/ANALYSIS.md) |
 | E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [slides-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf)<br>[romania-map](_exer/e-03-informed-heuristic-search/romania-map.pdf)<br>[is-e-03-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/)<br>[SOLUTION.md](_exer/e-03-informed-heuristic-search/data/SOLUTION.md) · [ANALYSIS.md](_exer/e-03-informed-heuristic-search/data/ANALYSIS.md) |
 | E02 | Uninformed (Blind) Search | Frog Leap Puzzle | [slides-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf)<br>[is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf)<br>[is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) | [C++](_exer/e-02-uninformed-blind-search/cpp/) · [Java](_exer/e-02-uninformed-blind-search/java/) · [Python](_exer/e-02-uninformed-blind-search/python/) |
@@ -113,7 +113,8 @@ No content yet.
 ## E05 — Genetic Algorithms
 
 **Problem:** Travelling Salesman Problem (TSP)  
-**Docs:** [Slides](_exer/e-05-genetic-algorithms/e-05-genetic-algorithms-slides.pdf) · [README](_exer/e-05-genetic-algorithms/TSP/README.md) · [PROBLEM](_exer/e-05-genetic-algorithms/TSP/PROBLEM.md) · [SOLUTION](_exer/e-05-genetic-algorithms/TSP/SOLUTION.md)
+**Docs:** [Slides](_exer/e-05-genetic-algorithms/e-05-genetic-algorithms-slides.pdf) · [PROBLEM](_exer/e-05-genetic-algorithms/TSP/PROBLEM.md) · [README](_exer/e-05-genetic-algorithms/TSP/README.md) · [SOLUTION](_exer/e-05-genetic-algorithms/TSP/SOLUTION.md)  
+**Data:** [data/](_exer/e-05-genetic-algorithms/TSP/data/) (UK-12 benchmark — 12 cities, optimal 1872.78)
 
 Find the shortest closed tour visiting all N cities exactly once.
 Solved with a **Genetic Algorithm** using permutation chromosomes:
