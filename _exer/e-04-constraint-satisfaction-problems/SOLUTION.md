@@ -1,12 +1,16 @@
-# Solution — N-Queens (Min-Conflicts / Local Search)
+# Solution — N-Queens
 
-## Algorithm Overview
+Two independent solutions are provided. Both accept the same `-v`/`-q` flags.
+
+---
+
+## Solution 1 — Min-Conflicts (CSP / Local Search)
+
+### Algorithm Overview
 
 The solution uses **Min-Conflicts**, a local search heuristic for CSPs.
 
-### Key Idea
-
-Instead of building a solution from scratch (backtracking), place all N queens immediately — one per column — and then iteratively repair conflicts until none remain.
+**Key Idea:** Instead of building a solution from scratch (backtracking), place all N queens immediately — one per column — then iteratively repair conflicts until none remain.
 
 ### Steps
 
@@ -19,7 +23,7 @@ Instead of building a solution from scratch (backtracking), place all N queens i
 
 3. **Restart** — if `2N` repair steps did not find a solution, re-initialise and try again. In practice one or two attempts always suffice.
 
-## Conflict Tracking — O(1) per Move
+### Conflict Tracking — O(1) per Move
 
 Naively recomputing conflicts after each move would be O(N). Instead, three integer arrays maintain conflict counts incrementally:
 
@@ -40,7 +44,7 @@ conflicts(row, col) = queensInRow[row]
 
 When a queen moves from `(fromRow, col)` to `(toRow, col)`, all three arrays are updated in O(1).
 
-## Complexity
+### Complexity
 
 | Phase | Time | Space |
 |-------|------|-------|
@@ -48,47 +52,17 @@ When a queen moves from `(fromRow, col)` to `(toRow, col)`, all three arrays are
 | Single repair step | O(N) — scan all rows for min conflict | O(N) — candidate list |
 | Total (expected) | **O(N)** — constant expected repair steps | **O(N)** |
 
-The O(N) scan per step is the bottleneck. For N = 10 000 this is ~10 000 × a few hundred steps = well within one second.
-
-## Why This Works at N = 10 000
-
-- No recursion, no backtracking — stack depth is O(1).
-- All data structures are flat `std::vector<unsigned>` — cache-friendly.
-- Randomised tie-breaking avoids cycles.
-- The interleaved initialisation keeps the initial conflict density low, so the repair loop converges in very few steps (empirically O(1) on average for large N).
-
-## Randomness
+### Randomness
 
 The Mersenne Twister (`std::mt19937`) is seeded with the current system time, ensuring different random tie-breaking on each run. This prevents worst-case deterministic cycles.
 
-## Known Limitations
-
-- N = 2 and N = 3 have no solution; the constructor throws `std::logic_error`.
-- Board printing (`std::cout << board`) is O(N²) and is commented out by default — impractical for large N.
-- `unsigned` counters limit N to roughly 4 billion, well beyond any practical requirement.
-
-## Arguments
-
-| Flag | Meaning |
-|---|---|
-| *(none)* | Default behaviour (see below) |
-| `-v` | **Verbose** — always print the board |
-| `-q` | **Quiet** — never print the board |
-
-**Default board printing behaviour:**
-
-- N ≤ 10 → board is printed (use `-q` to suppress)
-- N > 10 → board is not printed (use `-v` to force printing)
-
-Elapsed time is always printed to **stderr** regardless of flags.
-
-## Source
+### Source
 
 - C++:    `cpp/NQueens/NQueens.cpp`
 - Java:   `java/NQueens/src/NQueens.java`
 - Python: `python/NQueens/n_queens.py`
 
-## Build & Run
+### Build & Run
 
 **C++**
 ```bash
@@ -122,3 +96,132 @@ echo 8     | python3 n_queens.py -q      # suppresses board
 echo 10000 | python3 n_queens.py         # no board
 echo 10000 | python3 n_queens.py -v      # forces board print
 ```
+
+---
+
+## Solution 2 — Deterministic O(N) Linear Construction
+
+### Algorithm Overview
+
+Places all N queens in **O(N) time** using a closed-form mathematical formula — no search, no backtracking, no conflict repair. Produces one fixed valid solution directly.
+
+### Three Cases
+
+The construction depends on **N mod 6**:
+
+**Case 1: N even, N mod 6 ≠ 2**
+
+```
+Row m      → column 2m
+Row N/2+m  → column 2m-1
+for m = 1 .. N/2
+```
+
+Example (N = 8, mod 6 = 2 → actually Case 2; N = 4, mod 6 = 4 → Case 1):
+
+| Row | Column |
+|-----|--------|
+| 1 | 2 |
+| 2 | 4 |
+| 3 | 1 |
+| 4 | 3 |
+
+**Case 2: N even, N mod 6 = 2**
+
+```
+Row m      → column 1 + (2(m-1) + N/2 - 1) mod N
+Row N+1-m  → column N - (2(m-1) + N/2 - 1) mod N
+for m = 1 .. N/2
+```
+
+This "rotated even" placement avoids diagonal conflicts that Case 1 would create for N ≡ 2 (mod 6).
+
+**Case 3: N odd**
+
+Recursively solve for N−1 (which is even, so Case 1 or 2 applies), then place the last queen at row N, column N. The corner position never conflicts with the N−1 solution because N−1 queens never occupy the last row or last column in their construction.
+
+### Why It Works
+
+The formulas are a well-known result from combinatorics. The even-N constructions guarantee:
+
+- **Rows**: each of 1..N is used exactly once (by construction, we place one queen per row).
+- **Columns**: each of 1..N is used exactly once (the sequences 2, 4, …, N, 1, 3, …, N−1 and its variant are permutations).
+- **Diagonals**: verified algebraically; the two interleaved arithmetic progressions avoid all diagonal collisions.
+
+### Complexity
+
+| Metric | Value |
+|--------|-------|
+| Time | **O(N)** — exactly N assignments, no iterations |
+| Space | **O(N)** — one array of N integers |
+| Restarts | **0** — deterministic, always succeeds |
+| Randomness | **none** — same output for same N |
+
+This is strictly better than Min-Conflicts in the constant factor: there is no repair loop, no conflict re-evaluation, and no possibility of a restart.
+
+### Source
+
+- C++:    `cpp/NQueens/NQueensLinear.cpp`
+- Java:   `java/NQueens/src/NQueensLinear.java`
+- Python: `python/NQueens/n_queens_linear.py`
+
+### Build & Run
+
+**C++**
+```bash
+cd cpp/NQueens
+g++ -O2 -std=c++17 -o n_queens_linear NQueensLinear.cpp
+
+echo 8     | ./n_queens_linear        # prints board (N ≤ 10 default)
+echo 8     | ./n_queens_linear -q     # suppresses board
+echo 10000 | ./n_queens_linear        # no board (N > 10 default)
+echo 10000 | ./n_queens_linear -v     # forces board print
+```
+
+**Java**
+```bash
+cd java/NQueens
+mkdir -p out
+javac -d out src/NQueensLinear.java
+
+echo 8     | java -cp out NQueensLinear        # prints board
+echo 8     | java -cp out NQueensLinear -q     # suppresses board
+echo 10000 | java -cp out NQueensLinear        # no board
+echo 10000 | java -cp out NQueensLinear -v     # forces board print
+```
+
+**Python**
+```bash
+cd python/NQueens
+
+echo 8     | python3 n_queens_linear.py        # prints board
+echo 8     | python3 n_queens_linear.py -q     # suppresses board
+echo 10000 | python3 n_queens_linear.py        # no board
+echo 10000 | python3 n_queens_linear.py -v     # forces board print
+```
+
+---
+
+## Arguments (both solutions)
+
+| Flag | Meaning |
+|---|---|
+| *(none)* | Default behaviour (see below) |
+| `-v` | **Verbose** — always print the board |
+| `-q` | **Quiet** — never print the board |
+
+**Default board printing behaviour:**
+
+- N ≤ 10 → board is printed (use `-q` to suppress)
+- N > 10 → board is not printed (use `-v` to force printing)
+
+Elapsed time is always printed to **stderr** regardless of flags.
+
+---
+
+## Known Limitations
+
+- N = 2 and N = 3 have no solution; all implementations exit with an error.
+- Board printing is O(N²) — only use `-v` for small N.
+- Min-Conflicts: randomised, so timing varies between runs.
+- Linear Construction: deterministic, but always produces the same one solution (not suitable if varied solutions are needed).
