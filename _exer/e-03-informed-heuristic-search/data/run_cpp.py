@@ -10,7 +10,7 @@ ROOT_DIR   = DATA_DIR.parent
 BINARY     = ROOT_DIR / "cpp/SlidingBlocksPuzzleProceduralSolution/n_sliding_puzzle"
 PUZZLES    = DATA_DIR / "puzzles"
 RESULTS    = DATA_DIR / "results-cpp"
-TIMEOUT    = 1800  # seconds per puzzle (30 min)
+TIMEOUT    = 2400  # seconds per puzzle (40 min)
 
 
 def build():

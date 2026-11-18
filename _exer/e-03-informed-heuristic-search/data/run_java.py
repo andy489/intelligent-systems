@@ -11,7 +11,7 @@ JAVA_SRC   = ROOT_DIR / "java/SlidingBlocksPuzzleProceduralSolution"
 JAVA_OUT   = JAVA_SRC / "out"
 PUZZLES    = DATA_DIR / "puzzles"
 RESULTS    = DATA_DIR / "results-java"
-TIMEOUT    = 1800  # seconds per puzzle (30 min)
+TIMEOUT    = 2400  # seconds per puzzle (40 min)
 
 
 def build():
