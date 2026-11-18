@@ -189,7 +189,7 @@ Sorted by puzzle number. Unsolvable puzzles appear first (001–010). Timing for
 | 159 | 159-puzzle-4x4-HARD-2 | 4×4 | 56 | 364.883 ms | 00:00:00.897 | 00:01:06.622 |
 | 160 | 160-puzzle-4x4-MEGA-HARD | 4×4 | 66 | 3.599 s | 00:00:08.253 | 00:11:04.395 |
 | 161 | 161-puzzle-4x4-MEGA-HARD-2 | 4×4 | 78 | 2.025 s | 00:00:05.327 | 00:06:26.773 |
-| 162 | 162-puzzle-4x4-ULTRA-HARD | 4×4 | 80 | 00:02:38.655 | 00:06:08.431 | **TIMEOUT** |
+| 162 | 162-puzzle-4x4-ULTRA-HARD | 4×4 | 80 | 00:02:38.655 | 00:06:08.431 | TIMEOUT (>2400 s) |
 
 <!--
 Time format legend:
@@ -199,7 +199,7 @@ Time format legend:
   00:02:39.367   — HH:MM:SS.mmm (used when ≥ 1 s in Java/Python output)
   Java/Python timing is always HH:MM:SS.mmm (ms resolution, no sub-ms)
   —              — not applicable (already solved / unsolvable)
-  TIMEOUT        — exceeded 2400 s limit
+  TIMEOUT (>2400 s) — exceeded the 2400 s per-puzzle limit
 -->
 
 ---
