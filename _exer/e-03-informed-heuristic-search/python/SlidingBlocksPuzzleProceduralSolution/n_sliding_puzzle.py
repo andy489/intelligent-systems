@@ -72,6 +72,9 @@ _GROUP_B  = (6,  7,  8,  9, 10)
 _GROUP_C  = (11, 12, 13, 14, 15)
 _FACTORS  = (15*14*13*12, 14*13*12, 13*12, 12, 1)
 
+# Precomputed popcount for values 0–65535 — avoids bin().count('1') string allocation
+_POPCOUNT = [bin(i).count('1') for i in range(65536)]
+
 
 def _perm_rank_5(p):
     """Lehmer-code rank for ordered 5-tuple of positions on a 16-cell board."""
@@ -79,7 +82,7 @@ def _perm_rank_5(p):
     rank = 0
     for i in range(5):
         pos = p[i]
-        rank += (pos - bin(used & ((1 << pos) - 1)).count('1')) * _FACTORS[i]
+        rank += (pos - _POPCOUNT[used & ((1 << pos) - 1)]) * _FACTORS[i]
         used |= (1 << pos)
     return rank
 
@@ -196,6 +199,9 @@ class SlidingBlocksPuzzle:
         self._use_pdb = (self._grid_size == 4 and self._blank_target == 15)
         self._pdb_a = self._pdb_b = self._pdb_c = None
         self._tile_pos = [0] * 16  # only used when _use_pdb
+        self._pa = [0] * 5        # pre-allocated PDB lookup buffers
+        self._pb = [0] * 5
+        self._pc = [0] * 5
 
     # -----------------------------------------------------------------------
     # Initialisation
@@ -243,9 +249,12 @@ class SlidingBlocksPuzzle:
 
     def _pdb_lookup(self):
         tp = self._tile_pos
-        pa = [tp[t] for t in _GROUP_A]
-        pb = [tp[t] for t in _GROUP_B]
-        pc = [tp[t] for t in _GROUP_C]
+        pa = self._pa
+        pb = self._pb
+        pc = self._pc
+        pa[0] = tp[1];  pa[1] = tp[2];  pa[2] = tp[3];  pa[3] = tp[4];  pa[4] = tp[5]
+        pb[0] = tp[6];  pb[1] = tp[7];  pb[2] = tp[8];  pb[3] = tp[9];  pb[4] = tp[10]
+        pc[0] = tp[11]; pc[1] = tp[12]; pc[2] = tp[13]; pc[3] = tp[14]; pc[4] = tp[15]
         return (self._pdb_a[_perm_rank_5(pa)]
               + self._pdb_b[_perm_rank_5(pb)]
               + self._pdb_c[_perm_rank_5(pc)])
@@ -384,29 +393,37 @@ class SlidingBlocksPuzzle:
         opposite = _REVERSE[prev_dir]
         min_cost = MAX_H
 
+        board     = self._board
+        tile_pos  = self._tile_pos
+        use_pdb   = self._use_pdb
+        neighbour = self._neighbour_pos
+        update_md = self._update_md
+        pdb_lookup = self._pdb_lookup
+        lc        = self._calc_linear_conflict
+
         for direction in (Direction.LEFT, Direction.RIGHT, Direction.DOWN, Direction.UP):
             if direction == opposite:
                 continue
-            np = self._neighbour_pos(blank_pos, direction)
+            np = neighbour(blank_pos, direction)
             if np < 0:
                 continue
 
-            new_md = self._update_md(blank_pos, np, md)  # O(1) before swap
+            new_md = update_md(blank_pos, np, md)  # O(1) before swap
 
-            t = self._board[np]
-            self._board[blank_pos], self._board[np] = t, BLANK
+            t = board[np]
+            board[blank_pos], board[np] = t, BLANK
 
-            if self._use_pdb:
-                self._tile_pos[t] = blank_pos
-                new_h = self._pdb_lookup()
+            if use_pdb:
+                tile_pos[t] = blank_pos
+                new_h = pdb_lookup()
             else:
-                new_h = new_md + self._calc_linear_conflict()  # full LC after swap
+                new_h = new_md + lc()  # full LC after swap
 
             result = self._dls(np, limit, direction, new_h, new_md, depth + 1)
 
-            self._board[np], self._board[blank_pos] = self._board[blank_pos], BLANK
-            if self._use_pdb:
-                self._tile_pos[t] = np  # restore incremental position
+            board[np], board[blank_pos] = board[blank_pos], BLANK
+            if use_pdb:
+                tile_pos[t] = np  # restore incremental position
 
             if result == 0:
                 self._history.append(prev_dir)
