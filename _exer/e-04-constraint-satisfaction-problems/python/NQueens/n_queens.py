@@ -138,7 +138,8 @@ class NQueens:
 
 if __name__ == "__main__":
     n = int(input())
-    quiet = '-q' in sys.argv
+    quiet   = '-q' in sys.argv
+    verbose = '-v' in sys.argv
 
     start = time.perf_counter()
     board = NQueens(n, seed=None)
@@ -146,6 +147,7 @@ if __name__ == "__main__":
         board._place_queens()
     elapsed = time.perf_counter() - start
 
-    if not quiet:
+    print_board = (not quiet) if n <= 10 else verbose
+    if print_board:
         print(board, end='')
     print(f"elapsed time: {elapsed:.6f} s", file=sys.stderr)

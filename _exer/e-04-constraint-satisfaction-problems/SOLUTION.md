@@ -67,6 +67,21 @@ The Mersenne Twister (`std::mt19937`) is seeded with the current system time, en
 - Board printing (`std::cout << board`) is O(N²) and is commented out by default — impractical for large N.
 - `unsigned` counters limit N to roughly 4 billion, well beyond any practical requirement.
 
+## Arguments
+
+| Flag | Meaning |
+|---|---|
+| *(none)* | Default behaviour (see below) |
+| `-v` | **Verbose** — always print the board |
+| `-q` | **Quiet** — never print the board |
+
+**Default board printing behaviour:**
+
+- N ≤ 10 → board is printed (use `-q` to suppress)
+- N > 10 → board is not printed (use `-v` to force printing)
+
+Elapsed time is always printed to **stderr** regardless of flags.
+
 ## Source
 
 - C++:    `cpp/NQueens/NQueens.cpp`
@@ -79,8 +94,11 @@ The Mersenne Twister (`std::mt19937`) is seeded with the current system time, en
 ```bash
 cd cpp/NQueens
 g++ -O2 -std=c++17 -o n_queens NQueens.cpp
-echo 10000 | ./n_queens -q
-# elapsed time: 0.XXX s
+
+echo 8     | ./n_queens          # prints board (N ≤ 10 default)
+echo 8     | ./n_queens -q       # suppresses board
+echo 10000 | ./n_queens          # no board (N > 10 default)
+echo 10000 | ./n_queens -v       # forces board print
 ```
 
 **Java**
@@ -88,13 +106,19 @@ echo 10000 | ./n_queens -q
 cd java/NQueens
 mkdir -p out
 javac -d out src/NQueens.java
-echo 10000 | java -cp out NQueens -q
-# elapsed time: 0.XXX s
+
+echo 8     | java -cp out NQueens        # prints board
+echo 8     | java -cp out NQueens -q     # suppresses board
+echo 10000 | java -cp out NQueens        # no board
+echo 10000 | java -cp out NQueens -v     # forces board print
 ```
 
 **Python**
 ```bash
 cd python/NQueens
-echo 10000 | python3 n_queens.py -q
-# elapsed time: X.XXX s
+
+echo 8     | python3 n_queens.py         # prints board
+echo 8     | python3 n_queens.py -q      # suppresses board
+echo 10000 | python3 n_queens.py         # no board
+echo 10000 | python3 n_queens.py -v      # forces board print
 ```

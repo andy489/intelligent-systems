@@ -155,8 +155,12 @@ public class NQueens {
         int n = sc.nextInt();
         sc.close();
 
-        boolean quiet = false;
-        for (String a : args) if (a.equals("-q")) quiet = true;
+        boolean quiet   = false;
+        boolean verbose = false;
+        for (String a : args) {
+            if (a.equals("-q")) quiet   = true;
+            if (a.equals("-v")) verbose = true;
+        }
 
         long start = System.nanoTime();
         NQueens board = new NQueens(n, System.nanoTime());
@@ -164,7 +168,8 @@ public class NQueens {
             board.placeQueens();
         long elapsed = System.nanoTime() - start;
 
-        if (!quiet) System.out.print(board);
+        boolean printBoard = (n <= 10) ? !quiet : verbose;
+        if (printBoard) System.out.print(board);
         System.err.printf("elapsed time: %.6f s%n", elapsed / 1e9);
     }
 }

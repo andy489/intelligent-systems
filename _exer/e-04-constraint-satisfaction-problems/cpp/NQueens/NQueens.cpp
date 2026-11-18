@@ -139,8 +139,15 @@ public:
     }
 };
 
-int main() try
+int main(int argc, char* argv[]) try
 {
+    bool quiet   = false;
+    bool verbose = false;
+    for (int i = 1; i < argc; ++i) {
+        if (std::string(argv[i]) == "-q") quiet   = true;
+        if (std::string(argv[i]) == "-v") verbose = true;
+    }
+
     std::size_t n;
     std::cin >> n;
 
@@ -150,7 +157,9 @@ int main() try
         board.placeQueens();
     auto end = std::chrono::steady_clock::now();
 
-    //std::cout << board;
+    bool print_board = (n <= 10) ? !quiet : verbose;
+    if (print_board)
+        std::cout << board;
     std::cerr.precision(6);
     std::cerr << "elapsed time: " << std::fixed << std::chrono::duration<double>(end - start).count() << " s\n";
 }
