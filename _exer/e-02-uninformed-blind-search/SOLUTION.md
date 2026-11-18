@@ -1,4 +1,4 @@
-# E01 — Solution Approaches
+# E02 — Frog Leap Puzzle: Solution Approaches
 
 ## Overview
 
