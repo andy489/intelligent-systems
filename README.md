@@ -38,9 +38,9 @@
 | E07 | Introduction to Machine Learning | — | — | — |
 | E06 | Games | — | — | — |
 | E05 | Genetic Algorithms | [Travelling Salesman Problem (TSP)](_exer/e-05-genetic-algorithms/TSP/PROBLEM.md) | [slides](_exer/e-05-genetic-algorithms/e-05-genetic-algorithms-slides.pdf)<br>[data/](_exer/e-05-genetic-algorithms/TSP/data/) | [C++](_exer/e-05-genetic-algorithms/TSP/cpp/) · [Java](_exer/e-05-genetic-algorithms/TSP/java/) · [Python](_exer/e-05-genetic-algorithms/TSP/python/)<br>[README](_exer/e-05-genetic-algorithms/TSP/README.md) · [SOLUTION](_exer/e-05-genetic-algorithms/TSP/SOLUTION.md) |
-| E04 | Constraint Satisfaction Problems | N-Queens | [slides-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/e-04-constraint-satisfaction-problems-slides.pdf)<br>[is-e-04-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/is-e-04-(2021-10-25).pdf) | [C++](_exer/e-04-constraint-satisfaction-problems/cpp/) · [Java](_exer/e-04-constraint-satisfaction-problems/java/) · [Python](_exer/e-04-constraint-satisfaction-problems/python/)<br>[SOLUTION.md](_exer/e-04-constraint-satisfaction-problems/SOLUTION.md) · [ANALYSIS.md](_exer/e-04-constraint-satisfaction-problems/ANALYSIS.md) |
-| E03 | Informed (Heuristic) Search — IDA* | N-Sliding Blocks Puzzle | [slides-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf)<br>[romania-map](_exer/e-03-informed-heuristic-search/romania-map.pdf)<br>[is-e-03-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/)<br>[SOLUTION.md](_exer/e-03-informed-heuristic-search/data/SOLUTION.md) · [ANALYSIS.md](_exer/e-03-informed-heuristic-search/data/ANALYSIS.md) |
-| E02 | Uninformed (Blind) Search | Frog Leap Puzzle | [slides-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf)<br>[is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf)<br>[is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) | [C++](_exer/e-02-uninformed-blind-search/cpp/) · [Java](_exer/e-02-uninformed-blind-search/java/) · [Python](_exer/e-02-uninformed-blind-search/python/) |
+| E04 | Constraint Satisfaction Problems | [N-Queens](_exer/e-04-constraint-satisfaction-problems/PROBLEM.md) | [slides-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/e-04-constraint-satisfaction-problems-slides.pdf)<br>[is-e-04-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/is-e-04-(2021-10-25).pdf) | [C++](_exer/e-04-constraint-satisfaction-problems/cpp/) · [Java](_exer/e-04-constraint-satisfaction-problems/java/) · [Python](_exer/e-04-constraint-satisfaction-problems/python/)<br>[SOLUTION.md](_exer/e-04-constraint-satisfaction-problems/SOLUTION.md) · [ANALYSIS.md](_exer/e-04-constraint-satisfaction-problems/ANALYSIS.md) |
+| E03 | Informed (Heuristic) Search — IDA* | [N-Sliding Blocks Puzzle](_exer/e-03-informed-heuristic-search/PROBLEM.md) | [slides-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf)<br>[romania-map](_exer/e-03-informed-heuristic-search/romania-map.pdf)<br>[is-e-03-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf)<br>[data/](_exer/e-03-informed-heuristic-search/data/) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/)<br>[SOLUTION.md](_exer/e-03-informed-heuristic-search/data/SOLUTION.md) · [ANALYSIS.md](_exer/e-03-informed-heuristic-search/data/ANALYSIS.md) |
+| E02 | Uninformed (Blind) Search | [Frog Leap Puzzle](_exer/e-02-uninformed-blind-search/PROBLEM.md) | [slides-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf)<br>[is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf)<br>[is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) | [C++](_exer/e-02-uninformed-blind-search/cpp/) · [Java](_exer/e-02-uninformed-blind-search/java/) · [Python](_exer/e-02-uninformed-blind-search/python/) |
 | E01 | Introduction | — | [slides-(2021-10-07)](_exer/e-01-introduction/is-e-01-intro-slides.pdf) · [is-e-01-(2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) | [README](_exer/e-01-introduction/README.md) |
 
 > `is` = Intelligent Systems · `e` = Exercise · `pt` = Part · `(YYYY-MM-DD)` = date of issue · `slides` = lecture slides
@@ -145,7 +145,7 @@ echo "2\n500" | ./tsp_ga
 
 ## E04 — Constraint Satisfaction Problems
 
-**Problem:** N-Queens  
+**Problem:** [N-Queens](_exer/e-04-constraint-satisfaction-problems/PROBLEM.md)  
 **Docs:** [Exercise Sheet](_exer/e-04-constraint-satisfaction-problems/is-e-04-(2021-10-25).pdf) · [Slides-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/e-04-constraint-satisfaction-problems-slides.pdf) · [README](_exer/e-04-constraint-satisfaction-problems/README.md)
 
 Place N queens on an N×N board so no two attack each other. Two independent solutions:
@@ -167,8 +167,9 @@ Solution explanation: [`SOLUTION.md`](_exer/e-04-constraint-satisfaction-problem
 
 ## E03 — Informed (Heuristic) Search — IDA*
 
-**Problem:** N-Sliding Blocks Puzzle  
-**Docs:** [Exercise Sheet](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf) · [Slides-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf) · [Romania Map](_exer/e-03-informed-heuristic-search/romania-map.pdf) · [README](_exer/e-03-informed-heuristic-search/README.md)
+**Problem:** [N-Sliding Blocks Puzzle](_exer/e-03-informed-heuristic-search/PROBLEM.md)  
+**Docs:** [Exercise Sheet](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf) · [Slides-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf) · [Romania Map](_exer/e-03-informed-heuristic-search/romania-map.pdf) · [README](_exer/e-03-informed-heuristic-search/README.md)  
+**Data:** [data/](_exer/e-03-informed-heuristic-search/data/) (162 puzzles: 2×2 through 10×10)
 
 N-puzzle (8-puzzle, 15-puzzle, …): slide tiles on an N×N grid to reach the goal configuration.
 Solved with IDA\* using **additive 5-5-5 disjoint pattern databases (PDB)** for the standard 4×4 puzzle, and **Manhattan Distance + Linear Conflict (MD+LC)** for all other grids:
@@ -192,8 +193,8 @@ Runners: [`data/run_cpp.py`](_exer/e-03-informed-heuristic-search/data/run_cpp.p
 
 ## E02 — Uninformed Search
 
-**Problem:** Frog Leap Puzzle  
-**Docs:** [Part 1 — Blind Search](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf) · [Part 2 — Warm-Up](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) · [Slides-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf) · [README](_exer/e-02-uninformed-blind-search/README.md) · [Problem](_exer/e-02-uninformed-blind-search/PROBLEM.md) · [Solution](_exer/e-02-uninformed-blind-search/SOLUTION.md)
+**Problem:** [Frog Leap Puzzle](_exer/e-02-uninformed-blind-search/PROBLEM.md)  
+**Docs:** [Part 1 — Blind Search](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf) · [Part 2 — Warm-Up](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) · [Slides-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf) · [README](_exer/e-02-uninformed-blind-search/README.md) · [SOLUTION](_exer/e-02-uninformed-blind-search/SOLUTION.md)
 
 Classic puzzle on a `2N+1` board: swap N yellow (left-side) and N green (right-side) frogs using steps and jumps.
 Two approaches — DFS search and an O(N²) analytical linear solution.
