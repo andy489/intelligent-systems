@@ -1,0 +1,21 @@
+16
+left
+up
+right
+up
+right
+down
+left
+down
+right
+down
+left
+left
+up
+left
+up
+up
+
+Elapsed: 0.012 ms
+
+Success!

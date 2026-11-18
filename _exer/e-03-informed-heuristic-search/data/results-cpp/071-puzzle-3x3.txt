@@ -1,0 +1,23 @@
+18
+right
+down
+down
+right
+up
+up
+left
+down
+left
+up
+right
+right
+down
+left
+down
+left
+up
+up
+
+Elapsed: 0.024 ms
+
+Success!

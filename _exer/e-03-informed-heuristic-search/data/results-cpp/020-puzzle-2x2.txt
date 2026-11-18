@@ -1,0 +1,8 @@
+3
+down
+left
+up
+
+Elapsed: 0.004 ms
+
+Success!
