@@ -58,15 +58,15 @@ The Mersenne Twister (`std::mt19937`) is seeded with the current system time, en
 
 ### Source
 
-- C++:    `cpp/NQueens/NQueens.cpp`
-- Java:   `java/NQueens/src/NQueens.java`
-- Python: `python/NQueens/n_queens.py`
+- C++:    `cpp/NQueensCSP/NQueens.cpp`
+- Java:   `java/NQueensCSP/src/NQueens.java`
+- Python: `python/NQueensCSP/n_queens.py`
 
 ### Build & Run
 
 **C++**
 ```bash
-cd cpp/NQueens
+cd cpp/NQueensCSP
 g++ -O2 -std=c++17 -o n_queens NQueens.cpp
 
 echo 8     | ./n_queens          # prints board (N ≤ 10 default)
@@ -77,7 +77,7 @@ echo 10000 | ./n_queens -v       # forces board print
 
 **Java**
 ```bash
-cd java/NQueens
+cd java/NQueensCSP
 mkdir -p out
 javac -d out src/NQueens.java
 
@@ -89,7 +89,7 @@ echo 10000 | java -cp out NQueens -v     # forces board print
 
 **Python**
 ```bash
-cd python/NQueens
+cd python/NQueensCSP
 
 echo 8     | python3 n_queens.py         # prints board
 echo 8     | python3 n_queens.py -q      # suppresses board
@@ -161,15 +161,15 @@ This is strictly better than Min-Conflicts in the constant factor: there is no r
 
 ### Source
 
-- C++:    `cpp/NQueens/NQueensLinear.cpp`
-- Java:   `java/NQueens/src/NQueensLinear.java`
-- Python: `python/NQueens/n_queens_linear.py`
+- C++:    `cpp/NQueensLinear/NQueensLinear.cpp`
+- Java:   `java/NQueensLinear/src/NQueensLinear.java`
+- Python: `python/NQueensLinear/n_queens_linear.py`
 
 ### Build & Run
 
 **C++**
 ```bash
-cd cpp/NQueens
+cd cpp/NQueensCSP
 g++ -O2 -std=c++17 -o n_queens_linear NQueensLinear.cpp
 
 echo 8     | ./n_queens_linear        # prints board (N ≤ 10 default)
@@ -180,7 +180,7 @@ echo 10000 | ./n_queens_linear -v     # forces board print
 
 **Java**
 ```bash
-cd java/NQueens
+cd java/NQueensCSP
 mkdir -p out
 javac -d out src/NQueensLinear.java
 
@@ -192,7 +192,7 @@ echo 10000 | java -cp out NQueensLinear -v     # forces board print
 
 **Python**
 ```bash
-cd python/NQueens
+cd python/NQueensCSP
 
 echo 8     | python3 n_queens_linear.py        # prints board
 echo 8     | python3 n_queens_linear.py -q     # suppresses board

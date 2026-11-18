@@ -40,9 +40,9 @@ Uses a **closed-form mathematical formula** to place queens directly with zero s
 
 | Language | Min-Conflicts (CSP) | Linear Construction |
 |---|---|---|
-| C++ | `cpp/NQueens/NQueens.cpp` | `cpp/NQueens/NQueensLinear.cpp` |
-| Java | `java/NQueens/src/NQueens.java` | `java/NQueens/src/NQueensLinear.java` |
-| Python | `python/NQueens/n_queens.py` | `python/NQueens/n_queens_linear.py` |
+| C++ | `cpp/NQueensCSP/NQueens.cpp` | `cpp/NQueensLinear/NQueensLinear.cpp` |
+| Java | `java/NQueensCSP/src/NQueens.java` | `java/NQueensLinear/src/NQueensLinear.java` |
+| Python | `python/NQueensCSP/n_queens.py` | `python/NQueensLinear/n_queens_linear.py` |
 
 ---
 
@@ -65,9 +65,10 @@ Elapsed time is always written to **stderr**, regardless of flags.
 ### C++
 
 ```bash
-cd cpp/NQueens
+cd cpp/NQueensCSP
 # Min-Conflicts
 g++ -O2 -std=c++17 -o n_queens NQueens.cpp
+cd ../NQueensLinear
 # Linear Construction
 g++ -O2 -std=c++17 -o n_queens_linear NQueensLinear.cpp
 ```
@@ -85,25 +86,32 @@ echo 10000  | ./n_queens_linear -v
 ### Java
 
 ```bash
-cd java/NQueens
+cd java/NQueensCSP
 mkdir -p out
-javac -d out src/NQueens.java src/NQueensLinear.java
+javac -d out src/NQueens.java
+
+echo 8      | java -cp out NQueens              # Min-Conflicts
+echo 10000  | java -cp out NQueens -v
 ```
 
 ```bash
-echo 8      | java -cp out NQueens              # Min-Conflicts
+cd java/NQueensLinear
+mkdir -p out
+javac -d out src/NQueensLinear.java
+
 echo 8      | java -cp out NQueensLinear        # Linear Construction
-echo 10000  | java -cp out NQueens -v
 echo 10000  | java -cp out NQueensLinear -v
 ```
 
 ### Python
 
 ```bash
-cd python/NQueens
+cd python/NQueensCSP
 echo 8      | python3 n_queens.py               # Min-Conflicts
-echo 8      | python3 n_queens_linear.py        # Linear Construction
 echo 10000  | python3 n_queens.py -v
+
+cd ../NQueensLinear
+echo 8      | python3 n_queens_linear.py        # Linear Construction
 echo 10000  | python3 n_queens_linear.py -v
 ```
 
