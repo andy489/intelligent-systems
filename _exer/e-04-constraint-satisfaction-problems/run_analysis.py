@@ -13,7 +13,7 @@ JAVA_SRC = ROOT / "java/NQueens/src/NQueens.java"
 JAVA_OUT = ROOT / "java/NQueens/out"
 PY_SCRIPT = ROOT / "python/NQueens/n_queens.py"
 
-NS = [3, 4, 5, 6, 8, 100, 1_000, 10_000, 100_000, 1_000_000]
+NS = [3, 4, 5, 6, 8, 100, 1_000, 10_000, 100_000, 1_000_000, 10_000_000, 100_000_000]
 TIMEOUT = 120  # seconds per run
 
 
