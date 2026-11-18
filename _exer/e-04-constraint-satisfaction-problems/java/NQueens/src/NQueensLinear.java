@@ -1,60 +1,92 @@
-// N-Queens — Deterministic O(N) Construction (Explicit Formula)
+// N-Queens — Deterministic O(N) Construction
 //
-// Places all N queens in O(N) time using a closed-form formula — no search,
-// no backtracking, no conflict repair. Produces one valid solution directly.
+// Builds one valid solution in O(N) time using a closed-form placement formula.
+// No search, no backtracking, no conflict repair — every queen lands in its
+// final position on the first try.
 //
-// Three cases based on N mod 6:
+// ── Algorithm ────────────────────────────────────────────────────────────────
 //
-//   Case 1: N even, N mod 6 != 2
-//     Row m    → queen at column 2m
-//     Row N/2+m → queen at column 2m-1
-//     for m = 1 .. N/2
+// The construction is based on three cases that depend on N mod 6:
 //
-//   Case 2: N even, N mod 6 == 2
-//     Row m      → queen at column 1 + (2(m-1) + N/2 - 1) mod N
-//     Row N+1-m  → queen at column N - (2(m-1) + N/2 - 1) mod N
-//     for m = 1 .. N/2
+//   Case A  N even, N mod 6 ≠ 2  (i.e. N mod 6 ∈ {0, 4})
+//     First N/2 rows:   row m       → column 2m
+//     Next  N/2 rows:   row N/2 + m → column 2m − 1       (m = 1 … N/2)
+//     Produces two interleaved arithmetic sequences: even columns, then odd.
 //
-//   Case 3: N odd
-//     Solve for N-1 (even) using Case 1 or 2, then add queen at (N, N).
+//   Case B  N even, N mod 6 = 2
+//     First N/2 rows:   row m       → column 1 + (2(m−1) + N/2 − 1) mod N
+//     Next  N/2 rows:   row N+1 − m → column N − (2(m−1) + N/2 − 1) mod N
+//     A "rotated" variant that avoids the diagonal conflicts Case A creates
+//     when N ≡ 2 (mod 6).
+//
+//   Case C  N odd
+//     Solve for N−1 (even) with Case A or B, then place the last queen at
+//     row N, column N.  The corner (N, N) never conflicts with the N−1
+//     solution because neither Case A nor B ever uses column N.
+//
+// ── Complexity ───────────────────────────────────────────────────────────────
+//   Time  O(N)  — exactly N array writes, two half-size loops
+//   Space O(N)  — one int[] of size N
+//
+// ── Reference ────────────────────────────────────────────────────────────────
+//   E. Hoffman, J. Loessi, R. Moore (1969). "Constructions for the Solution
+//   of the m Queens Problem." Mathematics Magazine 42(2):66–72.
 
 import java.util.Scanner;
 
 public class NQueensLinear {
 
+    // colOfRow[r] = 1-indexed column of the queen placed in row r (0-indexed)
+    private final int[] colOfRow;
     private final int n;
-    private final int[] colOfRow; // colOfRow[row] = column of queen in that row (1-indexed)
 
     public NQueensLinear(int n) {
         if (n == 2 || n == 3) throw new IllegalArgumentException("No solution for N=" + n);
         this.n = n;
         colOfRow = new int[n];
-        solve(n, 0);
+        place(n, 0);
     }
 
-    // Fill colOfRow starting at offset, for a sub-problem of size sz.
-    private void solve(int sz, int offset) {
+    // ── Construction ─────────────────────────────────────────────────────────
+
+    // Fills colOfRow[offset .. offset+sz-1] with a valid sz-queens solution.
+    private void place(int sz, int offset) {
         if (sz % 2 == 0) {
-            if (sz % 6 != 2) methodOne(sz, offset);
-            else              methodTwo(sz, offset);
+            if (sz % 6 != 2) caseA(sz, offset);
+            else              caseB(sz, offset);
         } else {
-            solve(sz - 1, offset);
-            colOfRow[offset + sz - 1] = sz; // queen at (sz, sz) in sub-problem
+            // Odd: solve the even sub-problem, then append queen at (sz, sz).
+            place(sz - 1, offset);
+            colOfRow[offset + sz - 1] = sz;
         }
     }
 
-    private void methodOne(int sz, int offset) {
-        for (int m = 1; m <= sz / 2; ++m) colOfRow[offset + m - 1]          = 2 * m;
-        for (int m = 1; m <= sz / 2; ++m) colOfRow[offset + sz / 2 + m - 1] = 2 * m - 1;
+    // Case A: N even, N mod 6 ≠ 2
+    // Row m       → col 2m          (even columns, first half)
+    // Row N/2 + m → col 2m − 1     (odd  columns, second half)
+    private void caseA(int sz, int offset) {
+        int half = sz / 2;
+        for (int m = 1; m <= half; m++) {
+            colOfRow[offset + m - 1]        = 2 * m;
+            colOfRow[offset + half + m - 1] = 2 * m - 1;
+        }
     }
 
-    private void methodTwo(int sz, int offset) {
-        for (int m = 1; m <= sz / 2; ++m)
-            colOfRow[offset + m - 1] = 1 + (2 * (m - 1) + sz / 2 - 1) % sz;
-        for (int m = sz / 2; m >= 1; --m)
-            colOfRow[offset + sz - m] = sz - (2 * (m - 1) + sz / 2 - 1) % sz;
+    // Case B: N even, N mod 6 = 2
+    // Uses a modular shift to break the diagonals that Case A cannot avoid.
+    private void caseB(int sz, int offset) {
+        int half = sz / 2;
+        for (int m = 1; m <= half; m++) {
+            // forward pass: rows 1 … N/2
+            colOfRow[offset + m - 1]      = 1 + (2 * (m - 1) + half - 1) % sz;
+            // reverse pass: rows N … N/2+1  (fills second half back-to-front)
+            colOfRow[offset + sz - m]     = sz - (2 * (m - 1) + half - 1) % sz;
+        }
     }
 
+    // ── Output ───────────────────────────────────────────────────────────────
+
+    // Returns the full board as a string (O(N²) — only use for small N).
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(n * (n + 1));
@@ -66,24 +98,26 @@ public class NQueensLinear {
         return sb.toString();
     }
 
+    // ── Entry point ──────────────────────────────────────────────────────────
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        sc.close();
+        int n = new Scanner(System.in).nextInt();
 
         boolean quiet   = false;
         boolean verbose = false;
-        for (String a : args) {
-            if (a.equals("-q")) quiet   = true;
-            if (a.equals("-v")) verbose = true;
+        for (String arg : args) {
+            if (arg.equals("-q")) quiet   = true;
+            if (arg.equals("-v")) verbose = true;
         }
 
-        long start = System.nanoTime();
+        long t0 = System.nanoTime();
         NQueensLinear board = new NQueensLinear(n);
-        long elapsed = System.nanoTime() - start;
+        double elapsed = (System.nanoTime() - t0) / 1e9;
 
-        boolean printBoard = (n <= 10) ? !quiet : verbose;
-        if (printBoard) System.out.print(board);
-        System.err.printf("elapsed time: %.6f s%n", elapsed / 1e9);
+        // Default: print board only when N ≤ 10 (printing is O(N²))
+        if ((n <= 10) ? !quiet : verbose)
+            System.out.print(board);
+
+        System.err.printf("elapsed time: %.6f s%n", elapsed);
     }
 }
