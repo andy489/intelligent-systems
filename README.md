@@ -36,7 +36,7 @@
 | E09 | Naive Bayes Classifier | — | — | — |
 | E08 | k-Nearest Neighbours | — | — | — |
 | E07 | Introduction to Machine Learning | — | — | — |
-| E06 | Games | — | — | — |
+| E06 | Games | [Tic-Tac-Toe](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PROBLEM.md) | [slides](_exer/e-06-adversarial-search-(games)/e-06-adversarial-search-(games).pdf) | [C++](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/CPP/) · [Java](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/JAVA/) · [Python](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PYTHON/)<br>[README](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/SOLUTION.md) |
 | E05 | Genetic Algorithms | [Travelling Salesman Problem (TSP)](_exer/e-05-genetic-algorithms/TSP/PROBLEM.md) | [slides](_exer/e-05-genetic-algorithms/e-05-genetic-algorithms-slides.pdf)<br>[data/](_exer/e-05-genetic-algorithms/TSP/data/) | [C++](_exer/e-05-genetic-algorithms/TSP/cpp/) · [Java](_exer/e-05-genetic-algorithms/TSP/java/) · [Python](_exer/e-05-genetic-algorithms/TSP/python/)<br>[README](_exer/e-05-genetic-algorithms/TSP/README.md) · [SOLUTION](_exer/e-05-genetic-algorithms/TSP/SOLUTION.md) |
 | E04 | Constraint Satisfaction Problems | [N-Queens](_exer/e-04-constraint-satisfaction-problems/PROBLEM.md) | [slides-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/e-04-constraint-satisfaction-problems-slides.pdf)<br>[is-e-04-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/is-e-04-(2021-10-25).pdf) | [C++](_exer/e-04-constraint-satisfaction-problems/cpp/) · [Java](_exer/e-04-constraint-satisfaction-problems/java/) · [Python](_exer/e-04-constraint-satisfaction-problems/python/)<br>[SOLUTION.md](_exer/e-04-constraint-satisfaction-problems/SOLUTION.md) · [ANALYSIS.md](_exer/e-04-constraint-satisfaction-problems/ANALYSIS.md) |
 | E03 | Informed (Heuristic) Search — IDA* | [N-Sliding Blocks Puzzle](_exer/e-03-informed-heuristic-search/PROBLEM.md) | [slides-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf)<br>[romania-map](_exer/e-03-informed-heuristic-search/romania-map.pdf)<br>[is-e-03-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf)<br>[data/](_exer/e-03-informed-heuristic-search/data/) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/)<br>[SOLUTION.md](_exer/e-03-informed-heuristic-search/data/SOLUTION.md) · [ANALYSIS.md](_exer/e-03-informed-heuristic-search/data/ANALYSIS.md) |
@@ -103,10 +103,30 @@ No content yet.
 
 ## E06 — Games
 
-**Problem:** —  
-**Docs:** —
+**Problem:** [Tic-Tac-Toe](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PROBLEM.md)  
+**Docs:** [Slides](_exer/e-06-adversarial-search-(games)/e-06-adversarial-search-(games).pdf) · [PROBLEM](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PROBLEM.md) · [README](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/SOLUTION.md)
 
-No content yet.
+Play Tic-Tac-Toe against an unbeatable computer opponent.
+Solved with **Minimax + Alpha-Beta Pruning**:
+
+- **Incremental winner detection** — checks only lines through the last-placed piece
+- **In-place makeMove/undoMove** — no board copying during search
+- **Depth-adjusted utility** — prefers faster wins and slower losses
+- **Center bias** — equal-scoring moves default to center
+
+The computer never loses; optimal play always results in a draw.
+
+| Language | Source |
+|---|---|
+| C++ | [`CPP/tictactoe.cpp`](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/CPP/tictactoe.cpp) |
+| Java | [`JAVA/TicTacToe.java`](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/JAVA/TicTacToe.java) |
+| Python | [`PYTHON/tictactoe.py`](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PYTHON/tictactoe.py) |
+
+```bash
+# C++
+cd _exer/e-06-adversarial-search-\(games\)/TIC-TAC-TOE/CPP
+g++ -std=c++17 -O2 -o tictactoe tictactoe.cpp && ./tictactoe
+```
 
 ---
 
