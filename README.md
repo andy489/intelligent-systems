@@ -36,7 +36,7 @@
 | E09 | Naive Bayes Classifier | — | — | — |
 | E08 | k-Nearest Neighbours | — | — | — |
 | E07 | Introduction to Machine Learning | — | — | — |
-| E06 | Adversarial Search (Games) | [Tic-Tac-Toe](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PROBLEM.md) | [slides](_exer/e-06-adversarial-search-(games)/e-06-adversarial-search-(games).pdf) | [C++](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/CPP/) · [Java](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/JAVA/) · [Python](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PYTHON/)<br>[README](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/SOLUTION.md) |
+| E06 | Adversarial Search (Games) | [Tic-Tac-Toe](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PROBLEM.md)<br>[Dots and Boxes](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/PROBLEM.md) | [slides](_exer/e-06-adversarial-search-(games)/e-06-adversarial-search-(games).pdf) | [C++](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/CPP/) · [Java](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/JAVA/) · [Python](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PYTHON/)<br>[README](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/SOLUTION.md)<br>[Python](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/PYTHON/)<br>[README](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/SOLUTION.md) |
 | E05 | Genetic Algorithms | [Travelling Salesman Problem (TSP)](_exer/e-05-genetic-algorithms/TSP/PROBLEM.md) | [slides](_exer/e-05-genetic-algorithms/e-05-genetic-algorithms-slides.pdf)<br>[data/](_exer/e-05-genetic-algorithms/TSP/data/) | [C++](_exer/e-05-genetic-algorithms/TSP/cpp/) · [Java](_exer/e-05-genetic-algorithms/TSP/java/) · [Python](_exer/e-05-genetic-algorithms/TSP/python/)<br>[README](_exer/e-05-genetic-algorithms/TSP/README.md) · [SOLUTION](_exer/e-05-genetic-algorithms/TSP/SOLUTION.md) |
 | E04 | Constraint Satisfaction Problems | [N-Queens](_exer/e-04-constraint-satisfaction-problems/PROBLEM.md) | [slides-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/e-04-constraint-satisfaction-problems-slides.pdf)<br>[is-e-04-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/is-e-04-(2021-10-25).pdf) | [C++](_exer/e-04-constraint-satisfaction-problems/cpp/) · [Java](_exer/e-04-constraint-satisfaction-problems/java/) · [Python](_exer/e-04-constraint-satisfaction-problems/python/)<br>[SOLUTION.md](_exer/e-04-constraint-satisfaction-problems/SOLUTION.md) · [ANALYSIS.md](_exer/e-04-constraint-satisfaction-problems/ANALYSIS.md) |
 | E03 | Informed (Heuristic) Search — IDA* | [N-Sliding Blocks Puzzle](_exer/e-03-informed-heuristic-search/PROBLEM.md) | [slides-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf)<br>[romania-map](_exer/e-03-informed-heuristic-search/romania-map.pdf)<br>[is-e-03-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf)<br>[data/](_exer/e-03-informed-heuristic-search/data/) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/)<br>[SOLUTION.md](_exer/e-03-informed-heuristic-search/data/SOLUTION.md) · [ANALYSIS.md](_exer/e-03-informed-heuristic-search/data/ANALYSIS.md) |
@@ -103,8 +103,13 @@ No content yet.
 
 ## E06 — Adversarial Search (Games)
 
-**Problem:** [Tic-Tac-Toe](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PROBLEM.md)  
-**Docs:** [Slides](_exer/e-06-adversarial-search-(games)/e-06-adversarial-search-(games).pdf) · [PROBLEM](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PROBLEM.md) · [README](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/SOLUTION.md)
+**Docs:** [Slides](_exer/e-06-adversarial-search-(games)/e-06-adversarial-search-(games).pdf)
+
+---
+
+### Tic-Tac-Toe
+
+**Problem:** [PROBLEM](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PROBLEM.md) · [README](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/SOLUTION.md)
 
 Play Tic-Tac-Toe against an unbeatable computer opponent.
 Solved with **Minimax + Alpha-Beta Pruning**:
@@ -126,6 +131,30 @@ The computer never loses; optimal play always results in a draw.
 # C++
 cd _exer/e-06-adversarial-search-\(games\)/TIC-TAC-TOE/CPP
 g++ -std=c++17 -O2 -o tictactoe tictactoe.cpp && ./tictactoe
+```
+
+---
+
+### Dots and Boxes
+
+**Problem:** [PROBLEM](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/PROBLEM.md) · [README](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/SOLUTION.md)
+
+Play Dots and Boxes on an N×M grid against a computer opponent.
+Solved with **Minimax + Alpha-Beta Pruning** with special handling for the extra-turn rule (closing a box grants another move):
+
+- **Extra-turn correctness** — bonus turns keep the same player's perspective without decrementing depth, so chains of captures are fully evaluated
+- **Move ordering** — box-closing moves tried first to maximise alpha-beta cutoffs
+- **Heuristic** — scores unfinished positions by box difference plus sign-aware bonuses for 3-edge (capturable) and 2-edge (chain-opening) boxes
+- **2×2 board**: exhaustive search — computer is provably optimal
+- **3×3 board**: depth-7 search — full tree is infeasible (24! positions)
+
+| Language | Source |
+|---|---|
+| Python | [`PYTHON/dots_and_boxes.py`](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/PYTHON/dots_and_boxes.py) |
+
+```bash
+cd _exer/e-06-adversarial-search-\(games\)/DOTS-AND-BOXES/PYTHON
+python3 dots_and_boxes.py
 ```
 
 ---
