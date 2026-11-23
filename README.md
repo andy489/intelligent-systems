@@ -35,7 +35,7 @@
 | E10 | Decision Tree | — | — | — |
 | E09 | Naive Bayes Classifier | — | — | — |
 | E08 | k-Nearest Neighbours | — | — | — |
-| E07 | Introduction to Machine Learning | — | — | — |
+| E07 | Introduction to Machine Learning | — | [slides](_exer/e-07-machine-learning-intro/e-07-machine-learning-intro.pdf) | — |
 | E06 | Adversarial Search (Games) | [Tic-Tac-Toe](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PROBLEM.md)<br>[Dots and Boxes](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/PROBLEM.md) | [slides](_exer/e-06-adversarial-search-(games)/e-06-adversarial-search-(games).pdf) | **TTT:** [C++](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/CPP/) · [Java](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/JAVA/) · [Python](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PYTHON/) · [README](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/SOLUTION.md)<br>**D&B:** [Python](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/PYTHON/) · [README](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/SOLUTION.md) |
 | E05 | Genetic Algorithms | [Travelling Salesman Problem (TSP)](_exer/e-05-genetic-algorithms/TSP/PROBLEM.md) | [slides](_exer/e-05-genetic-algorithms/e-05-genetic-algorithms-slides.pdf)<br>[data/](_exer/e-05-genetic-algorithms/TSP/data/) | [C++](_exer/e-05-genetic-algorithms/TSP/cpp/) · [Java](_exer/e-05-genetic-algorithms/TSP/java/) · [Python](_exer/e-05-genetic-algorithms/TSP/python/)<br>[README](_exer/e-05-genetic-algorithms/TSP/README.md) · [SOLUTION](_exer/e-05-genetic-algorithms/TSP/SOLUTION.md) |
 | E04 | Constraint Satisfaction Problems | [N-Queens](_exer/e-04-constraint-satisfaction-problems/PROBLEM.md) | [slides-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/e-04-constraint-satisfaction-problems-slides.pdf)<br>[is-e-04-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/is-e-04-(2021-10-25).pdf) | [C++](_exer/e-04-constraint-satisfaction-problems/cpp/) · [Java](_exer/e-04-constraint-satisfaction-problems/java/) · [Python](_exer/e-04-constraint-satisfaction-problems/python/)<br>[SOLUTION.md](_exer/e-04-constraint-satisfaction-problems/SOLUTION.md) · [ANALYSIS.md](_exer/e-04-constraint-satisfaction-problems/ANALYSIS.md) |
@@ -95,9 +95,9 @@ No content yet.
 ## E07 — Introduction to Machine Learning
 
 **Problem:** —  
-**Docs:** —
+**Docs:** [Slides](_exer/e-07-machine-learning-intro/e-07-machine-learning-intro.pdf)
 
-No content yet.
+Lecture slides covering core ML concepts: supervised vs. unsupervised learning, classification, regression, model evaluation, and an overview of algorithms covered in E08–E12.
 
 ---
 
