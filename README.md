@@ -33,7 +33,7 @@
 | E12 | Neural Networks | — | — | — |
 | E11 | kMeans | — | — | — |
 | E10 | Decision Tree | — | — | — |
-| E09 | Naive Bayes Classifier | — | — | — |
+| E09 | Naive Bayes Classifier | — | [slides-(2021-11-30)](_exer/e-09-naive-bayes-classifier/e-09-naive-bayes-classifier-(slides).pdf) | — |
 | E08 | k-Nearest Neighbours | — | [slides-(2021-11-22)](_exer/e-08-k-nearest-neighbours/e-08-k-nearest-neighbours-(slides).pdf) | — |
 | E07 | Introduction to Machine Learning | — | [slides-(2021-11-15)](_exer/e-07-machine-learning-intro/e-07-machine-learning-intro-(slides).pdf) | — |
 | E06 | Adversarial Search (Games) | [Tic-Tac-Toe](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PROBLEM.md)<br>[Dots and Boxes](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/PROBLEM.md) | [slides-(2021-11-08)](_exer/e-06-adversarial-search-(games)/e-06-adversarial-search-(games).pdf) | **TTT:** [C++](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/CPP/) · [Java](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/JAVA/) · [Python](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PYTHON/) · [README](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/SOLUTION.md)<br>**D&B:** [Python](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/PYTHON/) · [README](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/SOLUTION.md) |
@@ -77,9 +77,9 @@ No content yet.
 ## E09 — Naive Bayes Classifier
 
 **Problem:** —  
-**Docs:** —
+**Docs:** [Slides](_exer/e-09-naive-bayes-classifier/e-09-naive-bayes-classifier-(slides).pdf)
 
-No content yet.
+Lecture slides covering the Naïve Bayes probabilistic classification model: Bayes' theorem, the conditional independence assumption, the classifier decision rule, log-probabilities for numerical stability, and Gaussian Naïve Bayes for continuous features.
 
 ---
 
