@@ -17,13 +17,13 @@
 
 ## Course Topics
 
-| Problem Solving and Search | Machine Learning |
-|---|---|
-| Uninformed (Blind) Search | k-Nearest Neighbours |
-| Informed (Heuristic) Search | Naive Bayes Classifier |
-| Constraint Satisfaction Problems | Decision Tree |
-| Genetic Algorithms | kMeans |
-| Adversarial Search (Games) | Neural Networks |
+| Problem Solving and Search | Slide Date | Machine Learning | Slide Date |
+|---|---|---|---|
+| Uninformed (Blind) Search | 2021-10-07 | k-Nearest Neighbours | 2021-11-22 |
+| Informed (Heuristic) Search | 2021-10-18 | Naive Bayes Classifier | 2021-11-30 |
+| Constraint Satisfaction Problems | 2021-10-25 | Decision Tree | 2021-12-06 |
+| Genetic Algorithms | 2021-11-01 | kMeans | 2021-12-13 |
+| Adversarial Search (Games) | 2021-11-08 | Neural Networks | — |
 
 ---
 
