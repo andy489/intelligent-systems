@@ -17,13 +17,13 @@
 
 ## Course Topics
 
-| Problem Solving and Search | Slide Date | Machine Learning | Slide Date |
-|---|---|---|---|
-| Uninformed (Blind) Search | 2021-10-07 | k-Nearest Neighbours | 2021-11-22 |
-| Informed (Heuristic) Search | 2021-10-18 | Naive Bayes Classifier | 2021-11-30 |
-| Constraint Satisfaction Problems | 2021-10-25 | Decision Tree | 2021-12-06 |
-| Genetic Algorithms | 2021-11-01 | kMeans | 2021-12-13 |
-| Adversarial Search (Games) | 2021-11-08 | Neural Networks | — |
+| # | Problem Solving and Search | Slide Date | # | Machine Learning | Slide Date |
+|---|---|---|---|---|---|
+| E02 | Uninformed (Blind) Search | 2021-10-07 | E08 | k-Nearest Neighbours | 2021-11-22 |
+| E03 | Informed (Heuristic) Search | 2021-10-18 | E09 | Naive Bayes Classifier | 2021-11-30 |
+| E04 | Constraint Satisfaction Problems | 2021-10-25 | E10 | Decision Tree | 2021-12-06 |
+| E05 | Genetic Algorithms | 2021-11-01 | E11 | kMeans | 2021-12-13 |
+| E06 | Adversarial Search (Games) | 2021-11-08 | E12 | Neural Networks | — |
 
 ---
 
