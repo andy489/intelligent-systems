@@ -32,7 +32,7 @@
 |---|---|---|---|---|
 | E12 | Neural Networks | — | — | — |
 | E11 | kMeans | [K-Means Clustering](_exer/e-11-k-means/PROBLEM.md) | [slides-(2021-12-13)](_exer/e-11-k-means/e-11-k-means-(slides).pdf) | [C++](_exer/e-11-k-means/cpp/) · [Java](_exer/e-11-k-means/java/) · [Python](_exer/e-11-k-means/python/)<br>[PROBLEM](_exer/e-11-k-means/PROBLEM.md) · [SOLUTION](_exer/e-11-k-means/SOLUTION.md) |
-| E10 | Decision Tree | — | [slides-(2021-12-06)](_exer/e-10-decision-trees/e-10-decision-trees-(slides).pdf) | — |
+| E10 | Decision Tree | [Play Tennis](_exer/e-10-decision-trees/PROBLEM.md) | [slides-(2021-12-06)](_exer/e-10-decision-trees/e-10-decision-trees-(slides).pdf) | [C++](_exer/e-10-decision-trees/cpp/) · [Java](_exer/e-10-decision-trees/java/) · [Python](_exer/e-10-decision-trees/python/)<br>[PROBLEM](_exer/e-10-decision-trees/PROBLEM.md) · [SOLUTION](_exer/e-10-decision-trees/SOLUTION.md) |
 | E09 | Naive Bayes Classifier | [Congressional Voting Records](_exer/e-09-naive-bayes-classifier/voting/PROBLEM.md) | [slides-(2021-11-30)](_exer/e-09-naive-bayes-classifier/e-09-naive-bayes-classifier-(slides).pdf) | [C++](_exer/e-09-naive-bayes-classifier/voting/cpp/) · [Java](_exer/e-09-naive-bayes-classifier/voting/java/) · [Python](_exer/e-09-naive-bayes-classifier/voting/python/)<br>[README](_exer/e-09-naive-bayes-classifier/voting/README.md) · [SOLUTION](_exer/e-09-naive-bayes-classifier/voting/SOLUTION.md) |
 | E08 | k-Nearest Neighbours | [k-d Tree Nearest Neighbour](_exer/e-08-k-nearest-neighbours/kd-tree/PROBLEM.md) | [slides-(2021-11-22)](_exer/e-08-k-nearest-neighbours/e-08-k-nearest-neighbours-(slides).pdf) | [C++](_exer/e-08-k-nearest-neighbours/kd-tree/cpp/) · [Java](_exer/e-08-k-nearest-neighbours/kd-tree/java/) · [Python](_exer/e-08-k-nearest-neighbours/kd-tree/python/)<br>[README](_exer/e-08-k-nearest-neighbours/kd-tree/README.md) · [SOLUTION](_exer/e-08-k-nearest-neighbours/kd-tree/SOLUTION.md) |
 | E07 | Introduction to Machine Learning | — | [slides-(2021-11-15)](_exer/e-07-machine-learning-intro/e-07-machine-learning-intro-(slides).pdf) | — |
@@ -92,8 +92,36 @@ python3 _exer/e-11-k-means/python/k_means.py _exer/e-11-k-means/datasets/normal/
 
 ## E10 — Decision Tree
 
-**Problem:** —  
-**Docs:** [Slides](_exer/e-10-decision-trees/e-10-decision-trees-(slides).pdf)
+**Problem:** [Play Tennis](_exer/e-10-decision-trees/PROBLEM.md)  
+**Docs:** [Slides-(2021-12-06)](_exer/e-10-decision-trees/e-10-decision-trees-(slides).pdf) · [SOLUTION](_exer/e-10-decision-trees/SOLUTION.md)  
+**Data:** [data/play_tennis.csv](_exer/e-10-decision-trees/data/play_tennis.csv) (14 instances, 4 attributes)
+
+Classify whether to play tennis given weather conditions.
+Solved with **ID3** (top-down induction using Information Gain / Entropy):
+
+- **Entropy** — H(S) = −Σ pᵢ log₂(pᵢ); measures impurity of a sample set
+- **Information Gain** — Gain(S,A) = H(S) − Σ (|Sᵥ|/|S|)·H(Sᵥ); pick the attribute that reduces entropy most
+- **Recursive split** — build subtree for each value of the best attribute; stop at pure leaves or exhausted attributes
+- **Result** — Outlook at root (gain=0.247); Overcast → Yes leaf; Humidity under Sunny; Wind under Rain
+
+| Language | Source |
+|---|---|
+| C++ | [`cpp/decision_tree.cpp`](_exer/e-10-decision-trees/cpp/decision_tree.cpp) |
+| Java | [`java/src/DecisionTree.java`](_exer/e-10-decision-trees/java/src/DecisionTree.java) |
+| Python | [`python/decision_tree.py`](_exer/e-10-decision-trees/python/decision_tree.py) |
+
+```bash
+# C++
+clang++ -std=c++17 -O2 -o _exer/e-10-decision-trees/cpp/decision_tree _exer/e-10-decision-trees/cpp/decision_tree.cpp
+./cpp/decision_tree data/play_tennis.csv
+
+# Java
+javac _exer/e-10-decision-trees/java/src/DecisionTree.java -d _exer/e-10-decision-trees/java/out
+java -cp _exer/e-10-decision-trees/java/out DecisionTree data/play_tennis.csv
+
+# Python
+python3 _exer/e-10-decision-trees/python/decision_tree.py data/play_tennis.csv
+```
 
 ---
 
