@@ -33,8 +33,8 @@
 | E12 | Neural Networks | — | — | — |
 | E11 | kMeans | — | — | — |
 | E10 | Decision Tree | — | — | — |
-| E09 | Naive Bayes Classifier | — | [slides-(2021-11-30)](_exer/e-09-naive-bayes-classifier/e-09-naive-bayes-classifier-(slides).pdf) | — |
-| E08 | k-Nearest Neighbours | — | [slides-(2021-11-22)](_exer/e-08-k-nearest-neighbours/e-08-k-nearest-neighbours-(slides).pdf) | — |
+| E09 | Naive Bayes Classifier | [Congressional Voting Records](_exer/e-09-naive-bayes-classifier/voting/PROBLEM.md) | [slides-(2021-11-30)](_exer/e-09-naive-bayes-classifier/e-09-naive-bayes-classifier-(slides).pdf) | [C++](_exer/e-09-naive-bayes-classifier/voting/cpp/) · [Java](_exer/e-09-naive-bayes-classifier/voting/java/) · [Python](_exer/e-09-naive-bayes-classifier/voting/python/)<br>[README](_exer/e-09-naive-bayes-classifier/voting/README.md) · [SOLUTION](_exer/e-09-naive-bayes-classifier/voting/SOLUTION.md) |
+| E08 | k-Nearest Neighbours | [k-d Tree Nearest Neighbour](_exer/e-08-k-nearest-neighbours/kd-tree/PROBLEM.md) | [slides-(2021-11-22)](_exer/e-08-k-nearest-neighbours/e-08-k-nearest-neighbours-(slides).pdf) | [C++](_exer/e-08-k-nearest-neighbours/kd-tree/cpp/) · [Java](_exer/e-08-k-nearest-neighbours/kd-tree/java/) · [Python](_exer/e-08-k-nearest-neighbours/kd-tree/python/)<br>[README](_exer/e-08-k-nearest-neighbours/kd-tree/README.md) · [SOLUTION](_exer/e-08-k-nearest-neighbours/kd-tree/SOLUTION.md) |
 | E07 | Introduction to Machine Learning | — | [slides-(2021-11-15)](_exer/e-07-machine-learning-intro/e-07-machine-learning-intro-(slides).pdf) | — |
 | E06 | Adversarial Search (Games) | [Tic-Tac-Toe](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PROBLEM.md)<br>[Dots and Boxes](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/PROBLEM.md) | [slides-(2021-11-08)](_exer/e-06-adversarial-search-(games)/e-06-adversarial-search-(games).pdf) | **TTT:** [C++](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/CPP/) · [Java](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/JAVA/) · [Python](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PYTHON/) · [README](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/SOLUTION.md)<br>**D&B:** [Python](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/PYTHON/) · [README](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/SOLUTION.md) |
 | E05 | Genetic Algorithms | [Travelling Salesman Problem (TSP)](_exer/e-05-genetic-algorithms/TSP/PROBLEM.md) | [slides-(2021-11-01)](_exer/e-05-genetic-algorithms/e-05-genetic-algorithms-slides.pdf)<br>[data/](_exer/e-05-genetic-algorithms/TSP/data/) | [C++](_exer/e-05-genetic-algorithms/TSP/cpp/) · [Java](_exer/e-05-genetic-algorithms/TSP/java/) · [Python](_exer/e-05-genetic-algorithms/TSP/python/)<br>[README](_exer/e-05-genetic-algorithms/TSP/README.md) · [SOLUTION](_exer/e-05-genetic-algorithms/TSP/SOLUTION.md) |
@@ -76,19 +76,81 @@ No content yet.
 
 ## E09 — Naive Bayes Classifier
 
-**Problem:** —  
-**Docs:** [Slides](_exer/e-09-naive-bayes-classifier/e-09-naive-bayes-classifier-(slides).pdf)
+**Problem:** [Congressional Voting Records](_exer/e-09-naive-bayes-classifier/voting/PROBLEM.md)  
+**Docs:** [Slides](_exer/e-09-naive-bayes-classifier/e-09-naive-bayes-classifier-(slides).pdf) · [README](_exer/e-09-naive-bayes-classifier/voting/README.md) · [SOLUTION](_exer/e-09-naive-bayes-classifier/voting/SOLUTION.md)  
+**Data:** [data/](_exer/e-09-naive-bayes-classifier/voting/data/) (UCI Congressional Voting Records — 435 instances, 16 votes + class)
 
-Lecture slides covering the Naïve Bayes probabilistic classification model: Bayes' theorem, the conditional independence assumption, the classifier decision rule, log-probabilities for numerical stability, and Gaussian Naïve Bayes for continuous features.
+Classify US House members as Democrat or Republican based on 16 votes, evaluated with **10-fold cross-validation**.
+Solved with a **Naïve Bayes Classifier** using Laplace smoothing:
+
+- **Preprocessing** — treat `y`, `n`, `?` as three distinct values (no imputation)
+- **Laplace smoothing** (α=1, K=3) — avoids zero-probability issues for unseen vote values
+- **Log probabilities** — prevents floating-point underflow over 16 attributes
+- **10-fold CV** — dataset shuffled (seed 42), split into 10 equal folds; each fold used once as test set
+- **Mean accuracy ~90%** across all three implementations
+
+| Language | Source |
+|---|---|
+| C++ | [`cpp/naive_bayes.cpp`](_exer/e-09-naive-bayes-classifier/voting/cpp/naive_bayes.cpp) |
+| Java | [`java/src/NaiveBayes.java`](_exer/e-09-naive-bayes-classifier/voting/java/src/NaiveBayes.java) |
+| Python | [`python/naive_bayes.py`](_exer/e-09-naive-bayes-classifier/voting/python/naive_bayes.py) |
+
+```bash
+# Python
+python3 _exer/e-09-naive-bayes-classifier/voting/python/naive_bayes.py
+
+# Java
+javac _exer/e-09-naive-bayes-classifier/voting/java/src/NaiveBayes.java -d _exer/e-09-naive-bayes-classifier/voting/java/out
+java -cp _exer/e-09-naive-bayes-classifier/voting/java/out NaiveBayes
+
+# C++
+g++ -std=c++17 -O2 -o _exer/e-09-naive-bayes-classifier/voting/cpp/naive_bayes _exer/e-09-naive-bayes-classifier/voting/cpp/naive_bayes.cpp
+_exer/e-09-naive-bayes-classifier/voting/cpp/naive_bayes
+```
 
 ---
 
 ## E08 — k-Nearest Neighbours
 
-**Problem:** —  
-**Docs:** [Slides-(2021-11-21)](_exer/e-08-k-nearest-neighbours/e-08-k-nearest-neighbours-(slides).pdf)
+**Problem:** [k-d Tree Nearest Neighbour](_exer/e-08-k-nearest-neighbours/kd-tree/PROBLEM.md)  
+**Docs:** [Slides-(2021-11-21)](_exer/e-08-k-nearest-neighbours/e-08-k-nearest-neighbours-(slides).pdf) · [README](_exer/e-08-k-nearest-neighbours/kd-tree/README.md) · [SOLUTION](_exer/e-08-k-nearest-neighbours/kd-tree/SOLUTION.md)
 
-No content yet.
+Given N 2D points, answer Q nearest-neighbour queries efficiently.
+Solved with a **k-d tree** using median-split construction and branch-and-bound search:
+
+- **Construction** — recursively splits on alternating x/y axis at the median; O(n log n) build time
+- **Search** — descends to the nearest leaf, then backtracks only if the distance to the splitting hyperplane is less than the current best; O(log n) average query time
+- **Pruning** — far subtrees are skipped when `|diff to split plane| ≥ bestDist`, avoiding unnecessary distance calculations
+
+| Language | Source |
+|---|---|
+| C++ | [`cpp/kd_tree.cpp`](_exer/e-08-k-nearest-neighbours/kd-tree/cpp/kd_tree.cpp) |
+| Java | [`java/src/KdTree.java`](_exer/e-08-k-nearest-neighbours/kd-tree/java/src/KdTree.java) |
+| Python | [`python/kd_tree.py`](_exer/e-08-k-nearest-neighbours/kd-tree/python/kd_tree.py) |
+
+```bash
+INPUT="5
+2.0 3.0
+5.0 4.0
+9.0 1.0
+4.0 7.0
+8.0 8.0
+3
+1.0 2.0
+9.0 3.0
+5.0 5.0"
+
+# Python
+echo "$INPUT" | python3 _exer/e-08-k-nearest-neighbours/kd-tree/python/kd_tree.py
+
+# Java
+javac _exer/e-08-k-nearest-neighbours/kd-tree/java/src/KdTree.java -d _exer/e-08-k-nearest-neighbours/kd-tree/java/out
+echo "$INPUT" | java -cp _exer/e-08-k-nearest-neighbours/kd-tree/java/out KdTree
+
+# C++
+g++ -std=c++17 -O2 -o /tmp/kd_tree _exer/e-08-k-nearest-neighbours/kd-tree/cpp/kd_tree.cpp
+echo "$INPUT" | /tmp/kd_tree
+```
 
 ---
 
