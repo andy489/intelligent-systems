@@ -1,47 +1,54 @@
 # Intelligent Systems
 
-> Course exercises covering search algorithms, constraint satisfaction, genetic algorithms, games, and machine learning.
+<div align="center">
 
-**Textbook:** Stuart Russell & Peter Norvig — *Artificial Intelligence: A Modern Approach*, Prentice Hall ([PDF](artificial-intelligence-a-modern-approach-3rd-edition.pdf) · [aima.eecs.berkeley.edu](http://aima.eecs.berkeley.edu/))  
-**Algorithms:** [algorithms-pseudo-code.pdf](algorithms-pseudo-code.pdf)  
-**Figures:** [global-figures.pdf](global-figures.pdf)
+![Problem Solving](https://img.shields.io/badge/Problem%20Solving%20%26%20Search-5%20topics-4A90D9?style=for-the-badge)
+![Machine Learning](https://img.shields.io/badge/Machine%20Learning-5%20topics-27AE60?style=for-the-badge)
+
+</div>
+
+---
+
+> **Textbook:** Stuart Russell & Peter Norvig — *Artificial Intelligence: A Modern Approach*, Prentice Hall ([PDF](artificial-intelligence-a-modern-approach-3rd-edition.pdf) · [aima.eecs.berkeley.edu](http://aima.eecs.berkeley.edu/))  
+> **Algorithms:** [algorithms-pseudo-code.pdf](algorithms-pseudo-code.pdf)  
+> **Figures:** [global-figures.pdf](global-figures.pdf)
 
 ---
 
 ## Course Topics
 
-| Problem Solving and Search | Machine Learning |
+| 🔍 Problem Solving and Search | 🤖 Machine Learning |
 |---|---|
-| Uninformed (Blind) Search | k-Nearest Neighbours |
-| Informed (Heuristic) Search | Naive Bayes Classifier |
-| Constraint Satisfaction Problems | Decision Tree |
-| Genetic Algorithms | kMeans |
-| Adversarial Search (Games) | Neural Networks |
+| 🌐 Uninformed (Blind) Search | 📍 k-Nearest Neighbours |
+| 🧭 Informed (Heuristic) Search | 📊 Naive Bayes Classifier |
+| 🔒 Constraint Satisfaction Problems | 🌳 Decision Tree |
+| 🧬 Genetic Algorithms | 🎯 kMeans |
+| ♟️ Adversarial Search (Games) | 🧠 Neural Networks |
 
 ---
 
 ## Exercise Sheets
 
-| # | Topic | Problem | Exercise Sheet | Solutions |
-|---|---|---|---|---|
-| E12 | Neural Networks | — | — | — |
-| E11 | kMeans | [K-Means Clustering](_exer/e-11-k-means/PROBLEM.md) | [slides-(2021-12-13)](_exer/e-11-k-means/e-11-k-means-(slides).pdf) | [C++](_exer/e-11-k-means/cpp/) · [Java](_exer/e-11-k-means/java/) · [Python](_exer/e-11-k-means/python/)<br>[PROBLEM](_exer/e-11-k-means/PROBLEM.md) · [SOLUTION](_exer/e-11-k-means/SOLUTION.md) |
-| E10 | Decision Tree | [Play Tennis](_exer/e-10-decision-trees/PROBLEM.md) | [slides-(2021-12-06)](_exer/e-10-decision-trees/e-10-decision-trees-(slides).pdf) | [C++](_exer/e-10-decision-trees/cpp/) · [Java](_exer/e-10-decision-trees/java/) · [Python](_exer/e-10-decision-trees/python/)<br>[PROBLEM](_exer/e-10-decision-trees/PROBLEM.md) · [SOLUTION](_exer/e-10-decision-trees/SOLUTION.md) |
-| E09 | Naive Bayes Classifier | [Congressional Voting Records](_exer/e-09-naive-bayes-classifier/voting/PROBLEM.md) | [slides-(2021-11-30)](_exer/e-09-naive-bayes-classifier/e-09-naive-bayes-classifier-(slides).pdf) | [C++](_exer/e-09-naive-bayes-classifier/voting/cpp/) · [Java](_exer/e-09-naive-bayes-classifier/voting/java/) · [Python](_exer/e-09-naive-bayes-classifier/voting/python/)<br>[README](_exer/e-09-naive-bayes-classifier/voting/README.md) · [SOLUTION](_exer/e-09-naive-bayes-classifier/voting/SOLUTION.md) |
-| E08 | k-Nearest Neighbours | [k-d Tree Nearest Neighbour](_exer/e-08-k-nearest-neighbours/kd-tree/PROBLEM.md) | [slides-(2021-11-22)](_exer/e-08-k-nearest-neighbours/e-08-k-nearest-neighbours-(slides).pdf) | [C++](_exer/e-08-k-nearest-neighbours/kd-tree/cpp/) · [Java](_exer/e-08-k-nearest-neighbours/kd-tree/java/) · [Python](_exer/e-08-k-nearest-neighbours/kd-tree/python/)<br>[README](_exer/e-08-k-nearest-neighbours/kd-tree/README.md) · [SOLUTION](_exer/e-08-k-nearest-neighbours/kd-tree/SOLUTION.md) |
-| E07 | Introduction to Machine Learning | — | [slides-(2021-11-15)](_exer/e-07-machine-learning-intro/e-07-machine-learning-intro-(slides).pdf) | — |
-| E06 | Adversarial Search (Games) | [Tic-Tac-Toe](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PROBLEM.md)<br>[Dots and Boxes](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/PROBLEM.md) | [slides-(2021-11-08)](_exer/e-06-adversarial-search-(games)/e-06-adversarial-search-(games).pdf) | **TTT:** [C++](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/CPP/) · [Java](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/JAVA/) · [Python](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PYTHON/) · [README](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/SOLUTION.md)<br>**D&B:** [Python](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/PYTHON/) · [README](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/SOLUTION.md) |
-| E05 | Genetic Algorithms | [Travelling Salesman Problem (TSP)](_exer/e-05-genetic-algorithms/TSP/PROBLEM.md) | [slides-(2021-11-01)](_exer/e-05-genetic-algorithms/e-05-genetic-algorithms-slides.pdf)<br>[data/](_exer/e-05-genetic-algorithms/TSP/data/) | [C++](_exer/e-05-genetic-algorithms/TSP/cpp/) · [Java](_exer/e-05-genetic-algorithms/TSP/java/) · [Python](_exer/e-05-genetic-algorithms/TSP/python/)<br>[README](_exer/e-05-genetic-algorithms/TSP/README.md) · [SOLUTION](_exer/e-05-genetic-algorithms/TSP/SOLUTION.md) |
-| E04 | Constraint Satisfaction Problems | [N-Queens](_exer/e-04-constraint-satisfaction-problems/PROBLEM.md) | [slides-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/e-04-constraint-satisfaction-problems-slides.pdf)<br>[is-e-04-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/is-e-04-(2021-10-25).pdf) | [C++](_exer/e-04-constraint-satisfaction-problems/cpp/) · [Java](_exer/e-04-constraint-satisfaction-problems/java/) · [Python](_exer/e-04-constraint-satisfaction-problems/python/)<br>[SOLUTION.md](_exer/e-04-constraint-satisfaction-problems/SOLUTION.md) · [ANALYSIS.md](_exer/e-04-constraint-satisfaction-problems/ANALYSIS.md) |
-| E03 | Informed (Heuristic) Search — IDA* | [N-Sliding Blocks Puzzle](_exer/e-03-informed-heuristic-search/PROBLEM.md) | [slides-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf)<br>[romania-map](_exer/e-03-informed-heuristic-search/romania-map.pdf)<br>[is-e-03-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf)<br>[data/](_exer/e-03-informed-heuristic-search/data/) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/)<br>[SOLUTION.md](_exer/e-03-informed-heuristic-search/data/SOLUTION.md) · [ANALYSIS.md](_exer/e-03-informed-heuristic-search/data/ANALYSIS.md) |
-| E02 | Uninformed (Blind) Search | [Frog Leap Puzzle](_exer/e-02-uninformed-blind-search/PROBLEM.md) | [slides-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf)<br>[is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf)<br>[is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) | [C++](_exer/e-02-uninformed-blind-search/cpp/) · [Java](_exer/e-02-uninformed-blind-search/java/) · [Python](_exer/e-02-uninformed-blind-search/python/)<br>[SOLUTION.md](_exer/e-02-uninformed-blind-search/SOLUTION.md) |
-| E01 | Introduction | — | [slides-(2021-10-07)](_exer/e-01-introduction/is-e-01-intro-slides.pdf) · [is-e-01-(2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) | [README](_exer/e-01-introduction/README.md) |
+| # | Topic | Problem | Exercise Sheet | Solutions | Status |
+|---|---|---|---|---|---|
+| E12 | Neural Networks | — | — | — | ![Pending](https://img.shields.io/badge/-pending-lightgrey?style=flat-square) |
+| E11 | kMeans | [K-Means Clustering](_exer/e-11-k-means/PROBLEM.md) | [slides-(2021-12-13)](_exer/e-11-k-means/e-11-k-means-(slides).pdf) | [C++](_exer/e-11-k-means/cpp/) · [Java](_exer/e-11-k-means/java/) · [Python](_exer/e-11-k-means/python/)<br>[PROBLEM](_exer/e-11-k-means/PROBLEM.md) · [SOLUTION](_exer/e-11-k-means/SOLUTION.md) | ![Done](https://img.shields.io/badge/-done-27AE60?style=flat-square) |
+| E10 | Decision Tree | [Play Tennis](_exer/e-10-decision-trees/PROBLEM.md) | [slides-(2021-12-06)](_exer/e-10-decision-trees/e-10-decision-trees-(slides).pdf) | [C++](_exer/e-10-decision-trees/cpp/) · [Java](_exer/e-10-decision-trees/java/) · [Python](_exer/e-10-decision-trees/python/)<br>[PROBLEM](_exer/e-10-decision-trees/PROBLEM.md) · [SOLUTION](_exer/e-10-decision-trees/SOLUTION.md) | ![Done](https://img.shields.io/badge/-done-27AE60?style=flat-square) |
+| E09 | Naive Bayes Classifier | [Congressional Voting Records](_exer/e-09-naive-bayes-classifier/voting/PROBLEM.md) | [slides-(2021-11-30)](_exer/e-09-naive-bayes-classifier/e-09-naive-bayes-classifier-(slides).pdf) | [C++](_exer/e-09-naive-bayes-classifier/voting/cpp/) · [Java](_exer/e-09-naive-bayes-classifier/voting/java/) · [Python](_exer/e-09-naive-bayes-classifier/voting/python/)<br>[README](_exer/e-09-naive-bayes-classifier/voting/README.md) · [SOLUTION](_exer/e-09-naive-bayes-classifier/voting/SOLUTION.md) | ![Done](https://img.shields.io/badge/-done-27AE60?style=flat-square) |
+| E08 | k-Nearest Neighbours | [k-d Tree Nearest Neighbour](_exer/e-08-k-nearest-neighbours/kd-tree/PROBLEM.md) | [slides-(2021-11-22)](_exer/e-08-k-nearest-neighbours/e-08-k-nearest-neighbours-(slides).pdf) | [C++](_exer/e-08-k-nearest-neighbours/kd-tree/cpp/) · [Java](_exer/e-08-k-nearest-neighbours/kd-tree/java/) · [Python](_exer/e-08-k-nearest-neighbours/kd-tree/python/)<br>[README](_exer/e-08-k-nearest-neighbours/kd-tree/README.md) · [SOLUTION](_exer/e-08-k-nearest-neighbours/kd-tree/SOLUTION.md) | ![Done](https://img.shields.io/badge/-done-27AE60?style=flat-square) |
+| E07 | Introduction to Machine Learning | — | [slides-(2021-11-15)](_exer/e-07-machine-learning-intro/e-07-machine-learning-intro-(slides).pdf) | — | ![Pending](https://img.shields.io/badge/-pending-lightgrey?style=flat-square) |
+| E06 | Adversarial Search (Games) | [Tic-Tac-Toe](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PROBLEM.md)<br>[Dots and Boxes](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/PROBLEM.md) | [slides-(2021-11-08)](_exer/e-06-adversarial-search-(games)/e-06-adversarial-search-(games).pdf) | **TTT:** [C++](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/CPP/) · [Java](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/JAVA/) · [Python](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PYTHON/) · [README](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/SOLUTION.md)<br>**D&B:** [Python](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/PYTHON/) · [README](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/SOLUTION.md) | ![Done](https://img.shields.io/badge/-done-27AE60?style=flat-square) |
+| E05 | Genetic Algorithms | [Travelling Salesman Problem (TSP)](_exer/e-05-genetic-algorithms/TSP/PROBLEM.md) | [slides-(2021-11-01)](_exer/e-05-genetic-algorithms/e-05-genetic-algorithms-slides.pdf)<br>[data/](_exer/e-05-genetic-algorithms/TSP/data/) | [C++](_exer/e-05-genetic-algorithms/TSP/cpp/) · [Java](_exer/e-05-genetic-algorithms/TSP/java/) · [Python](_exer/e-05-genetic-algorithms/TSP/python/)<br>[README](_exer/e-05-genetic-algorithms/TSP/README.md) · [SOLUTION](_exer/e-05-genetic-algorithms/TSP/SOLUTION.md) | ![Done](https://img.shields.io/badge/-done-27AE60?style=flat-square) |
+| E04 | Constraint Satisfaction Problems | [N-Queens](_exer/e-04-constraint-satisfaction-problems/PROBLEM.md) | [slides-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/e-04-constraint-satisfaction-problems-slides.pdf)<br>[is-e-04-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/is-e-04-(2021-10-25).pdf) | [C++](_exer/e-04-constraint-satisfaction-problems/cpp/) · [Java](_exer/e-04-constraint-satisfaction-problems/java/) · [Python](_exer/e-04-constraint-satisfaction-problems/python/)<br>[SOLUTION.md](_exer/e-04-constraint-satisfaction-problems/SOLUTION.md) · [ANALYSIS.md](_exer/e-04-constraint-satisfaction-problems/ANALYSIS.md) | ![Done](https://img.shields.io/badge/-done-27AE60?style=flat-square) |
+| E03 | Informed (Heuristic) Search — IDA* | [N-Sliding Blocks Puzzle](_exer/e-03-informed-heuristic-search/PROBLEM.md) | [slides-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf)<br>[romania-map](_exer/e-03-informed-heuristic-search/romania-map.pdf)<br>[is-e-03-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf)<br>[data/](_exer/e-03-informed-heuristic-search/data/) | [C++](_exer/e-03-informed-heuristic-search/cpp/) · [Java](_exer/e-03-informed-heuristic-search/java/) · [Python](_exer/e-03-informed-heuristic-search/python/)<br>[SOLUTION.md](_exer/e-03-informed-heuristic-search/data/SOLUTION.md) · [ANALYSIS.md](_exer/e-03-informed-heuristic-search/data/ANALYSIS.md) | ![Done](https://img.shields.io/badge/-done-27AE60?style=flat-square) |
+| E02 | Uninformed (Blind) Search | [Frog Leap Puzzle](_exer/e-02-uninformed-blind-search/PROBLEM.md) | [slides-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf)<br>[is-e-02-pt-1-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf)<br>[is-e-02-pt-2-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) | [C++](_exer/e-02-uninformed-blind-search/cpp/) · [Java](_exer/e-02-uninformed-blind-search/java/) · [Python](_exer/e-02-uninformed-blind-search/python/)<br>[SOLUTION.md](_exer/e-02-uninformed-blind-search/SOLUTION.md) | ![Done](https://img.shields.io/badge/-done-27AE60?style=flat-square) |
+| E01 | Introduction | — | [slides-(2021-10-07)](_exer/e-01-introduction/is-e-01-intro-slides.pdf) · [is-e-01-(2021-10-07)](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) | [README](_exer/e-01-introduction/README.md) | ![Pending](https://img.shields.io/badge/-pending-lightgrey?style=flat-square) |
 
 > `is` = Intelligent Systems · `e` = Exercise · `pt` = Part · `(YYYY-MM-DD)` = date of issue · `slides` = lecture slides
 
 ---
 
-## E12 — Neural Networks
+## 🧠 E12 — Neural Networks
 
 **Problem:** —  
 **Docs:** —
@@ -50,7 +57,7 @@ No content yet.
 
 ---
 
-## E11 — kMeans
+## 🎯 E11 — kMeans
 
 **Problem:** [K-Means Clustering](_exer/e-11-k-means/PROBLEM.md)  
 **Docs:** [Slides-(2021-12-13)](_exer/e-11-k-means/e-11-k-means-(slides).pdf) · [SOLUTION](_exer/e-11-k-means/SOLUTION.md)  
@@ -84,7 +91,7 @@ java -cp _exer/e-11-k-means/java/out KMeans _exer/e-11-k-means/datasets/normal/n
 python3 _exer/e-11-k-means/python/k_means.py _exer/e-11-k-means/datasets/normal/normal.txt 3 _exer/e-11-k-means/output/result.csv
 ```
 
-## E10 — Decision Tree
+## 🌳 E10 — Decision Tree
 
 **Problem:** [Play Tennis](_exer/e-10-decision-trees/PROBLEM.md)  
 **Docs:** [Slides-(2021-12-06)](_exer/e-10-decision-trees/e-10-decision-trees-(slides).pdf) · [SOLUTION](_exer/e-10-decision-trees/SOLUTION.md)  
@@ -119,7 +126,7 @@ python3 _exer/e-10-decision-trees/python/decision_tree.py data/play_tennis.csv
 
 ---
 
-## E09 — Naive Bayes Classifier
+## 📊 E09 — Naive Bayes Classifier
 
 **Problem:** [Congressional Voting Records](_exer/e-09-naive-bayes-classifier/voting/PROBLEM.md)  
 **Docs:** [Slides](_exer/e-09-naive-bayes-classifier/e-09-naive-bayes-classifier-(slides).pdf) · [README](_exer/e-09-naive-bayes-classifier/voting/README.md) · [SOLUTION](_exer/e-09-naive-bayes-classifier/voting/SOLUTION.md)  
@@ -155,7 +162,7 @@ _exer/e-09-naive-bayes-classifier/voting/cpp/naive_bayes
 
 ---
 
-## E08 — k-Nearest Neighbours
+## 📍 E08 — k-Nearest Neighbours
 
 **Problem:** [k-d Tree Nearest Neighbour](_exer/e-08-k-nearest-neighbours/kd-tree/PROBLEM.md)  
 **Docs:** [Slides-(2021-11-21)](_exer/e-08-k-nearest-neighbours/e-08-k-nearest-neighbours-(slides).pdf) · [README](_exer/e-08-k-nearest-neighbours/kd-tree/README.md) · [SOLUTION](_exer/e-08-k-nearest-neighbours/kd-tree/SOLUTION.md)
@@ -199,7 +206,7 @@ echo "$INPUT" | /tmp/kd_tree
 
 ---
 
-## E07 — Introduction to Machine Learning
+## 📖 E07 — Introduction to Machine Learning
 
 **Problem:** —  
 **Docs:** [Slides-(2021-11-15)](_exer/e-07-machine-learning-intro/e-07-machine-learning-intro-(slides).pdf)
@@ -208,7 +215,7 @@ Lecture slides covering core ML concepts: supervised vs. unsupervised learning, 
 
 ---
 
-## E06 — Adversarial Search (Games)
+## ♟️ E06 — Adversarial Search (Games)
 
 **Docs:** [Slides-(2021-11-08)](_exer/e-06-adversarial-search-(games)/e-06-adversarial-search-(games).pdf)
 
@@ -266,7 +273,7 @@ python3 dots_and_boxes.py
 
 ---
 
-## E05 — Genetic Algorithms
+## 🧬 E05 — Genetic Algorithms
 
 **Problem:** Travelling Salesman Problem (TSP)  
 **Docs:** [Slides-(2021-11-01)](_exer/e-05-genetic-algorithms/e-05-genetic-algorithms-slides.pdf) · [PROBLEM](_exer/e-05-genetic-algorithms/TSP/PROBLEM.md) · [README](_exer/e-05-genetic-algorithms/TSP/README.md) · [SOLUTION](_exer/e-05-genetic-algorithms/TSP/SOLUTION.md)  
@@ -299,7 +306,7 @@ echo "2\n500" | ./tsp_ga
 
 ---
 
-## E04 — Constraint Satisfaction Problems
+## 🔒 E04 — Constraint Satisfaction Problems
 
 **Problem:** [N-Queens](_exer/e-04-constraint-satisfaction-problems/PROBLEM.md)  
 **Docs:** [Exercise Sheet](_exer/e-04-constraint-satisfaction-problems/is-e-04-(2021-10-25).pdf) · [Slides-(2021-10-25)](_exer/e-04-constraint-satisfaction-problems/e-04-constraint-satisfaction-problems-slides.pdf) · [README](_exer/e-04-constraint-satisfaction-problems/README.md)
@@ -321,7 +328,7 @@ Solution explanation: [`SOLUTION.md`](_exer/e-04-constraint-satisfaction-problem
 
 ---
 
-## E03 — Informed (Heuristic) Search — IDA*
+## 🧭 E03 — Informed (Heuristic) Search — IDA*
 
 **Problem:** [N-Sliding Blocks Puzzle](_exer/e-03-informed-heuristic-search/PROBLEM.md)  
 **Docs:** [Exercise Sheet](_exer/e-03-informed-heuristic-search/is-e-03-(2021-10-18).pdf) · [Slides-(2021-10-18)](_exer/e-03-informed-heuristic-search/is-e-03-informed-search-slides.pdf) · [Romania Map](_exer/e-03-informed-heuristic-search/romania-map.pdf) · [README](_exer/e-03-informed-heuristic-search/README.md)  
@@ -347,7 +354,7 @@ Runners: [`data/run_cpp.py`](_exer/e-03-informed-heuristic-search/data/run_cpp.p
 
 ---
 
-## E02 — Uninformed Search
+## 🌐 E02 — Uninformed Search
 
 **Problem:** [Frog Leap Puzzle](_exer/e-02-uninformed-blind-search/PROBLEM.md)  
 **Docs:** [Part 1 — Blind Search](_exer/e-02-uninformed-blind-search/is-e-02-pt-1-(2021-10-07).pdf) · [Part 2 — Warm-Up](_exer/e-02-uninformed-blind-search/is-e-02-pt-2-(2021-10-07).pdf) · [Slides-(2021-10-07)](_exer/e-02-uninformed-blind-search/is-e-02-uninformed-search-slides.pdf) · [README](_exer/e-02-uninformed-blind-search/README.md) · [SOLUTION](_exer/e-02-uninformed-blind-search/SOLUTION.md)
@@ -363,7 +370,7 @@ Two approaches — DFS search and an O(N²) analytical linear solution.
 
 ---
 
-## E01 — Introduction
+## 📌 E01 — Introduction
 
 **Problem:** —  
 **Docs:** [Exercise Sheet](_exer/e-01-introduction/is-e-01-(2021-10-07).pdf) · [Slides-(2021-10-07)](_exer/e-01-introduction/is-e-01-intro-slides.pdf) · [README](_exer/e-01-introduction/README.md)
