@@ -31,8 +31,8 @@
 | # | Topic | Problem | Exercise Sheet | Solutions |
 |---|---|---|---|---|
 | E12 | Neural Networks | — | — | — |
-| E11 | kMeans | [K-Means Clustering](_exer/e-11-k-means/PROBLEM.md) | [slides](_exer/e-11-k-means/e-11-k-means-(slides).pdf) | [C++](_exer/e-11-k-means/cpp/) · [Java](_exer/e-11-k-means/java/) · [Python](_exer/e-11-k-means/python/)<br>[PROBLEM](_exer/e-11-k-means/PROBLEM.md) · [SOLUTION](_exer/e-11-k-means/SOLUTION.md) |
-| E10 | Decision Tree | — | [slides](_exer/e-10-decision-trees/e-10-decision-trees-(slides).pdf) | — |
+| E11 | kMeans | [K-Means Clustering](_exer/e-11-k-means/PROBLEM.md) | [slides-(2021-12-13)](_exer/e-11-k-means/e-11-k-means-(slides).pdf) | [C++](_exer/e-11-k-means/cpp/) · [Java](_exer/e-11-k-means/java/) · [Python](_exer/e-11-k-means/python/)<br>[PROBLEM](_exer/e-11-k-means/PROBLEM.md) · [SOLUTION](_exer/e-11-k-means/SOLUTION.md) |
+| E10 | Decision Tree | — | [slides-(2021-12-06)](_exer/e-10-decision-trees/e-10-decision-trees-(slides).pdf) | — |
 | E09 | Naive Bayes Classifier | [Congressional Voting Records](_exer/e-09-naive-bayes-classifier/voting/PROBLEM.md) | [slides-(2021-11-30)](_exer/e-09-naive-bayes-classifier/e-09-naive-bayes-classifier-(slides).pdf) | [C++](_exer/e-09-naive-bayes-classifier/voting/cpp/) · [Java](_exer/e-09-naive-bayes-classifier/voting/java/) · [Python](_exer/e-09-naive-bayes-classifier/voting/python/)<br>[README](_exer/e-09-naive-bayes-classifier/voting/README.md) · [SOLUTION](_exer/e-09-naive-bayes-classifier/voting/SOLUTION.md) |
 | E08 | k-Nearest Neighbours | [k-d Tree Nearest Neighbour](_exer/e-08-k-nearest-neighbours/kd-tree/PROBLEM.md) | [slides-(2021-11-22)](_exer/e-08-k-nearest-neighbours/e-08-k-nearest-neighbours-(slides).pdf) | [C++](_exer/e-08-k-nearest-neighbours/kd-tree/cpp/) · [Java](_exer/e-08-k-nearest-neighbours/kd-tree/java/) · [Python](_exer/e-08-k-nearest-neighbours/kd-tree/python/)<br>[README](_exer/e-08-k-nearest-neighbours/kd-tree/README.md) · [SOLUTION](_exer/e-08-k-nearest-neighbours/kd-tree/SOLUTION.md) |
 | E07 | Introduction to Machine Learning | — | [slides-(2021-11-15)](_exer/e-07-machine-learning-intro/e-07-machine-learning-intro-(slides).pdf) | — |
@@ -59,7 +59,7 @@ No content yet.
 ## E11 — kMeans
 
 **Problem:** [K-Means Clustering](_exer/e-11-k-means/PROBLEM.md)  
-**Docs:** [Slides](_exer/e-11-k-means/e-11-k-means-(slides).pdf) · [SOLUTION](_exer/e-11-k-means/SOLUTION.md)  
+**Docs:** [Slides-(2021-12-13)](_exer/e-11-k-means/e-11-k-means-(slides).pdf) · [SOLUTION](_exer/e-11-k-means/SOLUTION.md)  
 **Data:** [datasets/](_exer/e-11-k-means/datasets/) (normal — 100 pts, unbalance — 6500 pts)  
 **Output:** [output/](_exer/e-11-k-means/output/) (scatter plots + result CSV)
 
