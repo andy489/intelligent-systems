@@ -31,7 +31,7 @@
 
 | # | Topic | Problem | Exercise Sheet | Solutions | Status |
 |---|---|---|---|---|---|
-| E12 | Neural Networks | — | — | — | ![Pending](https://img.shields.io/badge/-pending-lightgrey?style=flat-square) |
+| E12 | Neural Networks | — | — | — | ![In Progress](https://img.shields.io/badge/-in%20progress-E67E22?style=flat-square) |
 | E11 | kMeans | [K-Means Clustering](_exer/e-11-k-means/PROBLEM.md) | [slides-(2021-12-13)](_exer/e-11-k-means/e-11-k-means-(slides).pdf) | [C++](_exer/e-11-k-means/cpp/) · [Java](_exer/e-11-k-means/java/) · [Python](_exer/e-11-k-means/python/)<br>[PROBLEM](_exer/e-11-k-means/PROBLEM.md) · [SOLUTION](_exer/e-11-k-means/SOLUTION.md) | ![Done](https://img.shields.io/badge/-done-27AE60?style=flat-square) |
 | E10 | Decision Tree | [Play Tennis](_exer/e-10-decision-trees/PROBLEM.md) | [slides-(2021-12-06)](_exer/e-10-decision-trees/e-10-decision-trees-(slides).pdf) | [C++](_exer/e-10-decision-trees/cpp/) · [Java](_exer/e-10-decision-trees/java/) · [Python](_exer/e-10-decision-trees/python/)<br>[PROBLEM](_exer/e-10-decision-trees/PROBLEM.md) · [SOLUTION](_exer/e-10-decision-trees/SOLUTION.md) | ![Done](https://img.shields.io/badge/-done-27AE60?style=flat-square) |
 | E09 | Naive Bayes Classifier | [Congressional Voting Records](_exer/e-09-naive-bayes-classifier/voting/PROBLEM.md) | [slides-(2021-11-30)](_exer/e-09-naive-bayes-classifier/e-09-naive-bayes-classifier-(slides).pdf) | [C++](_exer/e-09-naive-bayes-classifier/voting/cpp/) · [Java](_exer/e-09-naive-bayes-classifier/voting/java/) · [Python](_exer/e-09-naive-bayes-classifier/voting/python/)<br>[README](_exer/e-09-naive-bayes-classifier/voting/README.md) · [SOLUTION](_exer/e-09-naive-bayes-classifier/voting/SOLUTION.md) | ![Done](https://img.shields.io/badge/-done-27AE60?style=flat-square) |
@@ -50,10 +50,10 @@
 
 ## 🧠 E12 — Neural Networks
 
+> ![In Progress](https://img.shields.io/badge/-in%20progress-E67E22?style=flat-square) Work in progress.
+
 **Problem:** —  
 **Docs:** —
-
-No content yet.
 
 ---
 
