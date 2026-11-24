@@ -34,7 +34,7 @@
 | E11 | kMeans | — | — | — |
 | E10 | Decision Tree | — | — | — |
 | E09 | Naive Bayes Classifier | — | — | — |
-| E08 | k-Nearest Neighbours | — | [slides](_exer/e-08-k-nearest-neighbours/e-08-k-nearest-neighbours-(slides).pdf) | — |
+| E08 | k-Nearest Neighbours | — | [slides-(2021-11-21)](_exer/e-08-k-nearest-neighbours/e-08-k-nearest-neighbours-(slides).pdf) | — |
 | E07 | Introduction to Machine Learning | — | [slides-(2021-11-15)](_exer/e-07-machine-learning-intro/e-07-machine-learning-intro-(slides).pdf) | — |
 | E06 | Adversarial Search (Games) | [Tic-Tac-Toe](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PROBLEM.md)<br>[Dots and Boxes](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/PROBLEM.md) | [slides-(2021-11-08)](_exer/e-06-adversarial-search-(games)/e-06-adversarial-search-(games).pdf) | **TTT:** [C++](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/CPP/) · [Java](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/JAVA/) · [Python](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/PYTHON/) · [README](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/TIC-TAC-TOE/SOLUTION.md)<br>**D&B:** [Python](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/PYTHON/) · [README](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/README.md) · [SOLUTION](_exer/e-06-adversarial-search-(games)/DOTS-AND-BOXES/SOLUTION.md) |
 | E05 | Genetic Algorithms | [Travelling Salesman Problem (TSP)](_exer/e-05-genetic-algorithms/TSP/PROBLEM.md) | [slides-(2021-11-01)](_exer/e-05-genetic-algorithms/e-05-genetic-algorithms-slides.pdf)<br>[data/](_exer/e-05-genetic-algorithms/TSP/data/) | [C++](_exer/e-05-genetic-algorithms/TSP/cpp/) · [Java](_exer/e-05-genetic-algorithms/TSP/java/) · [Python](_exer/e-05-genetic-algorithms/TSP/python/)<br>[README](_exer/e-05-genetic-algorithms/TSP/README.md) · [SOLUTION](_exer/e-05-genetic-algorithms/TSP/SOLUTION.md) |
@@ -86,7 +86,7 @@ No content yet.
 ## E08 — k-Nearest Neighbours
 
 **Problem:** —  
-**Docs:** [Slides](_exer/e-08-k-nearest-neighbours/e-08-k-nearest-neighbours-(slides).pdf)
+**Docs:** [Slides-(2021-11-21)](_exer/e-08-k-nearest-neighbours/e-08-k-nearest-neighbours-(slides).pdf)
 
 No content yet.
 
