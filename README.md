@@ -10,19 +10,13 @@
 
 ## Course Topics
 
-### Problem Solving and Search
-- Uninformed (Blind) Search
-- Informed (Heuristic) Search
-- Constraint Satisfaction Problems
-- Genetic Algorithms
-- Adversarial Search (Games)
-
-### Machine Learning
-- k-Nearest Neighbours
-- Naive Bayes Classifier
-- Decision Tree
-- kMeans
-- Neural Networks
+| Problem Solving and Search | Machine Learning |
+|---|---|
+| Uninformed (Blind) Search | k-Nearest Neighbours |
+| Informed (Heuristic) Search | Naive Bayes Classifier |
+| Constraint Satisfaction Problems | Decision Tree |
+| Genetic Algorithms | kMeans |
+| Adversarial Search (Games) | Neural Networks |
 
 ---
 
