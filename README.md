@@ -31,7 +31,7 @@
 
 | # | Topic | Problem | Exercise Sheet | Solutions |
 |---|---|---|---|---|
-| E12 | Neural Networks | *to be done* | *to be done* | *to be done* |
+| E12 | Neural Networks | [Boolean Functions via Backpropagation](_exer/e-12-neural-networks/PROBLEM.md) | [slides](_exer/e-12-neural-networks/e-12-neural-networks-(slides).pdf) | [C++](_exer/e-12-neural-networks/cpp/) · [Java](_exer/e-12-neural-networks/java/) · [Python](_exer/e-12-neural-networks/python/)<br>[README](_exer/e-12-neural-networks/README.md) · [SOLUTION](_exer/e-12-neural-networks/SOLUTION.md) |
 | E11 | kMeans | [K-Means Clustering](_exer/e-11-k-means/PROBLEM.md) | [slides-(2021-12-13)](_exer/e-11-k-means/e-11-k-means-(slides).pdf) | [C++](_exer/e-11-k-means/cpp/) · [Java](_exer/e-11-k-means/java/) · [Python](_exer/e-11-k-means/python/)<br>[PROBLEM](_exer/e-11-k-means/PROBLEM.md) · [SOLUTION](_exer/e-11-k-means/SOLUTION.md) |
 | E10 | Decision Tree | [Play Tennis](_exer/e-10-decision-trees/PROBLEM.md) | [slides-(2021-12-06)](_exer/e-10-decision-trees/e-10-decision-trees-(slides).pdf) | [C++](_exer/e-10-decision-trees/cpp/) · [Java](_exer/e-10-decision-trees/java/) · [Python](_exer/e-10-decision-trees/python/)<br>[PROBLEM](_exer/e-10-decision-trees/PROBLEM.md) · [SOLUTION](_exer/e-10-decision-trees/SOLUTION.md) |
 | E09 | Naive Bayes Classifier | [Congressional Voting Records](_exer/e-09-naive-bayes-classifier/voting/PROBLEM.md) | [slides-(2021-11-30)](_exer/e-09-naive-bayes-classifier/e-09-naive-bayes-classifier-(slides).pdf) | [C++](_exer/e-09-naive-bayes-classifier/voting/cpp/) · [Java](_exer/e-09-naive-bayes-classifier/voting/java/) · [Python](_exer/e-09-naive-bayes-classifier/voting/python/)<br>[README](_exer/e-09-naive-bayes-classifier/voting/README.md) · [SOLUTION](_exer/e-09-naive-bayes-classifier/voting/SOLUTION.md) |
@@ -50,8 +50,40 @@
 
 ## 🧠 E12 — Neural Networks
 
-**Problem:** to be done  
-**Docs:** to be done
+**Problem:** [Boolean Functions via Backpropagation](_exer/e-12-neural-networks/PROBLEM.md)  
+**Docs:** [Slides](_exer/e-12-neural-networks/e-12-neural-networks-(slides).pdf) · [README](_exer/e-12-neural-networks/README.md) · [SOLUTION](_exer/e-12-neural-networks/SOLUTION.md) · [TESTS](_exer/e-12-neural-networks/TESTS.md)
+
+A self-learning neural network trained with **Backpropagation** that learns **AND**, **OR**, and **XOR** Boolean functions.
+XOR requires a hidden layer (not linearly separable) — solved with a 2-input → 4-hidden → 1-output architecture:
+
+- **Forward pass** — sigmoid activation `σ(x) = 1/(1+e^(−x))` on each hidden and output node
+- **Backpropagation** — output delta `δ_k = o_k(1−o_k)(t_k−o_k)`; hidden delta `δ_h = o_h(1−o_h)·Σ w_kh δ_k`
+- **Weight update** — `w_ij ← w_ij + η·δ_j·x_i + momentum·Δw_prev`
+- **Momentum** (0.7) — accelerates convergence and helps escape flat error regions
+- Converges in ~1 400–1 700 epochs for AND/OR, ~4 000–5 400 epochs for XOR
+
+| Language | Source |
+|---|---|
+| C++ | [`cpp/neural_network.cpp`](_exer/e-12-neural-networks/cpp/neural_network.cpp) |
+| Java | [`java/src/NeuralNetwork.java`](_exer/e-12-neural-networks/java/src/NeuralNetwork.java) |
+| Python | [`python/neural_network.py`](_exer/e-12-neural-networks/python/neural_network.py) |
+
+```bash
+# C++
+g++ -std=c++17 -O2 -o _exer/e-12-neural-networks/cpp/neural_network \
+    _exer/e-12-neural-networks/cpp/neural_network.cpp
+_exer/e-12-neural-networks/cpp/neural_network
+
+# Python
+python3 _exer/e-12-neural-networks/python/neural_network.py
+
+# Java
+javac _exer/e-12-neural-networks/java/src/Connection.java \
+      _exer/e-12-neural-networks/java/src/Neuron.java \
+      _exer/e-12-neural-networks/java/src/NeuralNetwork.java \
+      -d _exer/e-12-neural-networks/java/out
+java -cp _exer/e-12-neural-networks/java/out NeuralNetwork
+```
 
 ---
 
