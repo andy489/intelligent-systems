@@ -317,16 +317,6 @@ int main() {
         {0, 0}, {0, 1}, {1, 0}, {1, 1}
     };
 
-    // AND
-    trainFunction("AND", inputs,
-        {{0},{0},{0},{1}},
-        H, LR, MOM, MAX_RUNS, MIN_ERR);
-
-    // OR
-    trainFunction("OR", inputs,
-        {{0},{1},{1},{1}},
-        H, LR, MOM, MAX_RUNS, MIN_ERR);
-
     // XOR
     trainFunction("XOR", inputs,
         {{0},{1},{1},{0}},

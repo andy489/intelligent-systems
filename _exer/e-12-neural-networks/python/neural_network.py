@@ -202,6 +202,4 @@ if __name__ == "__main__":
 
     inputs = [[0, 0], [0, 1], [1, 0], [1, 1]]
 
-    train_function("AND", inputs, [[0], [0], [0], [1]])
-    train_function("OR",  inputs, [[0], [1], [1], [1]])
     train_function("XOR", inputs, [[0], [1], [1], [0]])
