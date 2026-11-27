@@ -268,8 +268,8 @@ region XOR requires. With H = 1, training fails to converge (see TESTS.md TC4).
 
 | File | Purpose |
 |------|---------|
-| `cpp/neural_network.cpp` | C++17 — trains AND, OR, XOR in sequence |
-| `python/neural_network.py` | Python 3 — same algorithm, same hyperparameters |
+| `cpp/neural_network.cpp` | C++17 — trains XOR |
+| `python/neural_network.py` | Python 3 — same algorithm, same hyperparameters (XOR) |
 | `java/src/Connection.java` | Java — edge class |
 | `java/src/Neuron.java` | Java — node class |
 | `java/src/NeuralNetwork.java` | Java — network + training loop (XOR only) |

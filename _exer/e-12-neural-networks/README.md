@@ -1,7 +1,6 @@
 # Neural Network — Boolean Functions via Backpropagation
 
-A self-learning neural network trained with **Backpropagation** that learns three Boolean
-functions: **AND**, **OR**, and **XOR**.
+A self-learning neural network trained with **Backpropagation** that learns the **XOR** Boolean function.
 
 See [PROBLEM.md](PROBLEM.md) for the full problem statement and [SOLUTION.md](SOLUTION.md)
 for the algorithm explanation.
@@ -30,6 +29,35 @@ Input layer     Hidden layer     Output layer
 | Weight init range | (−0.05, 0.05) |
 | Max epochs | 50 000 |
 | Stop condition | sum of squared errors < 0.001 |
+
+---
+
+## Why XOR?
+
+AND and OR are **linearly separable** — a single straight decision boundary can correctly
+classify all four input combinations. Any single-layer network (or even a network with
+no hidden layer) can learn them trivially.
+
+XOR is **not linearly separable**: no straight line can separate the "true" inputs
+`{(0,1), (1,0)}` from the "false" inputs `{(0,0), (1,1)}`.
+
+```
+  x₂
+  1 |  0   1       ← (0,1)=1, (1,1)=0
+    |
+  0 |  0   1       ← (0,0)=0, (1,0)=1
+    +----------
+       0   1   x₁
+
+No single line can separate the 1s from the 0s.
+```
+
+A **hidden layer with ≥ 2 neurons** solves this by composing two linear boundaries
+into a non-linear decision region. This is the core insight of the exercise — and why
+the XOR problem historically motivated the development of multi-layer networks and
+the Backpropagation algorithm.
+
+> With H = 1 hidden neuron the network **cannot converge** on XOR — see TESTS.md TC4.
 
 ---
 
