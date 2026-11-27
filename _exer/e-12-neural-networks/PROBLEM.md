@@ -134,24 +134,24 @@ of the node at the start of the edge.
 
 ```
 Training AND  for 10000 epochs  (H=2, η=0.1)
-  [0,0] → 0.03  (expected 0)
-  [0,1] → 0.04  (expected 0)
-  [1,0] → 0.04  (expected 0)
-  [1,1] → 0.96  (expected 1)
+  [0,0] → 0.00003253  (expected 0)
+  [0,1] → 0.01352150  (expected 0)
+  [1,0] → 0.01352293  (expected 0)
+  [1,1] → 0.97482417  (expected 1)
   Result: LEARNED ✓
 
 Training OR   for 10000 epochs  (H=2, η=0.1)
-  [0,0] → 0.04  (expected 0)
-  [0,1] → 0.96  (expected 1)
-  [1,0] → 0.96  (expected 1)
-  [1,1] → 0.97  (expected 1)
+  [0,0] → 0.02533213  (expected 0)
+  [0,1] → 0.98661133  (expected 1)
+  [1,0] → 0.98667382  (expected 1)
+  [1,1] → 0.99908323  (expected 1)
   Result: LEARNED ✓
 
 Training XOR  for 10000 epochs  (H=2, η=0.1)
-  [0,0] → 0.03  (expected 0)
-  [0,1] → 0.97  (expected 1)
-  [1,0] → 0.97  (expected 1)
-  [1,1] → 0.03  (expected 0)
+  [0,0] → 0.01225819  (expected 0)
+  [0,1] → 0.98135360  (expected 1)
+  [1,0] → 0.98978951  (expected 1)
+  [1,1] → 0.01994020  (expected 0)
   Result: LEARNED ✓
 ```
 
